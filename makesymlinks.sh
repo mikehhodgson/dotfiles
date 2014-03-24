@@ -9,7 +9,7 @@
 
 dir=~/dotfiles # dotfiles directory
 olddir=~/.dotfiles_old # old dotfiles backup directory
-files="emacs gitconfig profile tmux.conf vimrc zephyros.js" # list of files/folders to symlink in homedir
+files="elisp emacs gitconfig profile tmux.conf vimrc zephyros.js" # list of files/folders to symlink in homedir
 
 ##########
 
