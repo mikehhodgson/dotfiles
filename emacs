@@ -8,7 +8,7 @@
  '(custom-enabled-themes (quote (tsdh-dark)))
  '(desktop-save t)
  '(inhibit-startup-screen t)
- '(org-agenda-files (quote ("h:/notes.org")))
+ '(org-agenda-files (quote ("~/notes.org")))
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
