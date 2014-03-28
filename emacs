@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(column-number-mode t)
- '(custom-enabled-themes (quote (tsdh-dark)))
+;; '(custom-enabled-themes (quote (tsdh-dark)))
  '(desktop-save t)
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/notes.org")))
@@ -38,3 +38,11 @@
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" .
                                 visual-basic-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\(\\.emacs\\|emacs\\)$" .
+                                 emacs-lisp-mode)) auto-mode-alist))
+
+;; http://www.emacswiki.org/emacs/BackupDirectory
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
