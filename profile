@@ -4,6 +4,11 @@ export GREP_OPTIONS="--color"
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-
 # http://www.cavaliercoder.com/blog/terminal-color-in-osx.html
 # http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
+
+# http://blog.macromates.com/2008/working-with-history-in-bash/
+export HISTCONTROL=erasedups
+export HISTSIZE=10000
+shopt -s histappend
+
