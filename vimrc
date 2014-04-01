@@ -2,7 +2,6 @@
 " http://amix.dk/vim/vimrc.html
 
 if has("gui_running")
-  set background=dark 
 "  set hlsearch
 "  colorscheme macvim
 "  set bs=2
@@ -12,6 +11,8 @@ if has("gui_running")
 "  Hide toolbar
     set guioptions-=T
 endif
+
+set background=dark 
 highlight Normal guifg=white guibg=black
 set guifont=Inconsolata-dz:h11:cANSI
 
