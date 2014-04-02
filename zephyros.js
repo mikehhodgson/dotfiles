@@ -19,6 +19,8 @@
 // Full Screen - alt+cmd+F
 // Center - alt+cmd+C
 
+// TODO - diagnose multimonitor issues with snapping right
+
 var mash = ['cmd', 'alt'];
 var mashmash = ['cmd', 'alt', 'ctrl'];
 
@@ -35,6 +37,7 @@ bind('C', mash, function() {
   win.setFrame(winframe);
 });
 
+// Snap left half
 bind('left', mash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameIncludingDockAndMenu();
@@ -42,6 +45,7 @@ bind('left', mash, function() {
   win.setFrame(frame);
 });
 
+// Snap right half
 bind('right', mash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
@@ -50,6 +54,7 @@ bind('right', mash, function() {
   win.setFrame(frame);
 });
 
+// Snap top half
 bind('up', mash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
@@ -57,6 +62,7 @@ bind('up', mash, function() {
   win.setFrame(frame);
 });
 
+// Snap bottom half
 bind('down', mash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
@@ -66,7 +72,7 @@ bind('down', mash, function() {
   win.setFrame(frame);
 });
 
-
+// Snap top left
 bind('left', mashmash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
@@ -75,6 +81,7 @@ bind('left', mashmash, function() {
   win.setFrame(frame);
 });
 
+// Snap bottom right
 bind('right', mashmash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
@@ -86,6 +93,7 @@ bind('right', mashmash, function() {
   win.setFrame(frame);
 });
 
+// Snap top right
 bind('up', mashmash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
@@ -95,6 +103,7 @@ bind('up', mashmash, function() {
   win.setFrame(frame);
 });
 
+// Snap bottom left
 bind('down', mashmash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
