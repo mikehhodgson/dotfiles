@@ -49,3 +49,5 @@
 
 ;; this one's for osx
 (setq inhibit-startup-message t)
+
+(transient-mark-mode 1)
