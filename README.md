@@ -8,7 +8,7 @@ http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-do
 To Install
 ==========
 
-git clone git://github.com/mavasplode/dotfiles.git  
+git clone git://github.com/mikehhodgson/dotfiles.git  
 cd dotfiles  
 chmod +x makesymlinks.sh  
 ./makesymlinks.sh  
