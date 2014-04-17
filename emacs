@@ -40,6 +40,8 @@
                                 visual-basic-mode)) auto-mode-alist))
 (setq auto-mode-alist (append '(("\\(\\.emacs\\|emacs\\)$" .
                                  emacs-lisp-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\(\\.pac\\)$" .
+                                 javascript-mode)) auto-mode-alist))
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
