@@ -1,14 +1,10 @@
-PS1="\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]"
-alias ls="ls -G"
-export GREP_OPTIONS="--color"
+export PS1="\[$(tput bold)$(tput setaf 32)\]\u@\h \[$(tput setaf 250)\w \[$(tput sgr0)\]$ "
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
+export GREP_OPTIONS="--color"
 
-# http://www.cavaliercoder.com/blog/terminal-color-in-osx.html
-# http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
-
-# http://blog.macromates.com/2008/working-with-history-in-bash/
 export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
 
+alias ls="ls -G"
