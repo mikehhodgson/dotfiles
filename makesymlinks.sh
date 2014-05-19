@@ -5,6 +5,19 @@
 # http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
 ############################
 
+# Usage
+
+if [ $1 = "-h" ]
+then
+    echo "$0 [-i] [-h]"
+    echo
+    echo "    -i    interactive - prompt before making each symlink"
+    echo "    -h    help - print this message"
+    echo
+    exit 0
+fi
+
+
 ########## Variables
 
 dir=~/dotfiles # dotfiles directory
