@@ -26,7 +26,21 @@ echo "done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 echo "Moving any existing dotfiles from ~ to $olddir"
 for file in $files; do
-    mv ~/.$file $olddir/
-    echo "Creating symlink to $file in home directory."
-    ln -s $dir/$file ~/.$file
+    # if run with -i parameter, prompt user before creating each symlink
+    if [ $1 = "-i" ]
+    then
+        read -p "Create symlink to $file in home directory? " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+            mv ~/.$file $olddir/
+            echo "Creating symlink to $file in home directory."
+            ln -s $dir/$file ~/.$file
+        fi
+    # otherwise just go ahead and create them
+    else
+        mv ~/.$file $olddir/
+        echo "Creating symlink to $file in home directory."
+        ln -s $dir/$file ~/.$file
+    fi
 done
