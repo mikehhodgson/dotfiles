@@ -44,6 +44,8 @@
                                  javascript-mode)) auto-mode-alist))
 (setq auto-mode-alist (append '(("\\(\\.pyw\\)$" .
                                  python-mode)) auto-mode-alist))
+(setq auto-mode-alist (append '(("\\(Vagrantfile\\)$" .
+                                 ruby-mode)) auto-mode-alist))
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
