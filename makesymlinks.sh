@@ -5,18 +5,33 @@
 # http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/
 ############################
 
-# Usage
-
-if [ $1 = "-h" ]
-then
-    echo "$0 [-i] [-h]"
+function usage {
+    echo "usage: $0 [-i] [-h]"
     echo
     echo "    -i    interactive - prompt before making each symlink"
     echo "    -h    help - print this message"
     echo
-    exit 0
-fi
+} 
 
+# Parse args
+interactive=false
+while getopts "hi" opt; do
+    case $opt in
+        h)
+            usage            
+            exit 0
+            ;;
+        i)
+            interactive=true
+            ;;
+        *)
+            usage
+            exit 0
+            
+    esac
+done
+
+exit
 
 ########## Variables
 
@@ -40,7 +55,7 @@ echo "done"
 echo "Moving any existing dotfiles from ~ to $olddir"
 for file in $files; do
     # if run with -i parameter, prompt user before creating each symlink
-    if [ $1 = "-i" ]
+    if [ $interactive ]
     then
         read -p "Create symlink to $file in home directory? " -n 1 -r
         echo
