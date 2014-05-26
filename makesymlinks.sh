@@ -6,8 +6,9 @@
 ############################
 
 function usage {
-    echo "usage: $0 [-i] [-h]"
+    echo "usage: $0 [-cih]"
     echo
+    echo "    -c    copy - copy files instead of making symlinks"
     echo "    -i    interactive - prompt before making each symlink"
     echo "    -h    help - print this message"
     echo
@@ -15,8 +16,12 @@ function usage {
 
 # Parse args
 interactive=false
+copy=false
 while getopts "hi" opt; do
     case $opt in
+        c)
+            copy=true
+            ;;
         h)
             usage            
             exit 0
@@ -27,11 +32,9 @@ while getopts "hi" opt; do
         *)
             usage
             exit 0
-            
+            ;;
     esac
 done
-
-exit
 
 ########## Variables
 
@@ -63,12 +66,22 @@ for file in $files; do
         then
             mv ~/.$file $olddir/
             echo "Creating symlink to $file in home directory."
-            ln -s $dir/$file ~/.$file
+            if [ $copy ]
+            then
+                cp $dir/$file ~/.$file
+            else
+                ln -s $dir/$file ~/.$file
+            fi
         fi
     # otherwise just go ahead and create them
     else
         mv ~/.$file $olddir/
         echo "Creating symlink to $file in home directory."
-        ln -s $dir/$file ~/.$file
+        if [ $copy ]
+        then
+            cp $dir/$file ~/.$file
+        else
+            ln -s $dir/$file ~/.$file
+        fi
     fi
 done
