@@ -17,17 +17,17 @@ function usage {
 # Parse args
 interactive=false
 copy=false
-while getopts "hi" opt; do
+while getopts "chi" opt; do
     case $opt in
         c)
             copy=true
             ;;
+        i)
+            interactive=true
+            ;;
         h)
             usage            
             exit 0
-            ;;
-        i)
-            interactive=true
             ;;
         *)
             usage
