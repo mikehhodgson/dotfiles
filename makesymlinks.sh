@@ -44,11 +44,11 @@ main() {
     done
 
     # dotfiles directory
-    dir=~/dotfiles
+    local dir=~/dotfiles
     # old dotfiles backup directory
-    olddir=~/.dotfiles_old
+    local olddir=~/.dotfiles_old
     # list of files/folders to symlink in homedir
-    files="elisp emacs gitconfig profile tmux.conf vimrc zephyros.js"
+    local files="elisp emacs gitconfig profile tmux.conf vimrc zephyros.js"
     
     # create dotfiles_old in homedir
     echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
@@ -66,33 +66,35 @@ main() {
     echo "Moving any existing dotfiles from ~ to $olddir"
     for file in $files; do
         # if run with -i parameter, prompt user before creating each symlink
-        if [ $interactive ]
+        if [[ "$interactive" == true ]];
         then
             read -p "Create symlink to $file in home directory? " -n 1 -r
             echo
-            if [[ $REPLY =~ ^[Yy]$ ]]
+            if [[ $REPLY =~ ^[Yy]$ ]];
             then
-                mv ~/.$file $olddir/
+                mv "~/.$file" "$olddir/"
                 echo "Creating symlink to $file in home directory."
-                if [ $copy ]
+                if [[ "$copy" == true ]];
                 then
-                    cp $dir/$file ~/.$file
+                    echo "cp $dir/$file ~/.$file"
+                    cp "$dir/$file" "~/.$file"
                 else
-                    ln -s $dir/$file ~/.$file
+                    echo "ln -s $dir/$file ~/.$file"
+                    ln -s "$dir/$file" "~/.$file"
                 fi
             fi
         # otherwise just go ahead and create them
         else
-            mv ~/.$file $olddir/
+            mv "~/.$file" "$olddir/"
             echo "Creating symlink to $file in home directory."
-            if [ $copy ]
+            if [[ "$copy" == true ]];
             then
-                cp $dir/$file ~/.$file
+                cp "$dir/$file" "~/.$file"
             else
-                ln -s $dir/$file ~/.$file
+                ln -s "$dir/$file" "~/.$file"
             fi
         fi
     done
 }
 
-main
+main "$@"
