@@ -6,6 +6,8 @@
 # http://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming/
 ############################
 
+readonly ARGS="$@"
+
 usage() {
     cat <<- EOF
 	usage: $0 [-cih]
@@ -20,17 +22,14 @@ usage() {
 	EOF
 } 
 
-main() {
-    # Parse args
-    interactive=false
-    copy=false
+options() {
     while getopts "chi" opt; do
         case $opt in
             c)
-                copy=true
+                readonly COPY=true
                 ;;
             i)
-                interactive=true
+                readonly INTERACTIVE=true
                 ;;
             h)
                 usage
@@ -38,10 +37,14 @@ main() {
                 ;;
             *)
                 usage
-                exit 0
+                exit 2
                 ;;
         esac
     done
+}
+
+main() {
+    options $ARGS
 
     # dotfiles directory
     local dir=~/dotfiles
@@ -66,7 +69,7 @@ main() {
     echo "Moving any existing dotfiles from ~ to $olddir"
     for file in $files; do
         # if run with -i parameter, prompt user before creating each symlink
-        if [[ "$interactive" == true ]];
+        if [[ "$INTERACTIVE" == true ]];
         then
             read -p "Create symlink to $file in home directory? " -n 1 -r
             echo
@@ -74,7 +77,7 @@ main() {
             then
                 mv "~/.$file" "$olddir/"
                 echo "Creating symlink to $file in home directory."
-                if [[ "$copy" == true ]];
+                if [[ "$COPY" == true ]];
                 then
                     echo "cp $dir/$file ~/.$file"
                     cp "$dir/$file" "~/.$file"
@@ -87,7 +90,7 @@ main() {
         else
             mv "~/.$file" "$olddir/"
             echo "Creating symlink to $file in home directory."
-            if [[ "$copy" == true ]];
+            if [[ "$COPY" == true ]];
             then
                 cp "$dir/$file" "~/.$file"
             else
@@ -97,4 +100,4 @@ main() {
     done
 }
 
-main "$@"
+main
