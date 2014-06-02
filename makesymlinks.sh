@@ -10,30 +10,30 @@ readonly ARGS="$@"
 
 usage() {
     cat <<- EOF
-	usage: $0 [-cih]
+	usage: $0 [-chs]
 
 	This program creates symlinks in the user's home directory to the
 	bundled config files.
 
 	OPTIONS:
 	   -c    copy - copy files instead of making symlinks
-	   -i    interactive - prompt before making each symlink
 	   -h    help - print this message
+	   -s    silent - don't prompt before each file
 	EOF
 } 
 
 options() {
-    while getopts "chi" opt; do
+    while getopts "chs" opt; do
         case $opt in
             c)
                 readonly COPY=true
                 ;;
-            i)
-                readonly INTERACTIVE=true
-                ;;
             h)
                 usage
                 exit 0
+                ;;
+            s)
+                readonly SILENT=true
                 ;;
             *)
                 usage
@@ -68,9 +68,19 @@ main() {
     # ~/dotfiles directory specified in $files
     echo "Moving any existing dotfiles from ~ to $olddir"
     for file in $files; do
-        # if run with -i parameter, prompt user before creating each symlink
-        if [[ "$INTERACTIVE" == true ]];
+        # if run with -s parameter, process all files without prompting
+        if [[ "$SILENT" == true ]];
         then
+            mv "~/.$file" "$olddir/"
+            echo "Creating symlink to $file in home directory."
+            if [[ "$COPY" == true ]];
+            then
+                cp "$dir/$file" "~/.$file"
+            else
+                ln -s "$dir/$file" "~/.$file"
+            fi
+        # otherwise prompt before each file
+        else
             read -p "Create symlink to $file in home directory? " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]];
@@ -85,16 +95,6 @@ main() {
                     echo "ln -s $dir/$file ~/.$file"
                     ln -s "$dir/$file" "~/.$file"
                 fi
-            fi
-        # otherwise just go ahead and create them
-        else
-            mv "~/.$file" "$olddir/"
-            echo "Creating symlink to $file in home directory."
-            if [[ "$COPY" == true ]];
-            then
-                cp "$dir/$file" "~/.$file"
-            else
-                ln -s "$dir/$file" "~/.$file"
             fi
         fi
     done
