@@ -17,16 +17,20 @@ usage() {
 
 	OPTIONS:
 	   -c    copy - copy files instead of making symlinks
+	   -d    debug - set -x
 	   -h    help - print this message
 	   -s    silent - don't prompt before each file
 	EOF
 } 
 
 options() {
-    while getopts "chs" opt; do
+    while getopts "cdhs" opt; do
         case $opt in
             c)
                 readonly COPY=true
+                ;;
+            d)
+                set -x
                 ;;
             h)
                 usage
