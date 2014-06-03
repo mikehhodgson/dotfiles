@@ -58,6 +58,20 @@ main() {
     local files="elisp emacs gitconfig profile tmux.conf vimrc zephyros.js"
     
     # create dotfiles_old in homedir
+    # if olddir exists this can cause problems with backing up a symlink where
+    # olddir contains a directory of the same name
+    if [[ -d $olddir ]];
+    then
+        read -p "Do you wish to remove $olddir?" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]];
+        then
+            rm -rf $olddir
+        else
+            exit 1
+        fi
+    fi
+
     echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
     mkdir -p $olddir
     echo "done"
@@ -70,18 +84,18 @@ main() {
     # move any existing dotfiles in homedir to dotfiles_old directory,
     # then create symlinks from the homedir to any files in the
     # ~/dotfiles directory specified in $files
-    echo "Moving any existing dotfiles from ~ to $olddir"
+    echo "Any existing dotfiles will be moved from from ~ to $olddir"
     for file in $files; do
         # if run with -s parameter, process all files without prompting
         if [[ "$SILENT" == true ]];
         then
-            mv "~/.$file" "$olddir/"
+            mv -f ~/.$file $olddir/ 2>/dev/null
             echo "Creating symlink to $file in home directory."
             if [[ "$COPY" == true ]];
             then
-                cp "$dir/$file" "~/.$file"
+                cp -r "$dir/$file" ~/.$file
             else
-                ln -s "$dir/$file" "~/.$file"
+                ln -s "$dir/$file" ~/.$file
             fi
         # otherwise prompt before each file
         else
@@ -89,15 +103,13 @@ main() {
             echo
             if [[ $REPLY =~ ^[Yy]$ ]];
             then
-                mv "~/.$file" "$olddir/"
+                mv -f ~/.$file $olddir/ 2>/dev/null
                 echo "Creating symlink to $file in home directory."
                 if [[ "$COPY" == true ]];
                 then
-                    echo "cp $dir/$file ~/.$file"
-                    cp "$dir/$file" "~/.$file"
+                    cp -r "$dir/$file" ~/.$file
                 else
-                    echo "ln -s $dir/$file ~/.$file"
-                    ln -s "$dir/$file" "~/.$file"
+                    ln -s "$dir/$file" ~/.$file
                 fi
             fi
         fi
