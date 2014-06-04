@@ -47,6 +47,17 @@ options() {
     done
 }
 
+make_dotfile() {
+    if [[ "$COPY" == true ]];
+    then
+        echo "Copying $file to home directory."
+        cp -r $1 $2
+    else
+        echo "Creating symlink to $file in home directory."
+        ln -s $1 $2
+    fi
+}
+
 main() {
     options $ARGS
 
@@ -62,13 +73,18 @@ main() {
     # olddir contains a directory of the same name
     if [[ -d $olddir ]];
     then
-        read -p "Do you wish to remove $olddir?" -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]];
+        if [[ "$SILENT" == true ]];
         then
             rm -rf $olddir
         else
-            exit 1
+            read -p "Do you wish to remove $olddir?" -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]];
+            then
+                rm -rf $olddir
+            else
+                exit 1
+            fi
         fi
     fi
 
@@ -90,13 +106,7 @@ main() {
         if [[ "$SILENT" == true ]];
         then
             mv -f ~/.$file $olddir/ 2>/dev/null
-            echo "Creating symlink to $file in home directory."
-            if [[ "$COPY" == true ]];
-            then
-                cp -r "$dir/$file" ~/.$file
-            else
-                ln -s "$dir/$file" ~/.$file
-            fi
+            make_dotfile "$dir/$file" ~/.$file
         # otherwise prompt before each file
         else
             read -p "Create symlink to $file in home directory? " -n 1 -r
@@ -104,13 +114,7 @@ main() {
             if [[ $REPLY =~ ^[Yy]$ ]];
             then
                 mv -f ~/.$file $olddir/ 2>/dev/null
-                echo "Creating symlink to $file in home directory."
-                if [[ "$COPY" == true ]];
-                then
-                    cp -r "$dir/$file" ~/.$file
-                else
-                    ln -s "$dir/$file" ~/.$file
-                fi
+                make_dotfile "$dir/$file" ~/.$file
             fi
         fi
     done
