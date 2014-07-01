@@ -25,10 +25,10 @@ var mash = ['cmd', 'alt'];
 var mashmash = ['cmd', 'alt', 'ctrl'];
 
 bind('R', mashmash, function() {reloadConfig();});
-bind('F', mash, function() {api.focusedWindow().maximize();});
+bind('F', mashmash, function() {api.focusedWindow().maximize();});
 
 // Center window
-bind('C', mash, function() {
+bind('C', mashmash, function() {
   var win = api.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
   var winframe = win.frame();
