@@ -26,15 +26,6 @@ var mashmash = ['cmd', 'alt', 'ctrl'];
 
 api.bind('F', mashmash, function() {Window.focusedWindow().maximize();});
 
-//api.bind('E', ['cmd'], function() {
-//        var win = Window.focusedWindow();
-//        var frame = win.frame();
-//        frame.x += 10;
-//        frame.height -= 10;
-//        win.setFrame(frame);
-//        return true;
-//    });
-
 // Center window
 api.bind('C', mashmash, function() {
   var window = Window.focusedWindow();
@@ -42,7 +33,6 @@ api.bind('C', mashmash, function() {
   var frame = window.frame();
   frame.x = screen.width / 2 - (frame.width / 2);
   frame.y = screen.height / 2 - (frame.height / 2);
-  api.alert(frame.x + ' x ' + frame.y);
   window.setFrame(frame);
 });
 
@@ -50,7 +40,7 @@ api.bind('C', mashmash, function() {
 api.bind('left', mash, function() {
   var win = Window.focusedWindow();
   var frame = win.screen().frameIncludingDockAndMenu();
-  frame.w /= 2;
+  frame.width /= 2;
   win.setFrame(frame);
 });
 
@@ -58,68 +48,68 @@ api.bind('left', mash, function() {
 api.bind('right', mash, function() {
   var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.w /= 2;
-  frame.x = frame.w;
+  frame.width /= 2;
+  frame.x = frame.width;
   win.setFrame(frame);
 });
 
 // Snap top half
 api.bind('up', mash, function() {
-  var win = api.focusedWindow();
+  var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.h /= 2;
+  frame.height /= 2;
   win.setFrame(frame);
 });
 
 // Snap bottom half
 api.bind('down', mash, function() {
-  var win = api.focusedWindow();
+  var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.h /= 2;
-  frame.y = frame.h + (win.screen().frameIncludingDockAndMenu().h -
-                        win.screen().frameWithoutDockOrMenu().h);
+  frame.height /= 2;
+  frame.y = frame.height + (win.screen().frameIncludingDockAndMenu().height -
+                        win.screen().frameWithoutDockOrMenu().height);
   win.setFrame(frame);
 });
 
 // Snap top left
 api.bind('left', mashmash, function() {
-  var win = api.focusedWindow();
+  var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.w /= 2;
-  frame.h /= 2;
+  frame.width /= 2;
+  frame.height /= 2;
   win.setFrame(frame);
 });
 
 // Snap bottom right
 api.bind('right', mashmash, function() {
-  var win = api.focusedWindow();
+  var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.w /= 2;
-  frame.h /= 2;
-  frame.x = frame.w;
-  frame.y = frame.h + (win.screen().frameIncludingDockAndMenu().h -
-                        win.screen().frameWithoutDockOrMenu().h);
+  frame.width /= 2;
+  frame.height /= 2;
+  frame.x = frame.width;
+  frame.y = frame.height + (win.screen().frameIncludingDockAndMenu().height -
+                        win.screen().frameWithoutDockOrMenu().height);
   win.setFrame(frame);
 });
 
 // Snap top right
 api.bind('up', mashmash, function() {
-  var win = api.focusedWindow();
+  var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.w /= 2;
-  frame.h /= 2;
-  frame.x = frame.w;
+  frame.width /= 2;
+  frame.height /= 2;
+  frame.x = frame.width;
   win.setFrame(frame);
 });
 
 // Snap bottom left
 api.bind('down', mashmash, function() {
-  var win = api.focusedWindow();
+  var win = Window.focusedWindow();
   var frame = win.screen().frameWithoutDockOrMenu();
-  frame.w /= 2;
-  frame.h /= 2;
-  frame.y = frame.h + (win.screen().frameIncludingDockAndMenu().h -
-                        win.screen().frameWithoutDockOrMenu().h);
+  frame.width /= 2;
+  frame.height /= 2;
+  frame.y = frame.height + (win.screen().frameIncludingDockAndMenu().height -
+                        win.screen().frameWithoutDockOrMenu().height);
   win.setFrame(frame);
 });
 
