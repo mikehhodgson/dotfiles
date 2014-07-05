@@ -66,7 +66,7 @@ main() {
     # old dotfiles backup directory
     local olddir=~/.dotfiles_old
     # list of files/folders to symlink in homedir
-    local files="elisp emacs gitconfig profile tmux.conf vimrc zephyros.js"
+    local files="elisp emacs gitconfig hydra phoenix.js profile tmux.conf vimrc zephyros.js"
     
     # create dotfiles_old in homedir
     # if olddir exists this can cause problems with backing up a symlink where
