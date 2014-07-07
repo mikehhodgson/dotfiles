@@ -9,8 +9,7 @@
  '(desktop-save t)
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/notes.org")))
- '(size-indication-mode t)
- '(tool-bar-mode nil))
+ '(size-indication-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -61,3 +60,6 @@
 (setq inhibit-startup-message t)
 
 (transient-mark-mode 1)
+
+(menu-bar-mode -1)
+
