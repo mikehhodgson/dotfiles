@@ -5,11 +5,11 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(column-number-mode t)
- '(custom-enabled-themes (quote (tsdh-dark)))
  '(desktop-save t)
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/notes.org")))
- '(size-indication-mode t))
+ '(size-indication-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -61,5 +61,11 @@
 
 (transient-mark-mode 1)
 
-(menu-bar-mode -1)
+(if (display-graphic-p)
+    (progn
+      ;; if graphical
+      (custom-set-variables
+       '(custom-enabled-themes (quote (tsdh-dark)))))
+  ;; else
+  (menu-bar-mode -1))
 
