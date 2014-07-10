@@ -46,6 +46,10 @@
 (setq auto-mode-alist (append '(("\\(Vagrantfile\\)$" .
                                  ruby-mode)) auto-mode-alist))
 
+(autoload 'powershell-mode "powershell-mode" "Powershell mode." t)
+(setq auto-mode-alist (append '(("\\(\\.ps1\\)$" .
+                                powershell-mode)) auto-mode-alist))
+
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
