@@ -1,7 +1,4 @@
--- Hi!
--- Save this as ~/.hydra/init.lua and choose Reload Config from the menu
-
-hydra.alert("Hydra sample config loaded", 1.5)
+hydra.alert("Hydra config loaded", 1.5)
 
 -- open a repl
 -- the repl is a Lua prompt; type "print('hello world')"
@@ -39,7 +36,18 @@ function movewindow_righthalf()
   win:setframe(newframe)
 end
 
-hotkey.new({"cmd", "ctrl", "alt"}, "L", movewindow_righthalf):enable()
+hotkey.new({"cmd", "alt"}, "right", movewindow_righthalf):enable()
+
+-- move the window to the right half of the screen
+function movewindow_lefthalf()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.w = newframe.w / 2
+--  newframe.x = newframe.w -- comment this line to push it to left half of screen
+  win:setframe(newframe)
+end
+
+hotkey.new({"cmd", "alt"}, "left", movewindow_lefthalf):enable()
 
 -- show available updates
 local function showupdate()
@@ -68,25 +76,12 @@ if lastcheckedupdates == nil or lastcheckedupdates <= os.time() - timer.days(7) 
   checkforupdates()
 end
 
-
-
-
--- I've worked hard to make Hydra useful and easy to use. I've also
--- released it with a liberal open source license, so that you can do
--- with it as you please. So, instead of charging for licenses, I'm
--- asking for donations. If you find it helpful, I encourage you to
--- donate what you believe would have been a fair price for a license:
-
-local function donate()
-  -- Donate via PayPal (default)
-  os.execute("open 'https://www.paypal.com/cgi-bin/webscr?business=sbdegutis@gmail.com&cmd=_donations&item_name=Hydra.app%20donation'")
-
-  -- Donate via Gittip (inherently recurring)
-  -- os.execute("open https://www.gittip.com/sdegutis/")
-
-  -- Donate via Bitcoin: 18LEhURYNgkC9PPdtdXShDoyaHXGaLENe7
-  -- hydra.alert("Bitcoin address: 18LEhURYNgkC9PPdtdXShDoyaHXGaLENe7")
-end
-
 hotkey.bind({"cmd", "alt", "ctrl"}, "D", donate)
+
+
+
+
+
+
+
 
