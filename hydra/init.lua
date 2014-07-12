@@ -6,6 +6,9 @@ hydra.alert("Hydra config loaded", 1.5)
 -- almost all readline functionality works in the repl
 hotkey.bind({"cmd", "ctrl", "alt"}, "R", repl.open)
 
+-- auto reload config
+pathwatcher.new(os.getenv("HOME") .. "/.hydra/", hydra.reload):start()
+
 -- save the time when updates are checked
 function checkforupdates()
   updates.check()
@@ -49,6 +52,17 @@ end
 
 hotkey.new({"cmd", "alt"}, "left", movewindow_lefthalf):enable()
 
+-- move the window to the right half of the screen
+function movewindow_maximise()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+--  newframe.w = newframe.w / 2
+--  newframe.x = newframe.w -- comment this line to push it to left half of screen
+  win:setframe(newframe)
+end
+
+hotkey.new({"cmd", "ctrl", "alt"}, "f", movewindow_maximise):enable()
+
 -- show available updates
 local function showupdate()
   os.execute('open https://github.com/sdegutis/Hydra/releases')
@@ -64,7 +78,7 @@ function updates.available(available)
 end
 
 -- Uncomment this if you want Hydra to make sure it launches at login
--- autolaunch.set(true)
+autolaunch.set(true)
 
 -- check for updates every week
 timer.new(timer.weeks(1), checkforupdates):start()
@@ -75,13 +89,4 @@ local lastcheckedupdates = settings.get('lastcheckedupdates')
 if lastcheckedupdates == nil or lastcheckedupdates <= os.time() - timer.days(7) then
   checkforupdates()
 end
-
-hotkey.bind({"cmd", "alt", "ctrl"}, "D", donate)
-
-
-
-
-
-
-
 
