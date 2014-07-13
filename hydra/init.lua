@@ -1,13 +1,16 @@
-hydra.alert("Hydra config loaded", 1.5)
-
--- open a repl
--- the repl is a Lua prompt; type "print('hello world')"
--- when you're in the repl, type "help" to get started
--- almost all readline functionality works in the repl
-hotkey.bind({"cmd", "ctrl", "alt"}, "R", repl.open)
-
 -- auto reload config
 pathwatcher.new(os.getenv("HOME") .. "/.hydra/", hydra.reload):start()
+--hydra.alert("Hydra config loaded", 1.5)
+
+mash = {"cmd", "alt"}
+mashmash = {"cmd", "ctrl", "alt"}
+
+hotkey.bind(mash, "r", hydra.reload)
+hotkey.bind(mashmash, "f", movewindow_maximise)
+hotkey.bind(mashmash, "c", movewindow_center)
+hotkey.bind(mash, "left", movewindow_lefthalf)
+hotkey.bind(mash, "right", movewindow_righthalf)
+hotkey.bind(mashmash, "R", repl.open)
 
 -- save the time when updates are checked
 function checkforupdates()
@@ -30,38 +33,35 @@ menu.show(function()
     }
 end)
 
--- move the window to the right half of the screen
-function movewindow_righthalf()
+function movewindow_maximise()
   local win = window.focusedwindow()
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.x = newframe.w -- comment this line to push it to left half of screen
-  win:setframe(newframe)
+  local frame = win:screen():frame_without_dock_or_menu()
+  win:setframe(frame)
 end
 
-hotkey.new({"cmd", "alt"}, "right", movewindow_righthalf):enable()
+function movewindow_center()
+  local win = window.focusedwindow()
+  local screen = win:screen():frame_without_dock_or_menu()
+  local f = win:frame()
+  f.x = screen.w / 2 - (f.w / 2)
+  f.y = screen.h / 2 - (f.h / 2)
+  win:setframe(f)
+end
 
--- move the window to the right half of the screen
 function movewindow_lefthalf()
   local win = window.focusedwindow()
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
---  newframe.x = newframe.w -- comment this line to push it to left half of screen
   win:setframe(newframe)
 end
 
-hotkey.new({"cmd", "alt"}, "left", movewindow_lefthalf):enable()
-
--- move the window to the right half of the screen
-function movewindow_maximise()
+function movewindow_righthalf()
   local win = window.focusedwindow()
   local newframe = win:screen():frame_without_dock_or_menu()
---  newframe.w = newframe.w / 2
---  newframe.x = newframe.w -- comment this line to push it to left half of screen
+  newframe.w = newframe.w / 2
+  newframe.x = newframe.w
   win:setframe(newframe)
 end
-
-hotkey.new({"cmd", "ctrl", "alt"}, "f", movewindow_maximise):enable()
 
 -- show available updates
 local function showupdate()
