@@ -10,6 +10,8 @@ hotkey.bind(mashmash, "f", movewindow_maximise)
 hotkey.bind(mashmash, "c", movewindow_center)
 hotkey.bind(mash, "left", movewindow_lefthalf)
 hotkey.bind(mash, "right", movewindow_righthalf)
+hotkey.bind(mash, "up", movewindow_tophalf)
+hotkey.bind(mash, "down", movewindow_bottomhalf)
 hotkey.bind(mashmash, "R", repl.open)
 
 -- save the time when updates are checked
@@ -60,6 +62,23 @@ function movewindow_righthalf()
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   newframe.x = newframe.w
+  win:setframe(newframe)
+end
+
+
+function movewindow_tophalf()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.h = newframe.h / 2
+  win:setframe(newframe)
+end
+
+function movewindow_bottomhalf()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.h = newframe.h / 2
+  newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
+                                win:screen():frame_without_dock_or_menu().h)
   win:setframe(newframe)
 end
 
