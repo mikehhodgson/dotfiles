@@ -6,13 +6,17 @@ mash = {"cmd", "alt"}
 mashmash = {"cmd", "ctrl", "alt"}
 
 hotkey.bind(mash, "r", hydra.reload)
+hotkey.bind(mashmash, "R", repl.open)
 hotkey.bind(mashmash, "f", movewindow_maximise)
 hotkey.bind(mashmash, "c", movewindow_center)
 hotkey.bind(mash, "left", movewindow_lefthalf)
 hotkey.bind(mash, "right", movewindow_righthalf)
 hotkey.bind(mash, "up", movewindow_tophalf)
 hotkey.bind(mash, "down", movewindow_bottomhalf)
-hotkey.bind(mashmash, "R", repl.open)
+hotkey.bind(mashmash, "left", movewindow_bottomleft)
+hotkey.bind(mashmash, "right", movewindow_topright)
+hotkey.bind(mashmash, "up", movewindow_topleft)
+hotkey.bind(mashmash, "down", movewindow_bottomright)
 
 -- save the time when updates are checked
 function checkforupdates()
@@ -79,6 +83,44 @@ function movewindow_bottomhalf()
   newframe.h = newframe.h / 2
   newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
                                 win:screen():frame_without_dock_or_menu().h)
+  win:setframe(newframe)
+end
+
+function movewindow_topleft()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.w = newframe.w / 2
+  newframe.h = newframe.h / 2
+  win:setframe(newframe)
+end
+
+function movewindow_bottomleft()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.w = newframe.w / 2
+  newframe.h = newframe.h / 2
+  newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
+                                win:screen():frame_without_dock_or_menu().h)
+  win:setframe(newframe)
+end
+
+function movewindow_bottomright()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.w = newframe.w / 2
+  newframe.h = newframe.h / 2
+  newframe.x = newframe.w
+  newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
+                                win:screen():frame_without_dock_or_menu().h)
+  win:setframe(newframe)
+end
+
+function movewindow_topright()
+  local win = window.focusedwindow()
+  local newframe = win:screen():frame_without_dock_or_menu()
+  newframe.w = newframe.w / 2
+  newframe.h = newframe.h / 2
+  newframe.x = newframe.w
   win:setframe(newframe)
 end
 
