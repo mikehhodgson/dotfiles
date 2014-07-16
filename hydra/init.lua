@@ -7,46 +7,27 @@ mashmash = {"cmd", "ctrl", "alt"}
 
 hotkey.bind(mash, "r", hydra.reload)
 hotkey.bind(mashmash, "R", repl.open)
-hotkey.bind(mashmash, "f", movewindow_maximise)
-hotkey.bind(mashmash, "c", movewindow_center)
-hotkey.bind(mash, "left", movewindow_lefthalf)
-hotkey.bind(mash, "right", movewindow_righthalf)
-hotkey.bind(mash, "up", movewindow_tophalf)
-hotkey.bind(mash, "down", movewindow_bottomhalf)
-hotkey.bind(mashmash, "left", movewindow_bottomleft)
-hotkey.bind(mashmash, "right", movewindow_topright)
-hotkey.bind(mashmash, "up", movewindow_topleft)
-hotkey.bind(mashmash, "down", movewindow_bottomright)
+hotkey.bind(mashmash, "f", maximise)
+hotkey.bind(mashmash, "c", center)
+hotkey.bind(mash, "left", left)
+hotkey.bind(mash, "right", right)
+hotkey.bind(mash, "up", top)
+hotkey.bind(mash, "down", bottom)
+hotkey.bind(mashmash, "left", bottomleft)
+hotkey.bind(mashmash, "right", topright)
+hotkey.bind(mashmash, "up", topleft)
+hotkey.bind(mashmash, "down", bottomright)
 
--- save the time when updates are checked
-function checkforupdates()
-  updates.check()
-  settings.set('lastcheckedupdates', os.time())
-end
-
--- show a helpful menu
-menu.show(function()
-    local updatetitles = {[true] = "Install Update", [false] = "Check for Update..."}
-    local updatefns = {[true] = updates.install, [false] = checkforupdates}
-    local hasupdate = (updates.newversion ~= nil)
-
-    return {
-      {title = "Reload Config", fn = hydra.reload},
-      {title = "-"},
-      {title = "About", fn = hydra.showabout},
-      {title = updatetitles[hasupdate], fn = updatefns[hasupdate]},
-      {title = "Quit Hydra", fn = os.exit},
-    }
-end)
-
-function movewindow_maximise()
+function maximise()
   local win = window.focusedwindow()
+  if not win then return end
   local frame = win:screen():frame_without_dock_or_menu()
   win:setframe(frame)
 end
 
-function movewindow_center()
+function center()
   local win = window.focusedwindow()
+  if not win then return end
   local screen = win:screen():frame_without_dock_or_menu()
   local f = win:frame()
   f.x = screen.w / 2 - (f.w / 2)
@@ -54,31 +35,34 @@ function movewindow_center()
   win:setframe(f)
 end
 
-function movewindow_lefthalf()
+function left()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   win:setframe(newframe)
 end
 
-function movewindow_righthalf()
+function right()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   newframe.x = newframe.w
   win:setframe(newframe)
 end
 
-
-function movewindow_tophalf()
+function top()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.h = newframe.h / 2
   win:setframe(newframe)
 end
 
-function movewindow_bottomhalf()
+function bottom()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.h = newframe.h / 2
   newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
@@ -86,16 +70,18 @@ function movewindow_bottomhalf()
   win:setframe(newframe)
 end
 
-function movewindow_topleft()
+function topleft()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   newframe.h = newframe.h / 2
   win:setframe(newframe)
 end
 
-function movewindow_bottomleft()
+function bottomleft()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   newframe.h = newframe.h / 2
@@ -104,8 +90,9 @@ function movewindow_bottomleft()
   win:setframe(newframe)
 end
 
-function movewindow_bottomright()
+function bottomright()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   newframe.h = newframe.h / 2
@@ -115,8 +102,9 @@ function movewindow_bottomright()
   win:setframe(newframe)
 end
 
-function movewindow_topright()
+function topright()
   local win = window.focusedwindow()
+  if not win then return end
   local newframe = win:screen():frame_without_dock_or_menu()
   newframe.w = newframe.w / 2
   newframe.h = newframe.h / 2
@@ -150,4 +138,25 @@ local lastcheckedupdates = settings.get('lastcheckedupdates')
 if lastcheckedupdates == nil or lastcheckedupdates <= os.time() - timer.days(7) then
   checkforupdates()
 end
+
+-- save the time when updates are checked
+function checkforupdates()
+  updates.check()
+  settings.set('lastcheckedupdates', os.time())
+end
+
+-- show a helpful menu
+menu.show(function()
+    local updatetitles = {[true] = "Install Update", [false] = "Check for Update..."}
+    local updatefns = {[true] = updates.install, [false] = checkforupdates}
+    local hasupdate = (updates.newversion ~= nil)
+
+    return {
+      {title = "Reload Config", fn = hydra.reload},
+      {title = "-"},
+      {title = "About", fn = hydra.showabout},
+      {title = updatetitles[hasupdate], fn = updatefns[hasupdate]},
+      {title = "Quit Hydra", fn = os.exit},
+    }
+end)
 
