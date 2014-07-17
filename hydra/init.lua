@@ -35,12 +35,20 @@ function center()
   win:setframe(f)
 end
 
-function left()
-  local win = window.focusedwindow()
-  if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  win:setframe(newframe)
+-- if no argument, pushes focused window left
+-- if pass a screen frame, make it left and return it
+function left(...)
+   if select(1, ...) then
+      local frame = select(1, ...)
+      frame.w = frame.w / 2
+      return frame
+   else
+      local win = window.focusedwindow()
+      if not win then return end
+      local frame = win:screen():frame_without_dock_or_menu()
+      local frame = left(frame)
+      win:setframe(frame)
+   end
 end
 
 function right()
