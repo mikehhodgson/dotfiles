@@ -38,44 +38,63 @@ end
 -- if no argument, pushes focused window left
 -- if pass a screen frame, make it left and return it
 function left(...)
-   if select(1, ...) then
-      local frame = select(1, ...)
+   local frame = select(1, ...)
+   if frame then
       frame.w = frame.w / 2
       return frame
    else
       local win = window.focusedwindow()
       if not win then return end
-      local frame = win:screen():frame_without_dock_or_menu()
-      local frame = left(frame)
+      frame = win:screen():frame_without_dock_or_menu()
+      frame = left(frame)
       win:setframe(frame)
    end
 end
 
-function right()
-  local win = window.focusedwindow()
-  if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.x = newframe.w
-  win:setframe(newframe)
+-- if no argument, pushes focused window right
+-- if pass a screen frame, make it right and return it
+function right(...)
+   local frame = select(1, ...)
+   if frame then
+      frame.w = frame.w / 2
+      frame.x = frame.w
+      return frame
+   else
+      local win = window.focusedwindow()
+      if not win then return end
+      frame = win:screen():frame_without_dock_or_menu()
+      frame = right(frame)
+      win:setframe(frame)
+   end
 end
 
-function top()
-  local win = window.focusedwindow()
-  if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.h = newframe.h / 2
-  win:setframe(newframe)
+function top(...)
+   local frame = select(1, ...)
+   if frame then
+      frame.h = frame.h / 2
+      return frame
+   else
+      local win = window.focusedwindow()
+      if not win then return end
+      frame = win:screen():frame_without_dock_or_menu()
+      frame = top(frame)
+      win:setframe(frame)
+   end
 end
 
-function bottom()
-  local win = window.focusedwindow()
-  if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.h = newframe.h / 2
-  newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
-                                win:screen():frame_without_dock_or_menu().h)
-  win:setframe(newframe)
+function bottom(...)
+   local frame = select(1, ...)
+   if frame then
+      frame.h = frame.h / 2
+      frame.y = frame.y + frame.h  -- account for menu bar
+      return frame
+   else
+      local win = window.focusedwindow()
+      if not win then return end
+      frame = win:screen():frame_without_dock_or_menu()
+      frame = bottom(frame)
+      win:setframe(frame)
+   end
 end
 
 function topleft()
