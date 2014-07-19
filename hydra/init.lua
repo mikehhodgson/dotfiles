@@ -2,21 +2,23 @@
 pathwatcher.new(os.getenv("HOME") .. "/.hydra/", hydra.reload):start()
 --hydra.alert("Hydra config loaded", 1.5)
 
-mash = {"cmd", "alt"}
-mashmash = {"cmd", "ctrl", "alt"}
+function bindkeys()
+   local mash = {"cmd", "alt"}
+   local mashmash = {"cmd", "ctrl", "alt"}
 
-hotkey.bind(mash, "r", hydra.reload)
-hotkey.bind(mashmash, "R", repl.open)
-hotkey.bind(mashmash, "f", maximise)
-hotkey.bind(mashmash, "c", center)
-hotkey.bind(mash, "left", left)
-hotkey.bind(mash, "right", right)
-hotkey.bind(mash, "up", top)
-hotkey.bind(mash, "down", bottom)
-hotkey.bind(mashmash, "left", bottomleft)
-hotkey.bind(mashmash, "right", topright)
-hotkey.bind(mashmash, "up", topleft)
-hotkey.bind(mashmash, "down", bottomright)
+   hotkey.bind(mash, "r", hydra.reload)
+   hotkey.bind(mashmash, "R", repl.open)
+   hotkey.bind(mashmash, "f", maximise)
+   hotkey.bind(mashmash, "c", center)
+   hotkey.bind(mash, "left", left)
+   hotkey.bind(mash, "right", right)
+   hotkey.bind(mash, "up", top)
+   hotkey.bind(mash, "down", bottom)
+   hotkey.bind(mashmash, "left", bottomleft)
+   hotkey.bind(mashmash, "right", topright)
+   hotkey.bind(mashmash, "up", topleft)
+   hotkey.bind(mashmash, "down", bottomright)
+end
 
 function maximise()
   local win = window.focusedwindow()
@@ -187,3 +189,4 @@ menu.show(function()
     }
 end)
 
+bindkeys()
