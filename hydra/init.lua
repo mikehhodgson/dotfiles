@@ -102,43 +102,29 @@ end
 function topleft()
   local win = window.focusedwindow()
   if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.h = newframe.h / 2
-  win:setframe(newframe)
+  local frame = win:screen():frame_without_dock_or_menu()
+  win:setframe(top(left(frame)))
 end
 
 function bottomleft()
   local win = window.focusedwindow()
   if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.h = newframe.h / 2
-  newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
-                                win:screen():frame_without_dock_or_menu().h)
-  win:setframe(newframe)
+  local frame = win:screen():frame_without_dock_or_menu()
+  win:setframe(bottom(left(frame)))
 end
 
 function bottomright()
   local win = window.focusedwindow()
   if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.h = newframe.h / 2
-  newframe.x = newframe.w
-  newframe.y = newframe.h + (win:screen():frame_including_dock_and_menu().h -
-                                win:screen():frame_without_dock_or_menu().h)
-  win:setframe(newframe)
+  local frame = win:screen():frame_without_dock_or_menu()
+  win:setframe(bottom(right(frame)))
 end
 
 function topright()
   local win = window.focusedwindow()
   if not win then return end
-  local newframe = win:screen():frame_without_dock_or_menu()
-  newframe.w = newframe.w / 2
-  newframe.h = newframe.h / 2
-  newframe.x = newframe.w
-  win:setframe(newframe)
+  local frame = win:screen():frame_without_dock_or_menu()
+  win:setframe(top(right(frame)))
 end
 
 -- show available updates
