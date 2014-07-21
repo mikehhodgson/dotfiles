@@ -20,6 +20,17 @@ function bindkeys()
    hotkey.bind(mashmash, "down", bottomright)
 end
 
+function movewindow(...)
+   local functions = {...}
+   local win = window.focusedwindow()
+   if not win then return end
+   local frame = win:screen():frame_without_dock_or_menu()
+   for k, v in pairs(functions) do
+      frame = v(frame)
+    end
+   win:setframe(frame)
+end
+
 function maximise()
   local win = window.focusedwindow()
   if not win then return end
@@ -45,16 +56,10 @@ function left(...)
       frame.w = frame.w / 2
       return frame
    else
-      local win = window.focusedwindow()
-      if not win then return end
-      frame = win:screen():frame_without_dock_or_menu()
-      frame = left(frame)
-      win:setframe(frame)
+      movewindow(left)
    end
 end
 
--- if no argument, pushes focused window right
--- if pass a screen frame, make it right and return it
 function right(...)
    local frame = select(1, ...)
    if frame then
@@ -62,11 +67,7 @@ function right(...)
       frame.x = frame.w
       return frame
    else
-      local win = window.focusedwindow()
-      if not win then return end
-      frame = win:screen():frame_without_dock_or_menu()
-      frame = right(frame)
-      win:setframe(frame)
+      movewindow(right)
    end
 end
 
@@ -76,11 +77,7 @@ function top(...)
       frame.h = frame.h / 2
       return frame
    else
-      local win = window.focusedwindow()
-      if not win then return end
-      frame = win:screen():frame_without_dock_or_menu()
-      frame = top(frame)
-      win:setframe(frame)
+      movewindow(top)
    end
 end
 
@@ -91,40 +88,24 @@ function bottom(...)
       frame.y = frame.y + frame.h  -- account for menu bar
       return frame
    else
-      local win = window.focusedwindow()
-      if not win then return end
-      frame = win:screen():frame_without_dock_or_menu()
-      frame = bottom(frame)
-      win:setframe(frame)
+      movewindow(bottom)
    end
 end
 
 function topleft()
-  local win = window.focusedwindow()
-  if not win then return end
-  local frame = win:screen():frame_without_dock_or_menu()
-  win:setframe(top(left(frame)))
+   movewindow(top, left)
 end
 
 function bottomleft()
-  local win = window.focusedwindow()
-  if not win then return end
-  local frame = win:screen():frame_without_dock_or_menu()
-  win:setframe(bottom(left(frame)))
+   movewindow(bottom, left)
 end
 
 function bottomright()
-  local win = window.focusedwindow()
-  if not win then return end
-  local frame = win:screen():frame_without_dock_or_menu()
-  win:setframe(bottom(right(frame)))
+   movewindow(bottom, right)
 end
 
 function topright()
-  local win = window.focusedwindow()
-  if not win then return end
-  local frame = win:screen():frame_without_dock_or_menu()
-  win:setframe(top(right(frame)))
+   movewindow(top, right)
 end
 
 -- show available updates
