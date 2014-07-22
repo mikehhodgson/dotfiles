@@ -32,10 +32,7 @@ function movewindow(...)
 end
 
 function maximise()
-  local win = window.focusedwindow()
-  if not win then return end
-  local frame = win:screen():frame_without_dock_or_menu()
-  win:setframe(frame)
+   movewindow()
 end
 
 function center()
