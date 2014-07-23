@@ -35,14 +35,19 @@ function maximise()
    movewindow()
 end
 
-function center()
-  local win = window.focusedwindow()
-  if not win then return end
-  local screen = win:screen():frame_without_dock_or_menu()
-  local f = win:frame()
-  f.x = screen.w / 2 - (f.w / 2)
-  f.y = screen.h / 2 - (f.h / 2)
-  win:setframe(f)
+function center(...)
+   local frame = select(1, ...)
+   if frame then
+      local win = window.focusedwindow()
+      local screen = win:screen():frame_without_dock_or_menu()
+      frame = win:frame()
+      if not win then return end
+      frame.x = screen.w / 2 - (frame.w / 2)
+      frame.y = screen.h / 2 - (frame.h / 2)
+      return frame
+   else
+      movewindow(center)
+   end
 end
 
 -- if no argument, pushes focused window left
