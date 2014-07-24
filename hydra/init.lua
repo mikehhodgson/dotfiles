@@ -7,9 +7,10 @@ function bindkeys()
    local mashmash = {"cmd", "ctrl", "alt"}
 
    hotkey.bind(mash, "r", hydra.reload)
-   hotkey.bind(mashmash, "R", repl.open)
+   hotkey.bind(mashmash, "r", repl.open)
    hotkey.bind(mashmash, "f", maximise)
    hotkey.bind(mashmash, "c", center)
+   hotkey.bind(mashmash, "i", info)
    hotkey.bind(mash, "left", left)
    hotkey.bind(mash, "right", right)
    hotkey.bind(mash, "up", top)
@@ -18,6 +19,14 @@ function bindkeys()
    hotkey.bind(mashmash, "right", topright)
    hotkey.bind(mashmash, "up", topleft)
    hotkey.bind(mashmash, "down", bottomright)
+end
+
+function info()
+   local win = window.focusedwindow()
+   if not win then return end
+   local app = win:application()
+   if not app then return end
+   hydra.alert(app:title())
 end
 
 function movewindow(...)
