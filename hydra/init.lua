@@ -11,6 +11,7 @@ function bindkeys()
    hotkey.bind(mashmash, "f", maximise)
    hotkey.bind(mashmash, "c", center)
    hotkey.bind(mashmash, "i", info)
+   hotkey.bind(mashmash, "h", help)
    hotkey.bind(mash, "left", left)
    hotkey.bind(mash, "right", right)
    hotkey.bind(mash, "up", top)
@@ -27,6 +28,10 @@ function info()
    local app = win:application()
    if not app then return end
    hydra.alert(app:title())
+end
+
+function help()
+   os.execute("open http://sdegutis.github.io/hydra/docs/")
 end
 
 function movewindow(...)
@@ -161,6 +166,7 @@ menu.show(function()
     return {
       {title = "Reload Config", fn = hydra.reload},
       {title = "-"},
+      {title = "Help", fn = help},
       {title = "About", fn = hydra.showabout},
       {title = updatetitles[hasupdate], fn = updatefns[hasupdate]},
       {title = "Quit Hydra", fn = os.exit},
