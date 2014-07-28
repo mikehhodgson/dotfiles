@@ -17,22 +17,33 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Inconsolata-dz" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
 
-(add-to-list 'load-path "~/.elisp")
-(require 'php-mode)
-(require 'visual-basic-mode)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(transient-mark-mode 1)
+
+;; this one's for osx
+(setq inhibit-startup-message t)
+
+;; only show menu in gui mode
+(if (display-graphic-p)
+    (progn
+      ;; if graphical
+      (custom-set-variables
+       '(custom-enabled-themes (quote (tsdh-dark)))))
+  ;; else
+  (menu-bar-mode -1))
 
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-default-notes-file "~/notes.org")
-
      (global-set-key "\C-cl" 'org-store-link)
      (global-set-key "\C-cc" 'org-capture)
      (global-set-key "\C-ca" 'org-agenda)
      (global-set-key "\C-cb" 'org-iswitchb)
 
-
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-
+;; additional modes and file extensions
+(add-to-list 'load-path "~/.elisp")
+(require 'php-mode)
+(require 'visual-basic-mode)
 
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" .
@@ -45,11 +56,9 @@
                                  python-mode)) auto-mode-alist))
 (setq auto-mode-alist (append '(("\\(Vagrantfile\\)$" .
                                  ruby-mode)) auto-mode-alist))
-
 (autoload 'powershell-mode "powershell-mode" "Powershell mode." t)
 (setq auto-mode-alist (append '(("\\(\\.ps1\\)$" .
                                 powershell-mode)) auto-mode-alist))
-
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
@@ -60,16 +69,16 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; this one's for osx
-(setq inhibit-startup-message t)
-
-(transient-mark-mode 1)
-
-(if (display-graphic-p)
-    (progn
-      ;; if graphical
-      (custom-set-variables
-       '(custom-enabled-themes (quote (tsdh-dark)))))
-  ;; else
-  (menu-bar-mode -1))
-
+;; easy spell check
+;; http://www.emacswiki.org/emacs/FlySpell
+;;(global-set-key (kbd "<f8>") 'ispell-word)
+;;(global-set-key (kbd "<f8>") 'flyspell-mode)
+(global-set-key (kbd "<f8>") 'flyspell-buffer)
+;;(global-set-key (kbd "C-<f8>") 'flyspell-check-previous-highlighted-word)
+;;(defun flyspell-check-next-highlighted-word ()
+;;  "Custom function to spell check next highlighted word"
+;;  (interactive)
+;;  (flyspell-goto-next-error)
+;;  (ispell-word)
+;;  )
+;;(global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
