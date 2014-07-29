@@ -19,12 +19,13 @@ if [[ $charged_slots -gt 10 ]]; then
   charged_slots=10
 fi
 
-echo -n '#[fg=red]'
-for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
-
 if [[ $is_charging == 'Yes' ]]; then
-    HEART='+'
+    echo -n '#[fg=green]'
+else
+    echo -n '#[fg=red]'
 fi
+
+for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
 
 if [[ $charged_slots -lt 10 ]]; then
   echo -n '#[fg=white]'
