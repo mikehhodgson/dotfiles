@@ -82,3 +82,9 @@
 ;;  (ispell-word)
 ;;  )
 ;;(global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
+
+
+;; scroll buffer by line
+;; http://stackoverflow.com/a/16229080
+(global-set-key "\M-n" 'scroll-up-line)
+(global-set-key "\M-p" 'scroll-down-line)
