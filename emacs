@@ -1,35 +1,31 @@
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+ '(ansi-color-names-vector
+   ["black" "#d55e00" "#009e73" "#f8ec59"
+    "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(column-number-mode t)
  '(desktop-save t)
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/notes.org")))
- '(size-indication-mode t)
- '(tool-bar-mode nil))
+ '(size-indication-mode t))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Inconsolata-dz" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
+ '(default ((t (:family "Inconsolata-dz" :foundry "outline" :slant normal
+                        :weight normal :height 98 :width normal)))))
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (transient-mark-mode 1)
 
-;; this one's for osx
+(setq initial-scratch-message "")
 (setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message "mike")
 
 ;; only show menu in gui mode
 (if (display-graphic-p)
     (progn
       ;; if graphical
       (custom-set-variables
-       '(custom-enabled-themes (quote (tsdh-dark)))))
+       '(custom-enabled-themes (quote (tsdh-dark)))
+       '(tool-bar-mode nil)))
   ;; else
   (menu-bar-mode -1))
 
