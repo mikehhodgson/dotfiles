@@ -84,3 +84,19 @@
 ;; http://stackoverflow.com/a/16229080
 (global-set-key "\M-n" 'scroll-up-line)
 (global-set-key "\M-p" 'scroll-down-line)
+
+(defun byte-compile-dot-dir ()
+  "Byte-compile all your dotfiles."
+  (interactive)
+  (byte-recompile-directory "~/.elisp" 0))
+
+(defun byte-compile-init-file ()
+  "Byte-compile init file."
+  (interactive)
+  (byte-compile-file "~/.emacs" 0))
+
+(defun byte-compile-dot-files ()
+  "Byte-compile all dotfiles."
+  (progn
+    (byte-compile-init-file)
+    (byte-compile-dot-dir)))
