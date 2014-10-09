@@ -13,6 +13,7 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq-default show-trailing-whitespace t)
 (transient-mark-mode 1)
 
 (setq initial-scratch-message "")
