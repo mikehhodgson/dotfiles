@@ -90,15 +90,3 @@
   "Byte-compile all your dotfiles."
   (interactive)
   (byte-recompile-directory "~/.elisp" 0))
-
-(defun byte-compile-init-file ()
-  "Byte-compile init file."
-  (interactive)
-  (byte-compile-file "~/.emacs"))
-
-(defun byte-compile-dot-files ()
-  "Byte-compile all dotfiles."
-  (interactive)
-  (progn
-    (byte-compile-init-file)
-    (byte-compile-dot-dir)))
