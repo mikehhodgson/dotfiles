@@ -3,7 +3,6 @@
    ["black" "#d55e00" "#009e73" "#f8ec59"
     "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(column-number-mode t)
- '(desktop-save t)
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/notes.org")))
  '(size-indication-mode t))
@@ -11,23 +10,29 @@
  '(default ((t (:family "Inconsolata-dz" :foundry "outline" :slant normal
                         :weight normal :height 98 :width normal)))))
 
+;; whitespace
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default show-trailing-whitespace t)
+
+;; highlight selected region
 (transient-mark-mode 1)
 
+;; quiet!
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message "mike")
 
-;; only show menu in gui mode
+;; gui and terminal specifics
 (if (display-graphic-p)
     (progn
       ;; if graphical
       (custom-set-variables
        '(custom-enabled-themes (quote (tsdh-dark)))
+       ;; toolbar not required
        '(tool-bar-mode nil)))
   ;; else
+  ;; only show menu in gui mode
   (menu-bar-mode -1))
 
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
