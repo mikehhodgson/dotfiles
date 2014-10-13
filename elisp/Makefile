@@ -4,16 +4,16 @@
 
 #ELS = $(shell ls -1 *.el) # run ls command, list .el files
 #ELCS = $(ELS:.el=.elc)    # make variable substiution, list .elc files
+#ELFILES = $(shell egrep -o ^[a-zA-Z-]+.el Makefile)
 
-#usage:
-#	@echo "USAGE: make [ foo.el | foo.elc | download | compile | all ]"
-#	@echo
+usage:
+	@echo "USAGE: make [ foo.el | foo.elc | download | compile | all ]"
+	@echo
+	@echo "       files available:"
+	@egrep -o ^[a-zA-Z-]+.el Makefile | sed 's/^/           /'
 
 %.elc: %.el
 	emacs -batch -f batch-byte-compile $^
-
-# TODO grep all *.el files out of self
-#download: $(ELS)
 
 # https://www.gnu.org/software/emacs/manual/html_node/elisp/Compilation-Functions.html
 compile:
