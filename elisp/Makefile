@@ -32,3 +32,6 @@ powershell-mode.el:
 
 visual-basic-mode.el:
 	wget http://www.emacswiki.org/emacs/download/visual-basic-mode.el
+
+dos.el:
+	wget http://www.emacswiki.org/emacs/download/dos.el

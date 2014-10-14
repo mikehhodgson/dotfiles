@@ -44,8 +44,8 @@
 
 ;; additional modes and file extensions
 (add-to-list 'load-path "~/.elisp")
-(require 'php-mode)
-(require 'visual-basic-mode)
+;;(require 'php-mode)
+;;(require 'visual-basic-mode)
 
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" .
@@ -64,6 +64,10 @@
 (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+
+(autoload 'dos-mode "dos" "Windows Batch File mode." t)
+(setq auto-mode-alist (append '(("\\(\\.bat\\)$" .
+                                 dos-mode)) auto-mode-alist))
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
