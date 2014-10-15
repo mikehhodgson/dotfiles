@@ -2,9 +2,8 @@
 # http://edward.oconnor.cx/2005/09/installing-elisp-files
 # http://edward.oconnor.cx/config/elisp/Makefile
 
-#ELS = $(shell ls -1 *.el) # run ls command, list .el files
-#ELCS = $(ELS:.el=.elc)    # make variable substiution, list .elc files
-#ELFILES = $(shell egrep -o ^[a-zA-Z-]+.el Makefile)
+ELFILES = $(shell egrep -o ^[a-zA-Z-]+.el Makefile)
+ELCFILES = $(ELFILES:.el=.elc)    # make variable substiution, list .elc files
 
 usage:
 	@echo "USAGE: make [ foo.el | foo.elc | download | compile | all ]"
@@ -15,11 +14,19 @@ usage:
 %.elc: %.el
 	emacs -batch -f batch-byte-compile $^
 
+clean:
+	rm -f *.elc
+
 # https://www.gnu.org/software/emacs/manual/html_node/elisp/Compilation-Functions.html
 compile:
 	emacs -batch -f batch-byte-compile *.el
 
-all: download compile
+download: $(ELFILES)
+
+all: delete download compile
+
+delete: clean
+	rm -f *.el
 
 lua-mode.el:
 	wget http://lua-users.org/files/wiki_insecure/editors/lua-mode.el
