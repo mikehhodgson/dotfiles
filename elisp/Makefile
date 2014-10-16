@@ -8,8 +8,14 @@ ELCFILES = $(ELFILES:.el=.elc)    # make variable substiution, list .elc files
 usage:
 	@echo "USAGE: make [ foo.el | foo.elc | download | compile | all ]"
 	@echo
+	@echo "       make foo.el   - wget foo.el"
+	@echo "       make foo.elc  - byte compile foo.el"
+	@echo "       make download - wget any missing *.el"
+	@echo "       make compile  - compile all present *.el"
+	@echo "       make all      - re-download and compile all"
+	@echo
 	@echo "       files available:"
-	@egrep -o ^[a-zA-Z-]+.el Makefile | sed 's/^/           /'
+	@egrep -o ^[a-zA-Z-]+.el Makefile | sort | sed 's/^/            /'
 
 %.elc: %.el
 	emacs -batch -f batch-byte-compile $^
