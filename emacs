@@ -69,6 +69,10 @@
 (setq auto-mode-alist (append '(("\\(\\.bat\\)$" .
                                  dos-mode)) auto-mode-alist))
 
+(autoload 'php-mode "php-mode" "PHP mode." t)
+(setq auto-mode-alist (append '(("\\(\\.php\\)$" .
+                                 php-mode)) auto-mode-alist))
+
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
