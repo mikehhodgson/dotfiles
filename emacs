@@ -23,6 +23,8 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message "mike")
 
+(add-to-list 'custom-theme-load-path "~/.elisp")
+
 ;; gui and terminal specifics
 (if (display-graphic-p)
     (progn
@@ -31,9 +33,11 @@
        '(custom-enabled-themes (quote (tsdh-dark)))
        ;; toolbar not required
        '(tool-bar-mode nil)))
-  ;; else
-  ;; only show menu in gui mode
-  (menu-bar-mode -1))
+    ;; else
+    ;; only show menu in gui mode
+    (progn
+      (menu-bar-mode -1)
+      (load-theme 'evenhold t)))
 
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-default-notes-file "~/notes.org")
