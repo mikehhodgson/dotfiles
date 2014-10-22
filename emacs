@@ -23,6 +23,9 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message "mike")
 
+;; show matching parenthesis
+(show-paren-mode 1)
+
 (add-to-list 'custom-theme-load-path "~/.elisp")
 
 ;; gui and terminal specifics
