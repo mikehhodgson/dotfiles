@@ -14,6 +14,8 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default show-trailing-whitespace t)
+(add-hook 'Info-mode-hook (lambda ()
+                            (setq show-trailing-whitespace nil)))
 
 ;; highlight selected region
 (transient-mark-mode 1)
