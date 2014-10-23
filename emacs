@@ -16,6 +16,8 @@
 (setq-default show-trailing-whitespace t)
 (add-hook 'Info-mode-hook (lambda ()
                             (setq show-trailing-whitespace nil)))
+(add-hook 'Buffer-menu-mode-hook (lambda ()
+                            (setq show-trailing-whitespace nil)))
 
 ;; highlight selected region
 (transient-mark-mode 1)
