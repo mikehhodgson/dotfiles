@@ -48,3 +48,6 @@ visual-basic-mode.el:
 
 dos.el:
 	wget http://www.emacswiki.org/emacs/download/dos.el
+
+evenhold-theme.el:
+	wget https://raw.githubusercontent.com/evenhold/evenhold-theme/master/evenhold-theme.el
