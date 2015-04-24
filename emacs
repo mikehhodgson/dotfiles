@@ -125,4 +125,10 @@
 (global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
 (global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
 (global-set-key (kbd "C-0") '(lambda()(interactive)
-                                                              (modify-frame-parameters nil `((alpha . 100)))))
+                               (modify-frame-parameters nil `((alpha . 100)))))
+
+;; uni c++
+;; http://emacswiki.org/emacs/IndentingC
+;; http://en.wikipedia.org/wiki/Indent_style
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(setq-default c-basic-offset 3 c-default-style "Stroustrup")
