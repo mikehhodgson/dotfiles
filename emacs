@@ -14,10 +14,19 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default show-trailing-whitespace t)
-(add-hook 'Info-mode-hook (lambda ()
-                            (setq show-trailing-whitespace nil)))
-(add-hook 'Buffer-menu-mode-hook (lambda ()
-                            (setq show-trailing-whitespace nil)))
+
+(defun hide-trailing-whitespace ()
+  "Sets show-trailing-whitespace to nil"
+  (setq show-trailing-whitespace nil))
+
+(mapc
+ (lambda (emacs-mode-hook)
+   (add-hook emacs-mode-hook 'hide-trailing-whitespace))
+ '(buffer-menu-mode-hook
+   info-mode-hook
+   help-mode-hook
+   eww-mode-hook))
+
 
 ;; highlight selected region
 (transient-mark-mode 1)
