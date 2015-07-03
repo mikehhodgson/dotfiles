@@ -51,3 +51,6 @@ dos.el:
 
 evenhold-theme.el:
 	wget https://raw.githubusercontent.com/evenhold/evenhold-theme/master/evenhold-theme.el
+
+graphviz-mode.el:
+	wget http://graphviz.org/Misc/graphviz-dot-mode.el

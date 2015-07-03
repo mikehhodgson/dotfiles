@@ -108,6 +108,11 @@
 (setq auto-mode-alist (append '(("\\(\\.php\\)$" .
                                  php-mode)) auto-mode-alist))
 
+(autoload 'graphviz-dot-mode "graphviz-dot-mode" "Graphviz dot mode." t)
+(setq auto-mode-alist (append '(("\\(\\.dot\\|\\.gv\\)$" .
+                                 graphviz-dot-mode)) auto-mode-alist))
+
+
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
