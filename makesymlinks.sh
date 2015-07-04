@@ -10,18 +10,18 @@ readonly ARGS="$@"
 
 usage() {
     cat <<- EOF
-	usage: $0 [-chs]
+    usage: $0 [-chs]
 
-	This program creates symlinks in the user's home directory to the
-	bundled config files.
+    This program creates symlinks in the user's home directory to the
+    bundled config files.
 
-	OPTIONS:
-	   -c    copy - copy files instead of making symlinks
-	   -d    debug - set -x
-	   -h    help - print this message
-	   -s    silent - don't prompt before each file
-	EOF
-} 
+    OPTIONS:
+       -c    copy - copy files instead of making symlinks
+       -d    debug - set -x
+       -h    help - print this message
+       -s    silent - don't prompt before each file
+    EOF
+}
 
 options() {
     while getopts "cdhs" opt; do
@@ -66,8 +66,8 @@ main() {
     # old dotfiles backup directory
     local olddir=~/.dotfiles_old
     # list of files/folders to symlink in homedir
-    local files="elisp emacs gitconfig hydra phoenix.js profile tmux.conf vimrc zephyros.js"
-    
+    local files="elisp emacs gitconfig gtkrc-2.0.gnucash hydra phoenix.js profile tmux.conf vimrc zephyros.js"
+
     # create dotfiles_old in homedir
     # if olddir exists this can cause problems with backing up a symlink where
     # olddir contains a directory of the same name
@@ -91,12 +91,12 @@ main() {
     echo -n "Creating $olddir for backup of any existing dotfiles in ~ ..."
     mkdir -p $olddir
     echo "done"
-    
+
     # change to the dotfiles directory
     echo -n "Changing to the $dir directory ..."
     cd $dir
     echo "done"
-    
+
     # move any existing dotfiles in homedir to dotfiles_old directory,
     # then create symlinks from the homedir to any files in the
     # ~/dotfiles directory specified in $files
