@@ -10,17 +10,17 @@ readonly ARGS="$@"
 
 usage() {
     cat <<- EOF
-    usage: $0 [-chs]
+	usage: $0 [-chs]
 
-    This program creates symlinks in the user's home directory to the
-    bundled config files.
+	This program creates symlinks in the user's home directory to the
+	bundled config files.
 
-    OPTIONS:
-       -c    copy - copy files instead of making symlinks
-       -d    debug - set -x
-       -h    help - print this message
-       -s    silent - don't prompt before each file
-    EOF
+	OPTIONS:
+	   -c    copy - copy files instead of making symlinks
+	   -d    debug - set -x
+	   -h    help - print this message
+	   -s    silent - don't prompt before each file
+	EOF
 }
 
 options() {
