@@ -1,0 +1,6 @@
+style "font"
+{
+  font_name = "Arial Narrow 12"
+}
+widget_class "*" style "font"
+gtk-font-name = "Arial Narrow 12"
