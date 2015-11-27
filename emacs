@@ -34,12 +34,6 @@
  '(show-paren-mode t)
  '(size-indication-mode t)
  '(tool-bar-mode nil))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(default ((t (:family "Inconsolata-dz" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
 
 ;; whitespace
 (setq-default indent-tabs-mode nil)
@@ -170,9 +164,10 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (setq-default c-basic-offset 3 c-default-style "Stroustrup")
 (put 'downcase-region 'disabled nil)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Hack" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
