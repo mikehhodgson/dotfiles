@@ -54,3 +54,7 @@ evenhold-theme.el:
 
 graphviz-mode.el:
 	wget http://graphviz.org/Misc/graphviz-dot-mode.el
+
+markdown-mode.el:
+	wget http://jblevins.org/git/markdown-mode.git/plain/markdown-mode.el?h=stable
+

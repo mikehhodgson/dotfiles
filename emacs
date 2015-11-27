@@ -112,6 +112,11 @@
 (setq auto-mode-alist (append '(("\\(\\.dot\\|\\.gv\\)$" .
                                  graphviz-dot-mode)) auto-mode-alist))
 
+(autoload 'markdown-mode "markdown-mode"
+  "Major mode for editing Markdown files" t)
+(setq auto-mode-alist (append '(("\\(\\.md\\|\\.markdown\\)$" .
+                                 markdown-mode)) auto-mode-alist))
+
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
