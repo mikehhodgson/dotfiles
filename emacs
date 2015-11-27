@@ -117,6 +117,9 @@
 (setq auto-mode-alist (append '(("\\(\\.md\\|\\.markdown\\)$" .
                                  markdown-mode)) auto-mode-alist))
 
+(autoload 'puppet-mode "puppet-mode" "Puppet mode." t)
+(setq auto-mode-alist (append '(("\\(\\.pp\\)$" .
+                                 puppet-mode)) auto-mode-alist))
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist

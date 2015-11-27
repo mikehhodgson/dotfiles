@@ -58,3 +58,5 @@ graphviz-mode.el:
 markdown-mode.el:
 	wget http://jblevins.org/git/markdown-mode.git/plain/markdown-mode.el?h=stable
 
+puppet-mode.el:
+	wget https://raw.githubusercontent.com/lunaryorn/puppet-mode/master/puppet-mode.el
