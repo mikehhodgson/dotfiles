@@ -171,3 +171,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Hack" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
+
+;; allow number pad enter in addition to return key
+;; useful for M-enter when making a list of numbers
+(add-hook 'org-mode-hook
+          (lambda ()
+            (org-defkey org-mode-map [M-enter] 'org-meta-return)))
