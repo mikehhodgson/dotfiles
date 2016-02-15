@@ -59,7 +59,12 @@
 ;; quiet!
 (setq initial-scratch-message "")
 (setq inhibit-startup-message t)
-(setq inhibit-startup-echo-area-message "mike")
+
+;; http://yann.hodique.info/blog/rant-obfuscation-in-emacs/
+;; portable way to disable that silly message
+(put 'inhibit-startup-echo-area-message 'saved-value
+     (setq inhibit-startup-echo-area-message (user-login-name)))
+(setq inhibit-startup-screen t)
 
 ;; show matching parenthesis
 (show-paren-mode 1)
