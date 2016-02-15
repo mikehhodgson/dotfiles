@@ -32,6 +32,8 @@
  '(inhibit-startup-screen t)
  '(org-agenda-files (quote ("~/notes.org")))
  '(show-paren-mode t)
+ '(require-final-newline nil)
+ '(mode-require-final-newline nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil))
 
@@ -120,6 +122,8 @@
 (setq auto-mode-alist (append '(("\\(\\.pp\\)$" .
                                  puppet-mode)) auto-mode-alist))
 
+(autoload 'draft-mode "draft-mode" "Draft mode." t)
+
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -182,3 +186,4 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (org-defkey org-mode-map [M-enter] 'org-meta-return)))
+

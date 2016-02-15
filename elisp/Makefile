@@ -60,3 +60,6 @@ markdown-mode.el:
 
 puppet-mode.el:
 	wget https://raw.githubusercontent.com/lunaryorn/puppet-mode/master/puppet-mode.el
+
+draft-mode.el:
+	wget https://raw.githubusercontent.com/gaudecker/draft-mode/master/draft-mode.el
