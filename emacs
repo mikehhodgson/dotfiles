@@ -71,6 +71,10 @@
 ;; show matching parenthesis
 (show-paren-mode 1)
 
+;; https://www.reddit.com/r/emacs/comments/445w6s/whats_some_small_thing_in_your_dotemacs_that_you/
+(blink-cursor-mode -1)
+(global-set-key (kbd "M-o") 'other-window)
+
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
 (setq org-default-notes-file "~/notes.org")
      (global-set-key "\C-cl" 'org-store-link)
