@@ -23,6 +23,7 @@ usage:
 clean:
 	rm -f *.elc
 
+# TODO - fix writeroom dependency compilation
 # https://www.gnu.org/software/emacs/manual/html_node/elisp/Compilation-Functions.html
 compile:
 	emacs -batch -f batch-byte-compile *.el
@@ -63,3 +64,9 @@ puppet-mode.el:
 
 draft-mode.el:
 	wget https://raw.githubusercontent.com/gaudecker/draft-mode/master/draft-mode.el
+
+visual-fill-column.el:
+	wget https://raw.githubusercontent.com/joostkremers/visual-fill-column/master/visual-fill-column.el
+
+writeroom-mode.el: visual-fill-column.el
+	wget https://raw.githubusercontent.com/joostkremers/writeroom-mode/master/writeroom-mode.el

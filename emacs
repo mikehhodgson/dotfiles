@@ -127,6 +127,7 @@
                                  puppet-mode)) auto-mode-alist))
 
 (autoload 'draft-mode "draft-mode" "Draft mode." t)
+(autoload 'writeroom-mode "writeroom-mode" "Writeroom mode." t)
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
