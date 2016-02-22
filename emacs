@@ -1,21 +1,13 @@
 (add-to-list 'custom-theme-load-path "~/.elisp")
 
-;; gui and terminal specifics
+; gui and terminal specifics
 (if (display-graphic-p)
-    (progn
-      ;; if graphical
-;;      (custom-set-variables
-;;       '(custom-enabled-themes (quote (evenhold)))
-       ;; toolbar not required
-;;       '(tool-bar-mode nil))
-      )
-    ;; else
-    ;; only show menu in gui mode
-    (progn
-      (menu-bar-mode -1)
-      ;;(load-theme 'evenhold t)
-      ))
-
+    (progn ; if graphical
+      (if (string-equal system-type "darwin")
+          (progn
+            (scroll-bar-mode -1))))
+    (progn ; else
+      (menu-bar-mode -1))) ;; only show menu in gui mode
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
