@@ -1,13 +1,30 @@
-(add-to-list 'custom-theme-load-path "~/.elisp")
+;; quiet!
+(setq inhibit-startup-screen t
+      initial-scratch-message ""
+      inhibit-startup-message t)
 
-; gui and terminal specifics
-(if (display-graphic-p)
-    (progn ; if graphical
-      (if (string-equal system-type "darwin")
-          (progn
-            (scroll-bar-mode -1))))
-    (progn ; else
-      (menu-bar-mode -1))) ;; only show menu in gui mode
+;; http://yann.hodique.info/blog/rant-obfuscation-in-emacs/
+;; portable way to disable that silly message
+(put 'inhibit-startup-echo-area-message 'saved-value
+     (setq inhibit-startup-echo-area-message (user-login-name)))
+(setq inhibit-startup-screen t)
+
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(blink-cursor-mode -1)
+
+(setq column-number-mode t
+      size-indication-mode t
+      require-final-newline nil
+      mode-require-final-newline nil
+      transient-mark-mode t ;; highlight selected region
+      show-paren-mode t
+      )
+
+(global-set-key (kbd "M-o") 'other-window)
+
+(add-to-list 'custom-theme-load-path "~/.elisp")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -16,18 +33,11 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(column-number-mode t)
  '(custom-enabled-themes (quote (evenhold)))
  '(custom-safe-themes
    (quote
     ("4486c1c29f022216ce050ababe284c05bcb24096a280f0615e28d27c31f31b24" default)))
- '(inhibit-startup-screen t)
- '(org-agenda-files (quote ("~/notes.org")))
- '(show-paren-mode t)
- '(require-final-newline nil)
- '(mode-require-final-newline nil)
- '(size-indication-mode t)
- '(tool-bar-mode nil))
+ )
 
 ;; whitespace
 (setq-default indent-tabs-mode nil)
@@ -46,29 +56,9 @@
    help-mode-hook
    eww-mode-hook))
 
-
-;; highlight selected region
-(transient-mark-mode 1)
-
-;; quiet!
-(setq initial-scratch-message "")
-(setq inhibit-startup-message t)
-
-;; http://yann.hodique.info/blog/rant-obfuscation-in-emacs/
-;; portable way to disable that silly message
-(put 'inhibit-startup-echo-area-message 'saved-value
-     (setq inhibit-startup-echo-area-message (user-login-name)))
-(setq inhibit-startup-screen t)
-
-;; show matching parenthesis
-(show-paren-mode 1)
-
-;; https://www.reddit.com/r/emacs/comments/445w6s/whats_some_small_thing_in_your_dotemacs_that_you/
-(blink-cursor-mode -1)
-(global-set-key (kbd "M-o") 'other-window)
-
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-default-notes-file "~/notes.org")
+(setq org-default-notes-file "~/notes.org"
+      org-agenda-files '("~/notes.org"))
      (global-set-key "\C-cl" 'org-store-link)
      (global-set-key "\C-cc" 'org-capture)
      (global-set-key "\C-ca" 'org-agenda)
@@ -76,8 +66,6 @@
 
 ;; additional modes and file extensions
 (add-to-list 'load-path "~/.elisp")
-;;(require 'php-mode)
-;;(require 'visual-basic-mode)
 
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" .
