@@ -46,7 +46,13 @@
 
 (defun hide-trailing-whitespace ()
   "Sets show-trailing-whitespace to nil"
+  (interactive)
   (setq show-trailing-whitespace nil))
+
+(defun show-trailing-whitespace ()
+  "Sets show-trailing-whitespace to t"
+  (interactive)
+  (setq show-trailing-whitespace t))
 
 (mapc
  (lambda (emacs-mode-hook)
