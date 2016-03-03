@@ -13,13 +13,13 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
+(show-paren-mode)
 
 (setq column-number-mode t
       size-indication-mode t
       require-final-newline nil
       mode-require-final-newline nil
       transient-mark-mode t ;; highlight selected region
-      show-paren-mode t
       )
 
 (global-set-key (kbd "M-o") 'other-window)
