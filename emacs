@@ -178,3 +178,5 @@
           (lambda ()
             (org-defkey org-mode-map [M-enter] 'org-meta-return)))
 
+;; had trouble with the lua-mode lua-electric-match
+(add-hook 'lua-mode-hook (lambda () (local-set-key ")" 'self-insert-command)))
