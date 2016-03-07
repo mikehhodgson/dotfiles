@@ -12,4 +12,4 @@ shopt -s histappend
 export HISTIGNORE="ls:exit:pwd:clear"
 
 alias ls="ls -G"
-alias emacs="TERM=screen-256color emacs"
+alias emacs="TERM=screen-256color emacs -nw"
