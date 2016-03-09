@@ -1,26 +1,4 @@
---https://luarocks.org/search?q=mjolnir
---luarocks install mjolnir.hotkey
---luarocks install mjolnir.application
---luarocks install mjolnir.alert
-
---local application = require "mjolnir.application"
---local hotkey = require "mjolnir.hotkey"
---local window = require "mjolnir.window"
---local fnutils = require "mjolnir.fnutils"
---local alert = require "mjolnir.alert"
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
-  hs.alert.show("Hello World!")
-end)
-
-
-hs.hotkey.bind({"cmd", "alt", "ctrl"}, "D", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  f.x = f.x + 10
-  win:setFrame(f)
-end)
-
+hs.window.animationDuration = 0 -- disable animations
 
 function bindkeys()
    local mash = {"cmd", "alt"}
