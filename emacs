@@ -14,6 +14,7 @@
 (tool-bar-mode -1)
 (blink-cursor-mode -1)
 (show-paren-mode)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq column-number-mode t
       size-indication-mode t
