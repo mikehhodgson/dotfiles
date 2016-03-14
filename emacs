@@ -122,6 +122,8 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+(setq create-lockfiles nil)
+
 ;; easy spell check
 ;; http://www.emacswiki.org/emacs/FlySpell
 ;;(global-set-key (kbd "<f8>") 'ispell-word)
