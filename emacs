@@ -183,3 +183,8 @@
 
 ;; had trouble with the lua-mode lua-electric-match
 (add-hook 'lua-mode-hook (lambda () (local-set-key ")" 'self-insert-command)))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t))) ; this line activates ditaa
+(setq org-export-allow-BIND t)
