@@ -34,11 +34,11 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector
    ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
- '(custom-enabled-themes (quote (evenhold)))
+ '(custom-enabled-themes (quote (cyberpunk)))
  '(custom-safe-themes
    (quote
-    ("4486c1c29f022216ce050ababe284c05bcb24096a280f0615e28d27c31f31b24" default)))
- )
+    ("331433979cba7e5db23375e231e9216b2eb1d0b7977a3b327560b4dd6a2ef1ec" "4486c1c29f022216ce050ababe284c05bcb24096a280f0615e28d27c31f31b24" default))))
+
 
 ;; whitespace
 (setq-default indent-tabs-mode nil)

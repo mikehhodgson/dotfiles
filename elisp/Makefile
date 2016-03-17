@@ -70,3 +70,6 @@ visual-fill-column.el:
 
 writeroom-mode.el: visual-fill-column.el
 	wget https://raw.githubusercontent.com/joostkremers/writeroom-mode/master/writeroom-mode.el
+
+cyberpunk-theme.el:
+	wget https://raw.githubusercontent.com/n3mo/cyberpunk-theme.el/master/cyberpunk-theme.el
