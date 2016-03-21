@@ -176,3 +176,16 @@
  'org-babel-load-languages
  '((ditaa . t))) ; this line activates ditaa
 (setq org-export-allow-BIND t)
+
+;; emacs gui on osx does not receive the same exec path as when run
+;; from terminal
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell
+      (replace-regexp-in-string "[[:space:]\n]*$" ""
+        (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq exec-path (split-string path-from-shell path-separator))
+
+    ;; exec-path help notes that this should be the last item
+    (add-to-list 'exec-path exec-directory t)))
+(when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
