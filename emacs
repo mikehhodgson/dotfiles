@@ -1,3 +1,4 @@
+
 ;; quiet!
 (setq inhibit-startup-screen t
       initial-scratch-message ""
@@ -172,9 +173,14 @@
 ;; had trouble with the lua-mode lua-electric-match
 (add-hook 'lua-mode-hook (lambda () (local-set-key ")" 'self-insert-command)))
 
+;; active Bable languages
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((ditaa . t))) ; this line activates ditaa
+ '(
+   (calc . t)
+   (ditaa . t)
+   (python . t)
+   )) ; this line activates ditaa
 (setq org-export-allow-BIND t)
 
 ;; emacs gui on osx does not receive the same exec path as when run
