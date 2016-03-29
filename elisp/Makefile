@@ -73,3 +73,6 @@ writeroom-mode.el: visual-fill-column.el
 
 cyberpunk-theme.el:
 	wget https://raw.githubusercontent.com/n3mo/cyberpunk-theme.el/master/cyberpunk-theme.el
+
+web-mode.el:
+	wget https://raw.githubusercontent.com/fxbois/web-mode/master/web-mode.el

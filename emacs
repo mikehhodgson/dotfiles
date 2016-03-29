@@ -85,9 +85,10 @@
 (setq auto-mode-alist (append '(("\\(\\.bat\\)$" .
                                  dos-mode)) auto-mode-alist))
 
+(autoload 'web-mode "web-mode" "Web mode." t)
 (autoload 'php-mode "php-mode" "PHP mode." t)
 (setq auto-mode-alist (append '(("\\(\\.php\\)$" .
-                                 php-mode)) auto-mode-alist))
+                                 web-mode)) auto-mode-alist))
 
 (autoload 'graphviz-dot-mode "graphviz-dot-mode" "Graphviz dot mode." t)
 (setq auto-mode-alist (append '(("\\(\\.dot\\|\\.gv\\)$" .
