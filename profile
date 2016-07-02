@@ -13,3 +13,5 @@ export HISTIGNORE="ls:exit:pwd:clear"
 
 alias ls="ls -G"
 alias emacs="TERM=screen-256color emacs -nw"
+
+export PATH="/usr/local/sbin:$PATH"
