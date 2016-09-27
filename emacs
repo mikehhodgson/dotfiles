@@ -1,3 +1,8 @@
+;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+(setq gc-cons-threshold (* 8 1024 1024))
+
+(add-to-list 'custom-theme-load-path "~/dotfiles/elisp")
+(add-to-list 'load-path "~/dotfiles/elisp")
 
 ;; quiet!
 (setq inhibit-startup-screen t
@@ -26,7 +31,6 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 
-(add-to-list 'custom-theme-load-path "~/.elisp")
 (load-theme 'cyberpunk t)
 
 ;; whitespace
@@ -53,15 +57,12 @@
    eww-mode-hook))
 
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
-(setq org-default-notes-file "~/notes.org"
-      org-agenda-files '("~/notes.org"))
+;; (setq org-default-notes-file "~/notes.org"
+;;       org-agenda-files '("~/notes.org"))
      (global-set-key "\C-cl" 'org-store-link)
      (global-set-key "\C-cc" 'org-capture)
      (global-set-key "\C-ca" 'org-agenda)
      (global-set-key "\C-cb" 'org-iswitchb)
-
-;; additional modes and file extensions
-(add-to-list 'load-path "~/.elisp")
 
 (autoload 'visual-basic-mode "visual-basic-mode" "Visual Basic mode." t)
 (setq auto-mode-alist (append '(("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" .
@@ -105,6 +106,7 @@
 
 (autoload 'draft-mode "draft-mode" "Draft mode." t)
 (autoload 'writeroom-mode "writeroom-mode" "Writeroom mode." t)
+(autoload 'visual-fill-column-mode "visual-fill-column" "Visual Fill Column mode." t)
 
 ;; http://www.emacswiki.org/emacs/BackupDirectory
 (setq backup-directory-alist
@@ -163,26 +165,30 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
+ '(default ((t (:family "Hack" :foundry "outline" :slant normal :weight normal :height 98 :width normal))))
+ '(variable-pitch ((t (:family "Liberation Sans" :foundry "outline" :slant normal :weight normal :height 98 :width normal)))))
 
 ;; allow number pad enter in addition to return key
 ;; useful for M-enter when making a list of numbers
 (add-hook 'org-mode-hook
           (lambda ()
-            (org-defkey org-mode-map [M-enter] 'org-meta-return)))
+            (org-defkey org-mode-map [M-enter] 'org-meta-return)
+            (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+))
 
 ;; had trouble with the lua-mode lua-electric-match
 (add-hook 'lua-mode-hook (lambda () (local-set-key ")" 'self-insert-command)))
 
+;; long load time
 ;; active Bable languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (calc . t)
-   (ditaa . t)
-   (python . t)
-   )) ; this line activates ditaa
-(setq org-export-allow-BIND t)
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '(
+;;    (calc . t)
+;;    (ditaa . t)
+;;    (python . t)
+;;    )) ; this line activates ditaa
+;; (setq org-export-allow-BIND t)
 
 ;; emacs gui on osx does not receive the same exec path as when run
 ;; from terminal
@@ -196,3 +202,40 @@
     ;; exec-path help notes that this should be the last item
     (add-to-list 'exec-path exec-directory t)))
 (when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
+
+
+
+;; http://ergoemacs.org/emacs/elisp_read_file_content.html
+(defun get-string-from-file (filePath)
+  "Return filePath's file content."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+
+(put 'narrow-to-region 'disabled nil)
+(put 'scroll-left 'disabled nil)
+(display-time)
+
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+
+(setq visible-bell t)
+
+;; http://endlessparentheses.com/fill-and-unfill-paragraphs-with-a-single-key.html?source=rss
+(defun endless/fill-or-unfill ()
+  "Like `fill-paragraph', but unfill if used twice."
+  (interactive)
+  (let ((fill-column
+         (if (eq last-command 'endless/fill-or-unfill)
+             (progn (setq this-command nil)
+                    (point-max))
+           fill-column)))
+    (call-interactively #'fill-paragraph)))
+
+(global-set-key [remap fill-paragraph]
+                #'endless/fill-or-unfill)
