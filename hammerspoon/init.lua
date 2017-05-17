@@ -1,10 +1,12 @@
+-- http://www.hammerspoon.org/docs/index.html
+
 hs.window.animationDuration = 0 -- disable animations
 
 function bindkeys()
    local mash = {"cmd", "alt"}
    local mashmash = {"cmd", "ctrl", "alt"}
 
-   hs.hotkey.bind(mash, "r", hs.reload)
+   hs.hotkey.bind(mashmash, "r", hs.reload)
    hs.hotkey.bind(mashmash, "f", maximise)
    hs.hotkey.bind(mashmash, "c", center)
    hs.hotkey.bind(mash, "left", left)
@@ -15,8 +17,9 @@ function bindkeys()
    hs.hotkey.bind(mashmash, "right", topright)
    hs.hotkey.bind(mashmash, "up", topleft)
    hs.hotkey.bind(mashmash, "down", bottomright)
+   hs.hotkey.bind(mash, 'w', restartwifi)
+   hs.hotkey.bind(mash, 'l', lockscreen)
 end
-
 
 function movewindow(...)
    local functions = {...}
@@ -110,4 +113,25 @@ function topright()
    movewindow(top, right)
 end
 
+function restartwifi()
+   hs.wifi.setPower(false)
+   hs.wifi.setPower(true)
+end
+
+function lockscreen()
+   hs.caffeinate.lockScreen()
+end
+
+function sleephandler(eventType)
+   if (eventType == hs.caffeinate.watcher.systemWillSleep) then
+--      restartwifi() -- osx wifi sometimes doesn't work on wake without toggling wifi
+      local output = hs.audiodevice.defaultOutputDevice()
+      output:setVolume(0)
+      output:setMuted(true)
+   end
+end
+local caffeinateWatcher = hs.caffeinate.watcher.new(sleephandler)
+caffeinateWatcher:start()
+
 bindkeys()
+hs.alert.show('Hammerspoon config loaded')
