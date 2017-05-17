@@ -142,7 +142,7 @@
      `(org-tag ((,class (:background ,org-background :foreground ,foreground))))
      `(org-warning ((,class (:background ,region :foreground ,foreground :weight bold))))
      `(org-todo ((,class (:background ,region :foreground ,foreground :weight bold))))
-     `(org-done ((,class (:background ,region :foreground ,foreground :weight bold))))
+     `(org-done ((,class (:background ,org-background :foreground ,foreground :weight bold))))
 
      `(org-table ((,class (:background ,org-background))))
      `(org-code ((,class (:background ,org-background))))
