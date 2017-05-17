@@ -14,4 +14,6 @@ export HISTIGNORE="ls:exit:pwd:clear"
 alias ls="ls -G"
 alias emacs="TERM=screen-256color emacs -nw"
 
-export PATH="/usr/local/sbin:$PATH"
+# http://stackoverflow.com/questions/10940736/rbenv-not-changing-ruby-version
+export PATH="/usr/local/sbin:$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
