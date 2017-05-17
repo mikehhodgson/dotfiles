@@ -47,6 +47,9 @@ powershell-mode.el:
 visual-basic-mode.el:
 	wget http://www.emacswiki.org/emacs/download/visual-basic-mode.el
 
+deep-thought-theme.el:
+	wget https://raw.githubusercontent.com/emacsfodder/emacs-deep-thought-theme/master/deep-thought-theme.el
+
 dos.el:
 	wget http://www.emacswiki.org/emacs/download/dos.el
 
@@ -58,6 +61,9 @@ graphviz-mode.el:
 
 markdown-mode.el:
 	wget http://jblevins.org/git/markdown-mode.git/plain/markdown-mode.el?h=stable
+
+minimal-theme.el:
+	wget https://raw.githubusercontent.com/anler/minimal-theme/master/minimal-theme.el
 
 puppet-mode.el:
 	wget https://raw.githubusercontent.com/lunaryorn/puppet-mode/master/puppet-mode.el

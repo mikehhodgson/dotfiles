@@ -31,7 +31,8 @@
 
 (global-set-key (kbd "M-o") 'other-window)
 
-(load-theme 'cyberpunk t)
+;;(load-theme 'cyberpunk t)
+(load-theme 'minimal t)
 
 ;; whitespace
 (setq-default indent-tabs-mode nil)
@@ -174,6 +175,7 @@
           (lambda ()
             (org-defkey org-mode-map [M-enter] 'org-meta-return)
             (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+            (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 ))
 
 ;; had trouble with the lua-mode lua-electric-match
