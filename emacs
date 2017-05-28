@@ -57,6 +57,14 @@
    help-mode-hook
    eww-mode-hook))
 
+(mapc
+ (lambda (emacs-mode-hook)
+   (add-hook emacs-mode-hook (lambda ()
+                               "Turn on `visual-line-mode' mode."
+                               (visual-line-mode 1))))
+ '(text-mode-hook))
+
+
 ;;(setq org-default-notes-file (concat org-directory "/notes.org"))
 ;; (setq org-default-notes-file "~/notes.org"
 ;;       org-agenda-files '("~/notes.org"))
