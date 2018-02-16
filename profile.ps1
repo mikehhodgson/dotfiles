@@ -108,7 +108,17 @@ Function Get-SystemBootTime {
     (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
 }
 
-New-Alias -Force -Name emacs -Value runemacs               # starts new process
+
+if ($IsOSX) {
+    Function Open-Emacs {
+        bash -c "TERM=screen-256color emacs -nw $($Args)"
+    }
+    New-Alias -Force -Name emacs -Value Open-Emacs
+}
+else {
+    New-Alias -Force -Name emacs -Value runemacs   # starts new process
+}
+
 New-Alias -Force -Name edp -Value Edit-Profile
 New-Alias -Force -Name which -Value Get-CommandDefinition
 New-Alias -Force -Name weather -Value Get-Weather
