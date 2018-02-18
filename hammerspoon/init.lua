@@ -19,6 +19,12 @@ function bindkeys()
    hs.hotkey.bind(mashmash, "down", bottomright)
    hs.hotkey.bind(mash, 'w', restartwifi)
    hs.hotkey.bind(mash, 'l', lockscreen)
+   hs.hotkey.bind("alt", "1", insertdate)
+end
+
+function insertdate()
+   -- http://www.lua.org/manual/5.1/manual.html#pdf-os.date
+   hs.eventtap.keyStrokes(os.date("%Y-%m-%d"))
 end
 
 function movewindow(...)
