@@ -108,6 +108,35 @@ Function Get-SystemBootTime {
     (Get-CimInstance Win32_OperatingSystem).LastBootUpTime
 }
 
+Function Get-MusicForProgramming {
+    <#
+    .SYNOPSIS
+    Gets music.
+    .DESCRIPTION
+    Returns the mp3s in the rss feed of musicforprogramming.net to the current directory
+    .EXAMPLE
+    Get-MusicForProgramming
+    #>
+    Write-Progress -Activity "Getting File List" -Status "Waiting" `
+      -PercentComplete 0
+
+    $items = Invoke-RestMethod -Uri "http://musicforprogramming.net/rss.php" |
+      sort-object title
+    $i=0
+
+    $items | ForEach-Object {
+        $file = $_.comments.Split('/')[-1]
+        Write-Progress -Activity "Downloading files" -Status "Downloading $file" `
+          -PercentComplete ($i++ / $items.count * 100)
+          if (-not (Test-Path $file)) {
+              Invoke-WebRequest -Uri $_.comments -OutFile $file
+          }
+    }
+
+    Write-Progress -Activity "Downloading files" -Status "Download complete" `
+      -PercentComplete 100
+}
+
 
 if ($IsOSX) {
     Function Open-Emacs {
@@ -126,6 +155,7 @@ New-Alias -Force -Name w -Value Get-Weather
 New-Alias -Force -Name watch -Value Watch-Command
 New-Alias -Force -Name uptime -Value Get-SystemUptime
 New-Alias -Force -Name boottime -Value Get-SystemBootTime
+New-Alias -Force -Name icanhazmusic -Value Get-MusicForProgramming
 
 
 # http://stackoverflow.com/questions/2770526/where-are-the-default-aliases-defined-in-powershell
