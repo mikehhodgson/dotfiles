@@ -138,7 +138,7 @@ Function Get-MusicForProgramming {
 }
 
 
-if ($IsOSX) {
+if ($IsMacOS) {
     Function Open-Emacs {
         bash -c "TERM=screen-256color emacs -nw $($Args)"
     }
