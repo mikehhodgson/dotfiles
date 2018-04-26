@@ -28,25 +28,26 @@
 ;;; Code:
 (deftheme minimal "minimal dark theme.")
 
+;; colors taken from M-x list-colors-display
 (let* ((class '((class color) (min-colors 89)))
-       (foreground "grey90")
-       (background "grey10")
-       (cursor "white")
-       (border "grey40")
+       (foreground "grey90")                   ;; #e5e5e5
+       (background "grey10")                   ;; #1a1a1a
+       (cursor "white")                        ;; #ffffff
+       (border "grey40")                       ;; #666666
        (minibuffer cursor)
-       (region "grey30")
-       (comment-delimiter "grey30")
-       (comment "grey40")
+       (region "grey30")                       ;; #4d4d4d
+       (comment-delimiter "grey30")            ;; #4d4d4d
+       (comment "grey40")                      ;; #666666
        (constant foreground)
-       (string "grey70")
+       (string "grey70")                       ;; #b3b3b3
        (modeline-foreground background)
-       (modeline-background "grey95")
+       (modeline-background "grey95")          ;; #f2f2f2
        (modeline-foreground-inactive comment)
        (modeline-background-inactive background)
        (hl-background region)
        (hl-face-background nil)
-       (failure "red")
-       (org-background "grey8")
+       (failure "red")                         ;; #ff0000
+       (org-background "grey8")                ;; #141414
        )
   (setq fci-rule-color comment)
   (custom-theme-set-faces
