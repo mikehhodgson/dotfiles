@@ -16,14 +16,27 @@
     "editor.cursorBlinking": "solid",
     "editor.tokenColorCustomizations": {
         "[SIMPLE DARK MODE]": {
-            "comments": "#666666",
             "textMateRules": [
                 {
-                    "scope": [
-                        "entity.class"
+                    "name": "Strings",
+                    "scope":[
+                        "string",
+                        "punctuation.definition.string"
                     ],
                     "settings": {
-                        "fontStyle": "italic"
+                        "foreground": "#b3b3b3",
+                        "fontStyle": ""
+                    }
+                },
+                {
+                    "name": "Comments",
+                    "scope": [
+                        "comment",
+                        "punctuation.definition.comment"
+                    ],
+                    "settings": {
+                        "fontStyle": "",
+                        "foreground": "#666666"
                     }
                 }
             ],
@@ -41,7 +54,6 @@
             "sideBarTitle.foreground": "#aaaaaa",
             "editor.selectionBackground": "#606060",
             "editor.lineHighlightBackground": "#303030",
-            "welcomePage.buttonHoverBackground": "#606060",
             "editorGroupHeader.noTabsBackground": "#1a1a1a",
             "editorGroupHeader.tabsBackground": "#1a1a1a",
             "titleBar.activeBackground": "#1a1a1a",
@@ -53,7 +65,9 @@
             "input.border": "#606060",
             "input.foreground": "#606060",
             "sideBarSectionHeader.background": "#000000",
-            "button.background": "#000000"
+            "button.background": "#000000",
+            "button.hoverBackground": "#606060",
+            "welcomePage.buttonHoverBackground": "#606060"
         }
     }
 }
