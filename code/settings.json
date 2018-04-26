@@ -1,0 +1,59 @@
+{
+    //"java.errors.incompleteClasspath.severity": "ignore",
+    // https://code.visualstudio.com/docs/getstarted/theme-color-reference
+    //https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_adding-a-new-theme
+    // https://github.com/mikehhodgson/dotfiles/blob/master/elisp/minimal-theme.el
+    "window.zoomLevel": -1,
+    "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
+    "git.enableSmartCommit": true,
+    "diffEditor.renderSideBySide": false,
+    "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+    "javascript.format.enable": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "workbench.colorTheme": "SIMPLE DARK MODE",
+    "editor.cursorStyle": "block",
+    "editor.cursorBlinking": "solid",
+    "editor.tokenColorCustomizations": {
+        "[SIMPLE DARK MODE]": {
+            "comments": "#666666",
+            "textMateRules": [
+                {
+                    "scope": [
+                        "entity.class"
+                    ],
+                    "settings": {
+                        "fontStyle": "italic"
+                    }
+                }
+            ],
+        }
+    },
+    "workbench.colorCustomizations": {
+        "[SIMPLE DARK MODE]": {
+            "activityBar.background": "#1a1a1a",
+            "editor.background": "#1a1a1a",
+            "editorBracketMatch.background": "#606060",
+            "panel.background": "#1a1a1a",
+            "sideBar.background": "#1a1a1a",
+            "tab.inactiveForeground": "#aaaaaa",
+            "tab.unfocusedInactiveForeground": "#aaaaaa",
+            "sideBarTitle.foreground": "#aaaaaa",
+            "editor.selectionBackground": "#606060",
+            "editor.lineHighlightBackground": "#303030",
+            "welcomePage.buttonHoverBackground": "#606060",
+            "editorGroupHeader.noTabsBackground": "#1a1a1a",
+            "editorGroupHeader.tabsBackground": "#1a1a1a",
+            "titleBar.activeBackground": "#1a1a1a",
+            "peekViewTitle.background": "#1a1a1a",
+            "titleBar.inactiveBackground": "#1a1a1a",
+            "selection.background": "#606060",
+            "editor.selectionHighlightBorder": "#606060",
+            "input.background": "#1a1a1a",
+            "input.border": "#606060",
+            "input.foreground": "#606060",
+            "sideBarSectionHeader.background": "#000000",
+            "button.background": "#000000"
+        }
+    }
+}
