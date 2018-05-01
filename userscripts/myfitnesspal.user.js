@@ -5,6 +5,7 @@
 // @author   Mike Hodgson
 // @namespace  Hodgson
 // @include    http://www.myfitnesspal.com/food/diary*
+// @include    https://www.myfitnesspal.com/food/diary*
 // @require    https://code.jquery.com/jquery-3.3.1.min.js
 // @require    https://d3js.org/d3.v4.min.js
 // ==/UserScript==
@@ -82,10 +83,3 @@ var path = svg.selectAll('path')
       .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
       .attr("dy", "0.35em")
       .text(function(d) { return d.label; });
-/*
-svg
-	.append("text")
-      .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
-      .attr("dy", "0.35em")
-      .text(function(d) { return d.data.label; });
-*/
