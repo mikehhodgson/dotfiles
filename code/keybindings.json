@@ -37,5 +37,23 @@
     {
         "key": "ctrl+x o",
         "command": "-workbench.action.navigateEditorGroups"
+    },
+    {
+        "key": "ctrl+x b",
+        "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
+    },
+    {
+        "key": "ctrl+x ctrl+b",
+        "command": "workbench.action.openNextRecentlyUsedEditorInGroup"
+    },
+    {
+        "key": "ctrl+alt+\\",
+        "command": "editor.action.formatDocument",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+alt+f",
+        "command": "-editor.action.formatDocument",
+        "when": "editorTextFocus && !editorReadonly"
     }
 ]

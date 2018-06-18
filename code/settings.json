@@ -12,8 +12,12 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "workbench.colorTheme": "SIMPLE DARK MODE",
+    "editor.codeLens": false,
+    "editor.minimap.enabled": false,
+    "editor.smoothScrolling": false,
     "editor.cursorStyle": "block",
     "editor.cursorBlinking": "solid",
+    "editor.scrollbar.verticalScrollbarSize":20,
     "editor.tokenColorCustomizations": {
         "[SIMPLE DARK MODE]": {
             "textMateRules": [
@@ -36,7 +40,7 @@
                     ],
                     "settings": {
                         "fontStyle": "",
-                        "foreground": "#666666"
+                        "foreground": "#888888"
                     }
                 }
             ],
@@ -63,11 +67,23 @@
             "editor.selectionHighlightBorder": "#606060",
             "input.background": "#1a1a1a",
             "input.border": "#606060",
-            "input.foreground": "#606060",
+            "input.foreground":"#ffffff",
+            "inputOption.activeBorder": "#f78c00",
             "sideBarSectionHeader.background": "#000000",
             "button.background": "#000000",
             "button.hoverBackground": "#606060",
-            "welcomePage.buttonHoverBackground": "#606060"
+            "welcomePage.buttonHoverBackground": "#606060",
+            "editorIndentGuide.background": "#606060",
+            "editorIndentGuide.activeBackground": "#00d9ff",
+            "editorLineNumber.foreground":"#606060",
+            "scrollbarSlider.background": "#606060",
+            "gitlens.trailingLineForegroundColor": "#888888"
         }
+    },
+    "workbench.iconTheme": "seti",
+    "xmlTools.enableXmlTreeView": true,
+    "gitlens.blame.heatmap.enabled": true,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
     }
 }
