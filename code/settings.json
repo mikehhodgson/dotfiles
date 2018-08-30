@@ -77,12 +77,15 @@
             "editorIndentGuide.activeBackground": "#00d9ff",
             "editorLineNumber.foreground":"#606060",
             "scrollbarSlider.background": "#606060",
-            "gitlens.trailingLineForegroundColor": "#888888"
+            "gitlens.trailingLineForegroundColor": "#888888",
+            "list.hoverBackground":"#00d9ff",
+            "list.focusBackground":"#00d9ff"
         }
     },
     "workbench.iconTheme": "seti",
     "xmlTools.enableXmlTreeView": true,
     "gitlens.blame.heatmap.enabled": true,
+    "gitlens.currentLine.enabled": false,
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
     }
