@@ -8,7 +8,6 @@
     "git.enableSmartCommit": true,
     "diffEditor.renderSideBySide": false,
     "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
-    "javascript.format.enable": false,
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "workbench.colorTheme": "SIMPLE DARK MODE",
@@ -17,13 +16,13 @@
     "editor.smoothScrolling": false,
     "editor.cursorStyle": "block",
     "editor.cursorBlinking": "solid",
-    "editor.scrollbar.verticalScrollbarSize":20,
+    "editor.scrollbar.verticalScrollbarSize": 20,
+    "editor.formatOnSave": true,
     "editor.tokenColorCustomizations": {
         "[SIMPLE DARK MODE]": {
-            "textMateRules": [
-                {
+            "textMateRules": [{
                     "name": "Strings",
-                    "scope":[
+                    "scope": [
                         "string",
                         "punctuation.definition.string"
                     ],
@@ -67,26 +66,28 @@
             "editor.selectionHighlightBorder": "#606060",
             "input.background": "#1a1a1a",
             "input.border": "#606060",
-            "input.foreground":"#ffffff",
+            "input.foreground": "#ffffff",
             "inputOption.activeBorder": "#f78c00",
             "sideBarSectionHeader.background": "#000000",
             "button.background": "#000000",
             "button.hoverBackground": "#606060",
             "welcomePage.buttonHoverBackground": "#606060",
-            "editorIndentGuide.background": "#606060",
-            "editorIndentGuide.activeBackground": "#00d9ff",
-            "editorLineNumber.foreground":"#606060",
+            "editorIndentGuide.background": "#303030",
+            "editorIndentGuide.activeBackground": "#888888",
+            "editorLineNumber.foreground": "#606060",
             "scrollbarSlider.background": "#606060",
             "gitlens.trailingLineForegroundColor": "#888888",
-            "list.hoverBackground":"#00d9ff",
-            "list.focusBackground":"#00d9ff"
+            "list.hoverBackground": "#606060",
+            "list.focusBackground": "#606060",
         }
     },
-    "workbench.iconTheme": "seti",
     "xmlTools.enableXmlTreeView": true,
     "gitlens.blame.heatmap.enabled": true,
     "gitlens.currentLine.enabled": false,
     "gitlens.advanced.messages": {
         "suppressShowKeyBindingsNotice": true
-    }
+    },
+    "workbench.iconTheme": "seti",
+    "workbench.settings.editor": "json",
+    "window.titleBarStyle": "custom"
 }
