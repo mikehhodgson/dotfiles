@@ -1,7 +1,17 @@
 {
+  // TODO put this in the README.md
+  // Extensions:
+  // lfs.vscode-emacs-friendly
+  // in-the-box.simple-dark-mode
+  // qinjia.seti-icons
+  //
+  // ybaumes.highlight-trailing-white-spaces
+  // dbaeumer.vscode-eslint
+  // esbenp.prettier-vscode
+  //
   //"java.errors.incompleteClasspath.severity": "ignore",
   // https://code.visualstudio.com/docs/getstarted/theme-color-reference
-  //https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_adding-a-new-theme
+  // https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_adding-a-new-theme
   // https://github.com/mikehhodgson/dotfiles/blob/master/elisp/minimal-theme.el
   "window.zoomLevel": -1,
   "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
@@ -73,7 +83,20 @@
       "scrollbarSlider.background": "#606060",
       "gitlens.trailingLineForegroundColor": "#888888",
       "list.hoverBackground": "#606060",
-      "list.focusBackground": "#606060"
+      "list.focusBackground": "#606060",
+      "textLink.activeForeground": "#00d9ff",
+
+      "focusBorder": "#ffffff",
+
+      "editor.wordHighlightBackground": "#606060",
+      "editor.wordHighlightBorder": "#606060",
+      "editor.wordHighlightStrongBackground": "#000000",
+      "editor.wordHighlightStrongBorder": "#606060",
+
+      "editor.findMatchBorder": "#606060",
+      "editor.findMatchBackground": "#606060",
+      "editor.findMatchHighlightBorder": "#606060",
+      "editor.findMatchHighlightBackground": "#000000"
     }
   },
   "xmlTools.enableXmlTreeView": true,
@@ -84,5 +107,7 @@
   },
   "workbench.iconTheme": "seti",
   "workbench.settings.editor": "json",
-  "window.titleBarStyle": "custom"
+  "window.titleBarStyle": "custom",
+
+  "eslint.alwaysShowStatus": true
 }

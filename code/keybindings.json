@@ -55,5 +55,13 @@
     "key": "shift+alt+f",
     "command": "-editor.action.formatDocument",
     "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+x ctrl+c",
+    "command": "workbench.action.closeWindow"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "-workbench.action.closeWindow"
   }
 ]
