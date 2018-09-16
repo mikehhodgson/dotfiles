@@ -1,26 +1,21 @@
 {
-  // TODO put this in the README.md
-  // Extensions:
-  // lfs.vscode-emacs-friendly
-  // in-the-box.simple-dark-mode
-  // qinjia.seti-icons
-  //
-  // ybaumes.highlight-trailing-white-spaces
-  // dbaeumer.vscode-eslint
-  // esbenp.prettier-vscode
-  //
-  //"java.errors.incompleteClasspath.severity": "ignore",
-  // https://code.visualstudio.com/docs/getstarted/theme-color-reference
-  // https://code.visualstudio.com/docs/extensions/themes-snippets-colorizers#_adding-a-new-theme
-  // https://github.com/mikehhodgson/dotfiles/blob/master/elisp/minimal-theme.el
   "window.zoomLevel": -1,
-  "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
-  "git.enableSmartCommit": true,
-  "diffEditor.renderSideBySide": false,
-  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+  "window.restoreWindows": "none",
+  "window.titleBarStyle": "custom",
+
+  "workbench.colorTheme": "SIMPLE DARK MODE",
+  "workbench.iconTheme": "seti",
+  "workbench.settings.editor": "json",
+
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
-  "workbench.colorTheme": "SIMPLE DARK MODE",
+
+  "git.enableSmartCommit": true,
+
+  "diffEditor.renderSideBySide": false,
+
+  "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
+  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
   "editor.codeLens": false,
   "editor.minimap.enabled": false,
   "editor.smoothScrolling": false,
@@ -28,6 +23,7 @@
   "editor.cursorBlinking": "solid",
   "editor.scrollbar.verticalScrollbarSize": 20,
   "editor.formatOnSave": true,
+
   "editor.tokenColorCustomizations": {
     "[SIMPLE DARK MODE]": {
       "textMateRules": [
@@ -50,6 +46,7 @@
       ]
     }
   },
+
   "workbench.colorCustomizations": {
     "[SIMPLE DARK MODE]": {
       "activityBar.background": "#1a1a1a",
@@ -99,15 +96,17 @@
       "editor.findMatchHighlightBackground": "#000000"
     }
   },
+
   "xmlTools.enableXmlTreeView": true,
+
   "gitlens.blame.heatmap.enabled": true,
   "gitlens.currentLine.enabled": false,
   "gitlens.advanced.messages": {
     "suppressShowKeyBindingsNotice": true
   },
-  "workbench.iconTheme": "seti",
-  "workbench.settings.editor": "json",
-  "window.titleBarStyle": "custom",
 
-  "eslint.alwaysShowStatus": true
+  "eslint.alwaysShowStatus": true,
+  "explorer.confirmDelete": false
+
+  //"java.errors.incompleteClasspath.severity": "ignore"
 }
