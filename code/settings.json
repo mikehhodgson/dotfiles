@@ -55,56 +55,75 @@
   "workbench.colorCustomizations": {
     "[SIMPLE DARK MODE]": {
       "activityBar.background": "#1a1a1a",
-      "editor.background": "#1a1a1a",
-      "editorBracketMatch.background": "#606060",
-      "panel.background": "#1a1a1a",
-      "sideBar.background": "#1a1a1a",
-      "tab.inactiveForeground": "#aaaaaa",
-      "tab.unfocusedInactiveForeground": "#aaaaaa",
-      "sideBarTitle.foreground": "#aaaaaa",
-      "editor.selectionBackground": "#606060",
-      "editor.lineHighlightBackground": "#303030",
-      "editorGroupHeader.noTabsBackground": "#1a1a1a",
-      "editorGroupHeader.tabsBackground": "#1a1a1a",
-      "titleBar.activeBackground": "#1a1a1a",
-      "peekViewTitle.background": "#1a1a1a",
-      "titleBar.inactiveBackground": "#1a1a1a",
-      "selection.background": "#606060",
-      "editor.selectionHighlightBorder": "#606060",
-      "input.background": "#1a1a1a",
-      "input.border": "#606060",
-      "input.foreground": "#ffffff",
-      "inputOption.activeBorder": "#f78c00",
-      "sideBarSectionHeader.background": "#000000",
+
       "button.background": "#000000",
       "button.hoverBackground": "#606060",
-      "welcomePage.buttonHoverBackground": "#606060",
-      "editorIndentGuide.background": "#303030",
-      "editorIndentGuide.activeBackground": "#888888",
-      "editorLineNumber.foreground": "#606060",
-      "scrollbarSlider.background": "#606060",
-      "gitlens.trailingLineForegroundColor": "#888888",
-      "list.hoverBackground": "#606060",
-      "list.focusBackground": "#606060",
-      "textLink.activeForeground": "#00d9ff",
 
-      "menu.selectionBackground": "#606060",
-      "tab.hoverBackground": "#606060",
-      "tab.activeBackground": "#1a1a1a",
-      "tab.inactiveBackground": "#1a1a1a",
-      "sideBarSectionHeader.background": "#1a1a1a",
-
-      "focusBorder": "#ffffff",
-
+      "editor.background": "#1a1a1a",
+      "editor.findMatchBackground": "#606060",
+      "editor.findMatchBorder": "#606060",
+      "editor.findMatchHighlightBackground": "#000000",
+      "editor.findMatchHighlightBorder": "#606060",
+      "editor.lineHighlightBackground": "#303030",
+      "editor.selectionBackground": "#606060",
+      "editor.selectionHighlightBorder": "#606060",
       "editor.wordHighlightBackground": "#606060",
       "editor.wordHighlightBorder": "#606060",
       "editor.wordHighlightStrongBackground": "#000000",
       "editor.wordHighlightStrongBorder": "#606060",
 
-      "editor.findMatchBorder": "#606060",
-      "editor.findMatchBackground": "#606060",
-      "editor.findMatchHighlightBorder": "#606060",
-      "editor.findMatchHighlightBackground": "#000000"
+      "editorBracketMatch.background": "#606060",
+
+      "editorGroupHeader.noTabsBackground": "#1a1a1a",
+      "editorGroupHeader.tabsBackground": "#1a1a1a",
+
+      "editorIndentGuide.activeBackground": "#888888",
+      "editorIndentGuide.background": "#303030",
+
+      "editorLineNumber.foreground": "#606060",
+
+      "focusBorder": "#ffffff",
+
+      "gitlens.trailingLineForegroundColor": "#888888",
+
+      "input.background": "#1a1a1a",
+      "input.border": "#606060",
+      "input.foreground": "#ffffff",
+
+      "inputOption.activeBorder": "#f78c00",
+
+      "list.focusBackground": "#606060",
+      "list.hoverBackground": "#606060",
+
+      "menu.selectionBackground": "#606060",
+
+      "panel.background": "#1a1a1a",
+
+      "peekViewTitle.background": "#1a1a1a",
+
+      "scrollbarSlider.background": "#606060",
+
+      "selection.background": "#606060",
+
+      "sideBar.background": "#1a1a1a",
+
+      "sideBarSectionHeader.background": "#000000",
+      "sideBarSectionHeader.background": "#1a1a1a",
+
+      "sideBarTitle.foreground": "#aaaaaa",
+
+      "tab.activeBackground": "#1a1a1a",
+      "tab.hoverBackground": "#606060",
+      "tab.inactiveBackground": "#1a1a1a",
+      "tab.inactiveForeground": "#aaaaaa",
+      "tab.unfocusedInactiveForeground": "#aaaaaa",
+
+      "textLink.activeForeground": "#00d9ff",
+
+      "titleBar.activeBackground": "#1a1a1a",
+      "titleBar.inactiveBackground": "#1a1a1a",
+
+      "welcomePage.buttonHoverBackground": "#606060"
     }
   },
 
@@ -117,6 +136,7 @@
   },
 
   "eslint.alwaysShowStatus": true,
+
   "explorer.confirmDelete": false
 
   //"java.errors.incompleteClasspath.severity": "ignore"
