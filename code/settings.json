@@ -2,6 +2,10 @@
   "window.zoomLevel": -1,
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
+  "window.enableMenuBarMnemonics": false,
+  "window.openWithoutArgumentsInNewWindow": "on",
+  "window.openFilesInNewWindow": "on",
+  "window.openFoldersInNewWindow": "on",
 
   "workbench.colorTheme": "SIMPLE DARK MODE",
   "workbench.iconTheme": "seti",
@@ -15,6 +19,7 @@
   "diffEditor.renderSideBySide": false,
 
   "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
+  "editor.tabSize": 2,
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
   "editor.codeLens": false,
   "editor.minimap.enabled": false,
@@ -82,6 +87,12 @@
       "list.hoverBackground": "#606060",
       "list.focusBackground": "#606060",
       "textLink.activeForeground": "#00d9ff",
+
+      "menu.selectionBackground": "#606060",
+      "tab.hoverBackground": "#606060",
+      "tab.activeBackground": "#1a1a1a",
+      "tab.inactiveBackground": "#1a1a1a",
+      "sideBarSectionHeader.background": "#1a1a1a",
 
       "focusBorder": "#ffffff",
 
