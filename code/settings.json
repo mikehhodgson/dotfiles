@@ -29,6 +29,18 @@
   "editor.scrollbar.verticalScrollbarSize": 20,
   "editor.formatOnSave": true,
 
+  "explorer.confirmDelete": false,
+
+  "breadcrumbs.enabled": true,
+
+  "[yaml]": {
+    "editor.formatOnSave": false
+  },
+
+  "[dockerfile]": {
+    "editor.tabSize": 4
+  },
+
   "editor.tokenColorCustomizations": {
     "[SIMPLE DARK MODE]": {
       "textMateRules": [
@@ -137,7 +149,23 @@
 
   "eslint.alwaysShowStatus": true,
 
-  "explorer.confirmDelete": false
-
-  //"java.errors.incompleteClasspath.severity": "ignore"
+  // AWS CloudFormation
+  "yaml.customTags": [
+    "!And",
+    "!If",
+    "!Not",
+    "!Equals",
+    "!Or",
+    "!FindInMap",
+    "!Base64",
+    "!Cidr",
+    "!Ref",
+    "!Sub",
+    "!GetAtt",
+    "!GetAZs",
+    "!ImportValue",
+    "!Select",
+    "!Split",
+    "!Join"
+  ]
 }

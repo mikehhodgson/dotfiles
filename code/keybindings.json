@@ -73,5 +73,13 @@
     "key": "ctrl+k v",
     "command": "-markdown.showPreviewToSide",
     "when": "editorLangId == 'markdown'"
+  },
+  {
+    "key": "ctrl+x ctrl+shift+s",
+    "command": "workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "ctrl+k ctrl+shift+s",
+    "command": "-workbench.action.files.saveWithoutFormatting"
   }
 ]
