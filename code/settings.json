@@ -27,6 +27,7 @@
   "editor.cursorBlinking": "solid",
   "editor.scrollbar.verticalScrollbarSize": 20,
   "editor.formatOnSave": true,
+  "editor.rulers": [80],
 
   "explorer.confirmDelete": false,
 
