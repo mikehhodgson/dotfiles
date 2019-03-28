@@ -17,18 +17,33 @@
   "diffEditor.renderSideBySide": false,
 
   "editor.acceptSuggestionOnEnter": "off",
+  "editor.codeLens": false,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorStyle": "block",
   "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80],
+  "editor.scrollbar.verticalScrollbarSize": 20,
+  "editor.smoothScrolling": false,
+  "editor.snippetSuggestions": "top",
+  "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
-  "editor.codeLens": false,
-  "editor.minimap.enabled": false,
-  "editor.smoothScrolling": false,
-  "editor.cursorStyle": "block",
-  "editor.cursorBlinking": "solid",
-  "editor.scrollbar.verticalScrollbarSize": 20,
-  "editor.formatOnSave": true,
+
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.triggerExpansionOnTab": true,
 
   "explorer.confirmDelete": false,
+
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 
   "breadcrumbs.enabled": true,
 
@@ -69,6 +84,12 @@
     "!Split",
     "!Join"
   ],
+
   "git.confirmSync": false,
-  "workbench.colorTheme": "Monochrome Dark"
+
+  "workbench.colorTheme": "Monochrome Dark",
+
+  "java.configuration.checkProjectSettingsExclusions": false,
+
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }
