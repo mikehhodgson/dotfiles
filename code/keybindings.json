@@ -81,5 +81,26 @@
   {
     "key": "ctrl+k ctrl+shift+s",
     "command": "-workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "ctrl+shift+`",
+    "command": "-workbench.action.terminal.new"
+  },
+  // Toggle between terminal and editor focus
+  { "key": "ctrl+shift+`", "command": "workbench.action.terminal.focus" },
+  {
+    "key": "ctrl+shift+`",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "shift+alt+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "-editor.action.addSelectionToNextFindMatch",
+    "when": "editorFocus"
   }
 ]
