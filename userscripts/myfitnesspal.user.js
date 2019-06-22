@@ -10,76 +10,105 @@
 // @require    https://d3js.org/d3.v4.min.js
 // ==/UserScript==
 
-
-// TODO redo chart
 // http://www.cagrimmett.com/til/2016/08/19/d3-pie-chart.html
 
-var $diarytable = $('#diary-table');
-var $trtotals = $diarytable.find('tr.total').first();
-var carbs, fat, protein;
-$trtotals.children().each(function(index, element){
-  switch(index) {
+let carbs, fat, protein;
+
+const $diarytable = $("#diary-table");
+const $trtotals = $diarytable.find("tr.total").first();
+
+$trtotals.children().each(function(index, element) {
+  switch (index) {
     case 2:
-      carbs = element.lastElementChild.innerText;
+      carbs = parseFloat(element.lastElementChild.innerText);
       break;
     case 3:
-      fat = element.lastElementChild.innerText;
+      fat = parseFloat(element.lastElementChild.innerText);
       break;
     case 4:
-      protein = element.lastElementChild.innerText;
+      protein = parseFloat(element.lastElementChild.innerText);
       break;
   }
 });
 
-$('#diary-table')
-  .find('tr.total').first().next().addBack()
-  .find('.macro-percentage').show().css('color','#777777')
-  .append('%').prepend('<br />');
+const macroTotal = carbs + fat + protein;
 
-$('#wrap').after('<div id="chart"></div>');
-$('#chart').css({
-  'position':'fixed',
-  'top':'220px',
-  'right':'30px'
+$("#diary-table")
+  .find("tr.total")
+  .first()
+  .next()
+  .addBack()
+  .find(".macro-percentage")
+  .show()
+  .css("color", "#777777")
+  .append("%")
+  .prepend("<br />");
+
+$("#wrap").after('<div id="chart"></div>');
+$("#chart").css({
+  position: "fixed",
+  top: "220px",
+  right: "30px"
 });
 
-var dataset = [
-  { label: 'Carbs', count: carbs },
-  { label: 'Fat', count: fat },
-  { label: 'Protein', count: protein },
+const dataset = [
+  { label: "Carbs", count: carbs },
+  { label: "Fat", count: fat },
+  { label: "Protein", count: protein }
 ];
 
-var width = 180;
-var height = 180;
-var radius = Math.min(width, height) / 2;
+const width = 180;
+const height = 180;
+const radius = Math.min(width, height) / 2;
 
-var color = d3.scaleOrdinal(d3.schemeCategory10);
-var svg = d3.select('#chart')
-.append('svg')
-.attr('width', width)
-.attr('height', height)
-.append('g')
-.attr('transform', 'translate(' + (width / 2) +
-      ',' + (height / 2) + ')');
-var arc = d3.arc()
-.innerRadius(0)
-.outerRadius(radius);
-var pie = d3.pie()
-.value(function(d) { return d.count; })
-.sort(null);
+const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-var label = d3.arc()
-    .outerRadius(radius - 40)
-    .innerRadius(radius - 40);
+const svg = d3
+  .select("#chart")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .append("g")
+  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-var path = svg.selectAll('path')
-.data(pie(dataset))
-.enter()
-.append('path')
-.attr('d', arc)
-.attr('fill', function(d) {
-  return color(d.data.label);
-}).append("text")
-      .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
-      .attr("dy", "0.35em")
-      .text(function(d) { return d.label; });
+const arc = d3
+  .arc()
+  .innerRadius(0)
+  .outerRadius(radius - 10);
+
+const pie = d3
+  .pie()
+  .value(function(d) {
+    return d.count;
+  })
+  .sort(null);
+
+const label = d3
+  .arc()
+  .outerRadius(radius - 40)
+  .innerRadius(radius - 40);
+
+const g = svg
+  .selectAll("arc")
+  .data(pie(dataset))
+  .enter()
+  .append("g")
+  .attr("class", "arc");
+
+g.append("path")
+  .attr("d", arc)
+  .attr("fill", function(d) {
+    return color(d.data.label);
+  });
+
+g.append("text")
+  .attr("transform", function(d) {
+    return "translate(" + label.centroid(d) + ")";
+  })
+  .attr("dy", "0.35em")
+  .attr("dx", "-2em")
+  .text(function(d) {
+    return d.data.label.slice(0, 3) + " " + (d.value / macroTotal) * 100 + "%";
+  })
+  .style("fill", "#fff")
+  .style("font-weight", "bold");
