@@ -69,7 +69,7 @@ const svg = d3
   .attr("width", width)
   .attr("height", height)
   .append("g")
-  .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  .attr("transform", `translate(${width / 2},${height / 2})`);
 
 const arc = d3
   .arc()
@@ -78,9 +78,7 @@ const arc = d3
 
 const pie = d3
   .pie()
-  .value(function(d) {
-    return d.count;
-  })
+  .value(d => d.count)
   .sort(null);
 
 const label = d3
@@ -97,18 +95,15 @@ const g = svg
 
 g.append("path")
   .attr("d", arc)
-  .attr("fill", function(d) {
-    return color(d.data.label);
-  });
+  .attr("fill", d => color(d.data.label));
 
 g.append("text")
-  .attr("transform", function(d) {
-    return "translate(" + label.centroid(d) + ")";
-  })
+  .attr("transform", d => `translate(${label.centroid(d)})`)
   .attr("dy", "0.35em")
   .attr("dx", "-2em")
-  .text(function(d) {
-    return d.data.label.slice(0, 3) + " " + (d.value / macroTotal) * 100 + "%";
-  })
+  .text(
+    ({ data: { label }, value }) =>
+      `${label.slice(0, 3)} ${Math.round((value / macroTotal) * 100)}%`
+  )
   .style("fill", "#fff")
   .style("font-weight", "bold");
