@@ -1,4 +1,8 @@
 {
+  "workbench.settings.editor": "json",
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.tree.indent": 16,
+
   "window.zoomLevel": -1,
   "window.restoreWindows": "none",
   "window.titleBarStyle": "custom",
@@ -7,7 +11,9 @@
   "window.openFilesInNewWindow": "on",
   "window.openFoldersInNewWindow": "on",
   "workbench.iconTheme": "seti",
-  "workbench.settings.editor": "json",
+  "workbench.tips.enabled": false,
+
+  "npm.enableScriptExplorer": true,
 
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
@@ -23,6 +29,11 @@
   "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,
+  "editor.quickSuggestions": {
+    "comments": false,
+    "strings": true,
+    "other": true
+  },
   "editor.rulers": [80],
   "editor.scrollbar.verticalScrollbarSize": 20,
   "editor.smoothScrolling": false,
@@ -59,6 +70,11 @@
 
   "[dockerfile]": {
     "editor.tabSize": 4
+  },
+
+  "workbench.colorCustomizations": {
+    //"list.activeSelectionBackground": "#404040",
+    "list.inactiveFocusBackground": "#404040"
   },
 
   "xmlTools.enableXmlTreeView": true,
@@ -98,11 +114,34 @@
   "java.configuration.checkProjectSettingsExclusions": false,
 
   "javascript.updateImportsOnFileMove.enabled": "always",
+
   "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  "jest.showCoverageOnLoad": true
+  "jest.showCoverageOnLoad": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "auto-close-tag.activationOnLanguage": [
+    "xml",
+    "html",
+    "php",
+    "blade",
+    "ejs",
+    "jinja",
+    "javascriptreact",
+    "typescriptreact",
+    "plaintext",
+    "markdown",
+    "vue",
+    "liquid",
+    "erb",
+    "lang-cfml",
+    "cfml",
+    "HTML (Eex)"
+  ]
 }
