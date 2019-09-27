@@ -11,6 +11,7 @@
         st = status -sb
         br = branch
         hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --decorate --date=short --all
+        graph = log --graph --decorate --oneline --all
         type = cat-file -t
         dump = cat-file -p
 	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"

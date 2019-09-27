@@ -249,3 +249,25 @@
 
 (global-set-key [remap fill-paragraph]
                 #'endless/fill-or-unfill)
+
+;; front end js work
+(setq js-indent-level 2)
+
+;;(djcb-opacity-modify t)
+
+(electric-pair-mode)
+;; (electric-quote-mode) ;; this just substitutes regular quotes with angled quotes
+
+(require 'sr-speedbar)
+(setq sr-speedbar-auto-refresh t
+      sr-speedbar-skip-other-window-p nil
+;;      sr-speedbar-width-x 1
+;;      sr-speedbar-width-console 1
+;;      sr-speedbar-max-width 1
+      speedbar-use-images t
+      speedbar-show-unknown-files t)
+;;(sr-speedbar-open)
+;; (with-current-buffer sr-speedbar-buffer-name
+;;   (setq window-size-fixed 'width))
+
+(setq show-trailing-whitespace t)

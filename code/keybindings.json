@@ -122,5 +122,13 @@
     "key": "ctrl+k ctrl+[",
     "command": "-editor.foldRecursively",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+x s",
+    "command": "workbench.action.files.saveAll"
+  },
+  {
+    "key": "ctrl+k s",
+    "command": "-workbench.action.files.saveAll"
   }
 ]

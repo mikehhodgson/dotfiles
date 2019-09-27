@@ -18,6 +18,7 @@
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
 
+  "git.confirmSync": false,
   "git.enableSmartCommit": true,
 
   "diffEditor.renderSideBySide": false,
@@ -28,7 +29,11 @@
   "editor.cursorStyle": "block",
   "editor.fontFamily": "Hack, Consolas, 'Courier New', monospace",
   "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 80,
+  "editor.minimap.showSlider": "mouseover",
+  "editor.minimap.renderCharacters": false,
+
   "editor.quickSuggestions": {
     "comments": false,
     "strings": true,
@@ -37,20 +42,48 @@
   "editor.rulers": [80],
   "editor.scrollbar.verticalScrollbarSize": 20,
   "editor.smoothScrolling": false,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.horizontal": "hidden",
+
+  "editor.overviewRulerBorder": false,
+
   "editor.snippetSuggestions": "top",
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+
+  "[dockerfile]": {
+    "editor.tabSize": 4
+  },
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
 
   "[javascript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  "emmet.includeLanguages": {
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false
+  },
+
+  "[markdown]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "editor.quickSuggestions": false
+  },
+
+  "[yaml]": {
+    "editor.formatOnSave": false
+  },
+
+  /*   "emmet.includeLanguages": {
     "javascript": "javascriptreact",
     "typescript": "javascriptreact"
-  },
+  }, */
   "emmet.showSuggestionsAsSnippets": true,
   "emmet.syntaxProfiles": {
     "javascript": "jsx",
@@ -64,17 +97,12 @@
 
   "breadcrumbs.enabled": true,
 
-  "[yaml]": {
-    "editor.formatOnSave": false
-  },
-
-  "[dockerfile]": {
-    "editor.tabSize": 4
-  },
-
   "workbench.colorCustomizations": {
-    //"list.activeSelectionBackground": "#404040",
-    "list.inactiveFocusBackground": "#404040"
+    "list.activeSelectionBackground": "#404040",
+    "list.inactiveFocusBackground": "#404040",
+    "[SynthWave '84]": {
+      "editorRuler.foreground": "#495495"
+    }
   },
 
   "xmlTools.enableXmlTreeView": true,
@@ -107,8 +135,6 @@
     "!Join"
   ],
 
-  "git.confirmSync": false,
-
   "workbench.colorTheme": "Monochrome Dark",
 
   "java.configuration.checkProjectSettingsExclusions": false,
@@ -117,14 +143,9 @@
 
   "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
 
-  "jest.showCoverageOnLoad": true,
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "jest.showCoverageOnLoad": false,
+  "jest.autoEnable": false,
 
   "auto-close-tag.activationOnLanguage": [
     "xml",
@@ -143,5 +164,14 @@
     "lang-cfml",
     "cfml",
     "HTML (Eex)"
-  ]
+  ],
+
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    //    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
