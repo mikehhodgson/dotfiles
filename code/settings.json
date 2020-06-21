@@ -20,6 +20,7 @@
 
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
+  "git.decorations.enabled": true,
 
   "diffEditor.renderSideBySide": false,
 
@@ -57,7 +58,7 @@
   },
 
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
 
   "[javascript]": {
@@ -135,8 +136,6 @@
     "!Join"
   ],
 
-  "workbench.colorTheme": "Monochrome Dark",
-
   "java.configuration.checkProjectSettingsExclusions": false,
 
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -173,5 +172,8 @@
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "glassit.alpha": 255,
+
+  "workbench.colorTheme": "Monochrome Dark"
 }

@@ -157,7 +157,7 @@ Function Get-MusicForProgramming {
     -PercentComplete 0
 
   $items = Invoke-RestMethod -Uri "http://musicforprogramming.net/rss.php" |
-    sort-object title
+  sort-object title
   $i = 0
 
   $items | ForEach-Object {
