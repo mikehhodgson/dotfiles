@@ -1,4 +1,21 @@
 {
+  "files.associations": {
+    "Vagrantfile": "ruby",
+    "*.log_*": "log"
+  },
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.settings": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/target": true
+  },
+
   "workbench.settings.editor": "json",
   "workbench.tree.renderIndentGuides": "always",
   "workbench.tree.indent": 16,
@@ -34,6 +51,7 @@
   "editor.minimap.maxColumn": 80,
   "editor.minimap.showSlider": "mouseover",
   "editor.minimap.renderCharacters": false,
+  "editor.multiCursorPaste": "full",
 
   "editor.quickSuggestions": {
     "comments": false,
@@ -52,6 +70,13 @@
   "editor.suggestSelection": "first",
   "editor.tabSize": 2,
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+
+  "explorer.confirmDragAndDrop": false,
+
+  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
+
+  "problems.showCurrentInStatus": true,
+  "terminal.integrated.minimumContrastRatio": 4.5,
 
   "[dockerfile]": {
     "editor.tabSize": 4
@@ -99,8 +124,6 @@
   "breadcrumbs.enabled": true,
 
   "workbench.colorCustomizations": {
-    "list.activeSelectionBackground": "#404040",
-    "list.inactiveFocusBackground": "#404040",
     "[SynthWave '84]": {
       "editorRuler.foreground": "#495495"
     }
@@ -137,6 +160,10 @@
   ],
 
   "java.configuration.checkProjectSettingsExclusions": false,
+  "java.format.enabled": true,
+  "[java]": {
+    "editor.wordWrapColumn": 80
+  },
 
   "javascript.updateImportsOnFileMove.enabled": "always",
 
@@ -145,6 +172,11 @@
 
   "jest.showCoverageOnLoad": false,
   "jest.autoEnable": false,
+
+  "java.format.onType.enabled": false,
+  "java.semanticHighlighting.enabled": true,
+  "java.refactor.renameFromFileExplorer": "preview",
+  "java.requirements.JDK11Warning": false,
 
   "auto-close-tag.activationOnLanguage": [
     "xml",
@@ -173,6 +205,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
   "glassit.alpha": 255,
 
   "workbench.colorTheme": "Monochrome Dark"
