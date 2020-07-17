@@ -14,6 +14,8 @@ if ($host.Name -eq 'ConsoleHost') {
   #https://github.com/lzybkr/PSReadLine/blob/master/PSReadLine/SamplePSReadlineProfile.ps1
 }
 
+# https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7#maximumhistorycount
+$MaximumHistoryCount = 32767
 
 # Approved verbs:
 # https://technet.microsoft.com/en-us/library/ms714428%28v=VS.85%29.aspx
