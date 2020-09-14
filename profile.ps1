@@ -5,6 +5,7 @@ if ($host.Name -eq 'ConsoleHost') {
   Import-Module PSReadline
   Set-PSReadlineOption -EditMode emacs
   Set-PSReadlineOption -HistoryNoDuplicates:$True
+  Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`"@"
   Set-PSReadlineKeyHandler -Key Ctrl+v -Function Paste
 
   Set-PSReadLineOption -Colors  @{
@@ -12,6 +13,13 @@ if ($host.Name -eq 'ConsoleHost') {
     "Parameter" = [ConsoleColor]::White
   }
   #https://github.com/lzybkr/PSReadLine/blob/master/PSReadLine/SamplePSReadlineProfile.ps1
+
+  # https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup
+  # Install-Module posh-git -Scope CurrentUser
+  # Install-Module oh-my-posh -Scope CurrentUser
+  Import-Module posh-git
+  Import-Module oh-my-posh
+  Set-Prompt
 }
 
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7#maximumhistorycount
@@ -213,6 +221,7 @@ New-Alias -Force -Name icanhazmusic -Value Get-MusicForProgramming
 New-Alias -Force -Name dotfiles -Value Set-Location-Dotfiles
 New-Alias -Force -Name here -Value Open-Explorer-Here
 New-Alias -Force -Name gk -Value Run-Gitk
+New-Alias -Force -Name yeet -Value Remove-Item
 
 # http://stackoverflow.com/questions/2770526/where-are-the-default-aliases-defined-in-powershell
 # As a training exercise, and to test my scripts for compatibility, I sometimes remove the non-ReadOnly aliases:

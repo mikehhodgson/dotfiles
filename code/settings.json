@@ -73,7 +73,7 @@
 
   "explorer.confirmDragAndDrop": false,
 
-  "powershell.powerShellDefaultVersion": "Windows PowerShell (x64)",
+  "powershell.powerShellDefaultVersion": "PowerShell (x64)",
 
   "problems.showCurrentInStatus": true,
   "terminal.integrated.minimumContrastRatio": 4.5,
