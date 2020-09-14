@@ -210,6 +210,10 @@ Function Run-Gitk() {
   & gitk --all @args
 }
 
+Function Open-History() {
+  Invoke-Item (Get-PSReadLineOption).HistorySavePath
+}
+
 New-Alias -Force -Name edp -Value Edit-Profile
 New-Alias -Force -Name which -Value Get-CommandDefinition
 New-Alias -Force -Name weather -Value Get-Weather
@@ -222,6 +226,7 @@ New-Alias -Force -Name dotfiles -Value Set-Location-Dotfiles
 New-Alias -Force -Name here -Value Open-Explorer-Here
 New-Alias -Force -Name gk -Value Run-Gitk
 New-Alias -Force -Name yeet -Value Remove-Item
+New-Alias -Force -Name hist -Value Open-History
 
 # http://stackoverflow.com/questions/2770526/where-are-the-default-aliases-defined-in-powershell
 # As a training exercise, and to test my scripts for compatibility, I sometimes remove the non-ReadOnly aliases:
