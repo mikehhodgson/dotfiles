@@ -87,7 +87,10 @@
     "command": "-workbench.action.terminal.new"
   },
   // Toggle between terminal and editor focus
-  { "key": "ctrl+shift+`", "command": "workbench.action.terminal.focus" },
+  {
+    "key": "ctrl+shift+`",
+    "command": "workbench.action.terminal.focus"
+  },
   {
     "key": "ctrl+shift+`",
     "command": "workbench.action.focusActiveEditorGroup",
@@ -130,5 +133,28 @@
   {
     "key": "ctrl+k s",
     "command": "-workbench.action.files.saveAll"
+  },
+  {
+    "key": "ctrl+shift+s",
+    "command": "-workbench.action.files.saveAs"
+  },
+  {
+    "key": "ctrl+shift+s",
+    "command": "-workbench.action.files.saveLocalFile",
+    "when": "remoteFileDialogVisible"
+  },
+  {
+    "key": "ctrl+shift+s",
+    "command": "editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+-",
+    "when": "editorTextFocus && !editorReadonly",
+    "command": "markdown-checkbox-helper.toggleStyleWrapping",
+    "args": {
+      "before": "~~",
+      "after": "~~"
+    }
   }
 ]
