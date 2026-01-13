@@ -1,27 +1,6 @@
 # To be located  %UserProfile%\My Documents\WindowsPowerShell\profile.ps1
 # https://technet.microsoft.com/en-us/library/bb613488(v=vs.85).aspx
 
-if ($host.Name -eq 'ConsoleHost') {
-  Import-Module PSReadline
-  Set-PSReadlineOption -EditMode emacs
-  Set-PSReadlineOption -HistoryNoDuplicates:$True
-  Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`"@"
-  Set-PSReadlineKeyHandler -Key Ctrl+v -Function Paste
-
-  Set-PSReadLineOption -Colors  @{
-    "Operator"  = [ConsoleColor]::White
-    "Parameter" = [ConsoleColor]::White
-  }
-  #https://github.com/lzybkr/PSReadLine/blob/master/PSReadLine/SamplePSReadlineProfile.ps1
-
-  # https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup
-  # Install-Module posh-git -Scope CurrentUser
-  # Install-Module oh-my-posh -Scope CurrentUser
-  Import-Module posh-git
-  Import-Module oh-my-posh
-  Set-Prompt
-}
-
 # https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7#maximumhistorycount
 $MaximumHistoryCount = 32767
 
@@ -237,3 +216,27 @@ New-Alias -Force -Name local -Value Get-LocalBranches
 # http://stackoverflow.com/questions/2770526/where-are-the-default-aliases-defined-in-powershell
 # As a training exercise, and to test my scripts for compatibility, I sometimes remove the non-ReadOnly aliases:
 #Get-Alias | ? { ! ($_.Options -match "ReadOnly") } | % { Remove-Item alias:$_ }
+
+
+if ($host.Name -eq 'ConsoleHost') {
+  Import-Module PSReadline
+  Set-PSReadlineOption -EditMode emacs
+  Set-PSReadlineOption -HistoryNoDuplicates:$True
+  Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`"@"
+  Set-PSReadlineKeyHandler -Key Ctrl+v -Function Paste
+
+  Set-PSReadLineOption -Colors  @{
+    "Operator"  = [ConsoleColor]::White
+    "Parameter" = [ConsoleColor]::White
+  }
+  #https://github.com/lzybkr/PSReadLine/blob/master/PSReadLine/SamplePSReadlineProfile.ps1
+
+  # https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup
+
+  # https://ohmyposh.dev/docs/installation/windows
+  # https://ohmyposh.dev/docs/installation/prompt
+  # winget install JanDeDobbeleer.OhMyPosh --source winget
+  # now requires "Nerd Fonts", not "Powerline" fonts: www.nerdfonts.com/font-downloads
+  # Initialize Oh-My-Posh with a theme
+  oh-my-posh init pwsh --config 'powerline' | Invoke-Expression
+}
