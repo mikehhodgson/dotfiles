@@ -224,19 +224,107 @@ if ($host.Name -eq 'ConsoleHost') {
   Set-PSReadlineOption -HistoryNoDuplicates:$True
   Set-PSReadLineOption -WordDelimiters ";:,.[]{}()/\|^&*-=+'`"@"
   Set-PSReadlineKeyHandler -Key Ctrl+v -Function Paste
+  #Set-PSReadLineOption -PredictionSource History
+
+  Set-PSReadLineKeyHandler -Key 'Alt+n' -Function NextSuggestion
+  Set-PSReadLineKeyHandler -Key 'Alt+p' -Function PreviousSuggestion
+
+  # https://learn.microsoft.com/en-us/powershell/scripting/learn/shell/using-predictors?view=powershell-7.5#changing-keybindings
+  Set-PSReadlineKeyHandler -Key 'Alt+f' `
+    -Description "ForwardWord, or AcceptNextSuggestionWord if at end of line" `
+    -ScriptBlock {
+    $line = $null
+    $cursor = $null
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($cursor -eq $line.Length) {
+      $before = $line
+      [Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord()
+      [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+      if ($line -ne $before) { return }
+    }
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::ForwardWord()
+  }
+
+  Set-PSReadlineKeyHandler -Key 'Ctrl+e' `
+    -Description "EndOfLine, or AcceptSuggestion if at end of line" `
+    -ScriptBlock {
+    $line = $null
+    $cursor = $null
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($cursor -eq $line.Length) {
+      $before = $line
+      [Microsoft.PowerShell.PSConsoleReadLine]::AcceptSuggestion()
+      [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+      if ($line -ne $before) { return }
+    }
+
+    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+  }
 
   Set-PSReadLineOption -Colors  @{
-    "Operator"  = [ConsoleColor]::White
-    "Parameter" = [ConsoleColor]::White
+    # https://learn.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.5#example-4-set-multiple-color-options
+    Command            = $PSStyle.Foreground.Yellow
+    Comment            = $PSStyle.Foreground.Cyan
+    Number             = $PSStyle.Foreground.White
+    Member             = $PSStyle.Foreground.White
+    Operator           = $PSStyle.Foreground.White
+    Type               = $PSStyle.Foreground.White
+    Variable           = $PSStyle.Foreground.Green
+    Parameter          = $PSStyle.Foreground.White
+    ContinuationPrompt = $PSStyle.Foreground.White
+    Default            = $PSStyle.Foreground.White
+    InlinePrediction   = $PSStyle.Foreground.Blue
   }
-  #https://github.com/lzybkr/PSReadLine/blob/master/PSReadLine/SamplePSReadlineProfile.ps1
+
+  #Set-PSReadLineKeyHandler -Chord "Ctrl+e" -Function AcceptSuggestion
+  #Set-PSReadLineKeyHandler -Chord "Ctrl+f" -Function ForwardWord
+
+  # https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
+
+  Set-PSReadLineKeyHandler -Chord '"', "'" `
+    -BriefDescription SmartInsertQuote `
+    -LongDescription "Insert paired quotes if not already on a quote" `
+    -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($line.Length -gt $cursor -and $line[$cursor] -eq $key.KeyChar) {
+      # Just move the cursor
+      [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+    else {
+      # Insert matching quotes, move cursor to be in between the quotes
+      [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)" * 2)
+      [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+      [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor - 1)
+    }
+  }
 
   # https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup
+
+  # still want to import posh-git for git tab completion
+  # Install-Module posh-git -Scope CurrentUser -Force
+  Import-Module posh-git
+
+  # https://github.com/devblackops/Terminal-Icons
+  # Install-Module -Name Terminal-Icons -Repository PSGallery
+  Import-Module -Name Terminal-Icons
 
   # https://ohmyposh.dev/docs/installation/windows
   # https://ohmyposh.dev/docs/installation/prompt
   # winget install JanDeDobbeleer.OhMyPosh --source winget
   # now requires "Nerd Fonts", not "Powerline" fonts: www.nerdfonts.com/font-downloads
   # Initialize Oh-My-Posh with a theme
-  oh-my-posh init pwsh --config 'powerline' | Invoke-Expression
+  # from https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/powerline.omp.json
+  oh-my-posh init pwsh --config $env:AppData\dotfiles\powerline.omp.json | Invoke-Expression
 }

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#000000",
+          "foreground": "#FDF834",
+          "style": "powerline",
+          "template": " \uf0e7 ",
+          "type": "root"
+        },
+        {
+          "background": "#000000",
+          "foreground": "#ffffff",
+          "style": "powerline",
+          "template": "{{ .UserName }}@{{ .HostName }} ",
+          "type": "session"
+        },
+        {
+          "background": "#2186EC",
+          "foreground": "#FFFFFF",
+          "powerline_symbol": "\ue0b0",
+          "options": {
+            "style": "full"
+          },
+          "style": "powerline",
+          "template": " {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "template": "{{ if .Env.POSH_GIT_STRING }} {{ .Env.POSH_GIT_STRING }} {{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "powerline",
+          "powerline_symbol": "",
+          "foreground": "#000000",
+          "background": "#1EBB2B",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#FDF834{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#F6188F{{ end }}",
+            "{{ if gt .Ahead 0 }}#F85A21{{ end }}",
+            "{{ if gt .Behind 0 }}#F6188F{{ end }}"
+          ],
+          "template": " {{ .UpstreamIcon }} {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}",
+          "options": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          }
+        },
+        {
+          "background": "#F6188F",
+          "foreground": "#ffffff",
+          "powerline_symbol": "\ue0b0",
+          "style": "powerline",
+          "template": " \ue20f ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "console_title_template": "{{if .Root}}root {{end}}{{.Shell}}: {{.PWD}}",
+  "final_space": true,
+  "version": 4
+}
