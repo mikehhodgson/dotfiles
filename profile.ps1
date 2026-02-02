@@ -43,18 +43,20 @@ Function Edit-Profile([switch]$ise) {
   }
 }
 
-Function Set-Location-Dotfiles() { Set-Location $env:appdata\dotfiles }
+New-Alias -Force -Name s -Value Start-Process
 
-Function Open-Explorer-Here() {
-  start .
-}
+function d() { Set-Location $env:USERPROFILE\Desktop }
+function dl() { Set-Location $env:USERPROFILE\Downloads }
+function dotfiles() { Set-Location $env:USERPROFILE\git\dotfiles }
+function e() { Start-Process . }
+
 
 Function Get-Weather() {
   # maybe worth caching the data
   (Invoke-WebRequest http://www.bom.gov.au/wa/observations/perth.shtml).AllElements `
-  | ? { $_.tagname -eq 'td' -and $_.headers -eq "tPERTH-tmp tPERTH-station-perth" } `
+  | ForEach-Object { $_.tagname -eq 'td' -and $_.headers -eq "tPERTH-tmp tPERTH-station-perth" } `
   | select-object innerText `
-  | ft -hidetableheaders
+  | Format-Table -hidetableheaders
 
 }
 
@@ -68,12 +70,12 @@ Function Watch-Command {
   )
 
   do {
-    clear
+    Clear-Host
     invoke-expression $command
 
     # Just to let the user know what is happening
     "Waiting for $interval seconds. Press Ctrl-C to stop execution..."
-    sleep $interval
+    Start-Sleep $interval
   }
   # loop FOREVER
   while (1 -eq 1)
@@ -90,16 +92,16 @@ Function Watch-File($command, $file) {
       $last_time = $this_time
       invoke-command $command
     }
-    sleep 1
+    Start-Sleep 1
     $this_time = (get-item $file).LastWriteTime
   }
 }
 
-Function WaitFor-File($command, $file) {
+function wait($command, $file) {
   $this_time = (get-item $file).LastWriteTime
   $last_time = $this_time
   while ($last_time -eq $this_time) {
-    sleep 1
+    Start-Sleep 1
     $this_time = (get-item $file).LastWriteTime
   }
   invoke-command $command
@@ -185,17 +187,22 @@ Function hstat($url) {
   Invoke-WebRequest $url | Select-Object StatusCode
 }
 
-Function Run-Gitk() {
+Function Invoke-Gitk() {
   & gitk --all @args
 }
 
 Function Open-History() {
-  Invoke-Item (Get-PSReadLineOption).HistorySavePath
+  #Invoke-Item (Get-PSReadLineOption).HistorySavePath
+  Get-Content (Get-PSReadLineOption).HistorySavePath
 }
 
 # https://stackoverflow.com/a/31776247/10258089
 Function Get-LocalBranches() {
   git branch --format "%(refname:short) %(upstream)" | awk '{if (!$2) print $1;}'
+}
+function python {
+  # winget install uv
+  uv run python @args
 }
 
 New-Alias -Force -Name edp -Value Edit-Profile
@@ -206,12 +213,15 @@ New-Alias -Force -Name watch -Value Watch-Command
 New-Alias -Force -Name uptime -Value Get-SystemUptime
 New-Alias -Force -Name boottime -Value Get-SystemBootTime
 New-Alias -Force -Name icanhazmusic -Value Get-MusicForProgramming
-New-Alias -Force -Name dotfiles -Value Set-Location-Dotfiles
-New-Alias -Force -Name here -Value Open-Explorer-Here
-New-Alias -Force -Name gk -Value Run-Gitk
+New-Alias -Force -Name gk -Value Invoke-Gitk
 New-Alias -Force -Name yeet -Value Remove-Item
 New-Alias -Force -Name hist -Value Open-History
 New-Alias -Force -Name local -Value Get-LocalBranches
+
+New-Alias -Force -Name btop -Value btop4win
+New-Alias -Force -Name htop -Value btop4win
+New-Alias -Force -Name top -Value ntop
+New-Alias -Force -Name lg -Value lazygit
 
 # http://stackoverflow.com/questions/2770526/where-are-the-default-aliases-defined-in-powershell
 # As a training exercise, and to test my scripts for compatibility, I sometimes remove the non-ReadOnly aliases:
@@ -288,6 +298,7 @@ if ($host.Name -eq 'ConsoleHost') {
 
   # https://github.com/PowerShell/PSReadLine/blob/master/PSReadLine/SamplePSReadLineProfile.ps1
 
+  <#
   Set-PSReadLineKeyHandler -Chord '"', "'" `
     -BriefDescription SmartInsertQuote `
     -LongDescription "Insert paired quotes if not already on a quote" `
@@ -309,16 +320,24 @@ if ($host.Name -eq 'ConsoleHost') {
       [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor - 1)
     }
   }
+#>
 
   # https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup
 
   # still want to import posh-git for git tab completion
   # Install-Module posh-git -Scope CurrentUser -Force
-  Import-Module posh-git
+  #Import-Module posh-git
 
   # https://github.com/devblackops/Terminal-Icons
   # Install-Module -Name Terminal-Icons -Repository PSGallery
-  Import-Module -Name Terminal-Icons
+  #slow!
+  #Import-Module -Name Terminal-Icons
+
+  # handle slow imports
+  Register-EngineEvent -SourceIdentifier 'PowerShell.OnIdle' -MaxTriggerCount 1 -Action {
+    Import-Module -Name Terminal-Icons -Global
+    Import-Module posh-git
+  } | Out-Null
 
   # https://ohmyposh.dev/docs/installation/windows
   # https://ohmyposh.dev/docs/installation/prompt
@@ -326,5 +345,10 @@ if ($host.Name -eq 'ConsoleHost') {
   # now requires "Nerd Fonts", not "Powerline" fonts: www.nerdfonts.com/font-downloads
   # Initialize Oh-My-Posh with a theme
   # from https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/powerline.omp.json
-  oh-my-posh init pwsh --config $env:AppData\dotfiles\powerline.omp.json | Invoke-Expression
+  oh-my-posh init pwsh --config $PSScriptRoot\powerline.omp.json | Invoke-Expression
 }
+
+# For Windows Terminal Themes
+# https://windowsterminalthemes.dev/
+# https://learn.microsoft.com/en-us/windows/terminal/custom-terminal-gallery/theme-gallery
+# https://terminalsplash.com/
