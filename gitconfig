@@ -5,6 +5,7 @@
 	autocrlf = input
 	safectrl = true
 	excludesfile = ~/.gitignore_global
+	editor = emacs -nw
 [alias]
         co = checkout
         ci = commit
