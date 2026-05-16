@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Toggle idle timeouts without stopping hypridle.
+# This preserves hypridle's before_sleep_cmd, so lid-close suspend can still
+# lock the session before sleep.
+#
+# Bind in ~/.config/hypr/bindings.conf:
+#   bindd = SUPER CTRL, I, Toggle locking on idle, exec, ~/.local/bin/omarchy-toggle-idle-safe
+#
+# Reload Hyprland:
+#   hyprctl reload
+
+state_file="$HOME/.local/state/omarchy/toggles/idle-off"
+
+if [[ -f $state_file ]]; then
+    rm -f "$state_file"
+    notify-send -u low "󱫖    Now locking computer when idle"
+else
+    mkdir -p "$(dirname "$state_file")"
+    touch "$state_file"
+    notify-send -u low "󱫖    Stop locking computer when idle"
+fi
+
+pkill -RTMIN+9 waybar

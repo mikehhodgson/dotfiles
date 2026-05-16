@@ -1,0 +1,6 @@
+# Save all videos under Downloads directory in your home directory
+-o "~/Downloads/%(title)s [%(id)s].%(ext)s"
+
+# Use Node.JS JavaScript Runtime
+--js-runtimes node
+

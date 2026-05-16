@@ -1,0 +1,24 @@
+# Translated original bash PS1 to starship. Roughly.
+
+format = "$username@$hostname $directory $character"
+
+[username]
+show_always = true
+style_user = "bold fg:32"
+style_root = "bold fg:32"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold fg:32"
+format = "[$hostname]($style)"
+
+[directory]
+style = "fg:250"
+format = "[$path]($style)"
+truncate_to_repo = false
+
+[character]
+success_symbol = "[\\$](fg:7)"
+error_symbol   = "[\\$](fg:7)"
+

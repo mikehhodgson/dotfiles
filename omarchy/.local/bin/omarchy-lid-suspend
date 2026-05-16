@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+STAMP=/tmp/omarchy-lid-suspend
+
+# Prevent rapid re-suspend loops after resume
+if [[ -f "$STAMP" ]]; then
+    LAST=$(stat -c %Y "$STAMP")
+    NOW=$(date +%s)
+
+    if (( NOW - LAST < 15 )); then
+        exit 0
+    fi
+fi
+
+touch "$STAMP"
+
+loginctl lock-session
+sleep 1
+systemctl suspend

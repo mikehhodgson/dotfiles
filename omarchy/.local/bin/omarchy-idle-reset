@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -f "$HOME/.local/state/omarchy/toggles/idle-off"
+pkill -RTMIN+9 waybar

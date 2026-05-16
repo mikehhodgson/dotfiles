@@ -1,0 +1,4 @@
+--dir=~/src/personal/dotfiles
+--target=~/
+--ignore='~'
+--no-folding

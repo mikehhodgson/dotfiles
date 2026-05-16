@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Run the given command only when idle actions are enabled.
+# This lets hypridle stay alive for before_sleep_cmd while disabling the
+# timeout-triggered screensaver/lock/display-off actions.
+#
+# Usage examples:
+#   omarchy-idle-guard loginctl lock-session
+#   omarchy-idle-guard hyprctl dispatch dpms off
+
+state_file="$HOME/.local/state/omarchy/toggles/idle-off"
+
+if [[ -f $state_file ]]; then
+    exit 0
+fi
+
+exec "$@"

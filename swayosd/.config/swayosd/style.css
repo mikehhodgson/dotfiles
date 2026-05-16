@@ -1,0 +1,31 @@
+@import "../omarchy/current/theme/swayosd.css";
+
+window {
+  border-radius: 0;
+  /* opacity: 0.97; */
+  opacity: 0.90;
+  border: 2px solid @border-color;
+
+  background-color: @background-color;
+}
+
+label {
+  /* font-family: 'Hack Nerd Font Mono'; */
+  font-family: 'Nasalization';
+  /* font-size: 11pt; */
+  font-size: 14pt;
+
+  color: @label;
+}
+
+image {
+  color: @image;
+}
+
+progressbar {
+  border-radius: 0;
+}
+
+progress {
+  background-color: @progress;
+}

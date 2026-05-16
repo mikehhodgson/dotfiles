@@ -1,0 +1,180 @@
+@import "../omarchy/current/theme/waybar.css";
+
+/* https://docs.gtk.org/gtk3/css-overview.html */
+/* https://github.com/Alexays/Waybar/issues/366 */
+
+
+/* https://www.nasa.gov/nasa-brand-center/brand-guidelines/ */
+@define-color nasablue #0032A0;
+@define-color nasared  #E4002B;
+
+
+
+* {
+  background-color: @background;
+  color: @foreground;
+
+  /* background-color: unset; */
+
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  /* font-family: 'Hack Nerd Font Mono'; */
+  font-family: 'Nasalization';
+  font-size: 18px;
+  /* font-variant-numeric: tabular-nums; */
+}
+
+.modules-left {
+  margin-left: 8px;
+}
+
+.modules-right {
+  margin-right: 8px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
+}
+
+#workspaces button.empty {
+    opacity: 0.5;
+}
+
+#workspaces button.active,
+#workspaces button.active * {
+  /* make it bright when active, even if empty - red is dark otherwise */
+  opacity: 1;
+
+  color: @nasared;
+  
+  /* invert colors */  
+  /* background-color: @foreground; */
+  /* color: @background; */
+
+}
+
+#cpu,
+#battery,
+#pulseaudio,
+#custom-omarchy,
+#custom-update {
+  min-width: 12px;
+  margin: 0 7.5px;
+}
+
+#tray {
+  margin-right: 16px;
+}
+
+#bluetooth {
+  margin-right: 17px;
+}
+
+#network {
+  margin-right: 13px;
+}
+
+#custom-expand-icon {
+  margin-right: 18px;
+}
+
+tooltip {
+    padding: 2px;
+}
+
+#custom-update {
+  margin-left: 15px;
+  font-size: 18px;
+}
+
+/* #clock { */
+/*   margin-left: 8.75px; */
+/* } */
+
+.hidden {
+  opacity: 0;
+}
+
+
+#custom-screenrecording-indicator,
+#custom-idle-indicator,
+#custom-notification-silencing-indicator {
+  min-width: 12px;
+  margin-left: 15px;
+  margin-right: 0;
+  font-size: 18px;
+  padding-bottom: 0;
+}
+
+#custom-screenrecording-indicator.active {
+  color: #a55555;
+}
+
+#custom-voxtype {
+  min-width: 12px;
+  margin: 0 0 0 7.5px;
+}
+
+#custom-voxtype.recording {
+  color: #a55555;
+}
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+    color: #a55555;
+    color: @nasared;
+}
+
+
+/* https://github.com/Alexays/Waybar/wiki/Styling */
+@keyframes blink {
+    to {
+        background-color: @background;
+        color: @foreground;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: @nasared;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* #battery.charging { */
+/*     color: #26A65B; */
+/* } */
+
+
+#cpu {
+    margin-right: 20px;
+    /* try this if going to be positioned in between other tray icons */
+    /* min-width: 70px; */
+}
+
+#custom-weather {
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+  margin-right: 22px;
+}
+
+#custom-weather.unavailable {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#custom-gnucash {
+  margin-left: 7.5px;
+  margin-left: 3px;
+  margin-right: 7.5px;
+  margin-right: 22px;
+  color: #00FF00;
+}

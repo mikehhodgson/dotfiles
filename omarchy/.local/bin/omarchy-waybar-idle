@@ -1,0 +1,9 @@
+#!/bin/bash
+
+state_file="$HOME/.local/state/omarchy/toggles/idle-off"
+
+if [[ -f $state_file ]]; then
+    echo '{"text": "󱫖", "tooltip": "Idle lock disabled", "class": "active"}'
+else
+    echo '{"text": ""}'
+fi
