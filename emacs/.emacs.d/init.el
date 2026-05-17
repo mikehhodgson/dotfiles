@@ -1,120 +1,121 @@
-;; -*- lexical-binding: t -*-
+;; -*- lexical-binding: t; -*-
+(setq custom-file (locate-user-emacs-file "custom.el"))
+
+;; Disable startup screen
+(setq inhibit-startup-screen t)
+
+;; Use only Git for VC
+(setq vc-handled-backends '(Git))
+
+;; Default indentation
+(setq-default standard-indent 2)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 2)
+
+;; Line numbers
+(setq display-line-numbers-type 'absolute)
+(dolist (hook '(prog-mode-hook
+                ;;text-mode-hook
+                conf-mode-hook))
+  (add-hook hook #'display-line-numbers-mode))
+
+;; UI
+(blink-cursor-mode -1)
+(column-number-mode 1)
+
+;; Dired
+(setq dired-kill-when-opening-new-dired-buffer t)
+
+;; Project mode-line
+(setq project-mode-line t)
+
+;; Dashboard
+(setq dashboard-items
+      '((projects . 10)
+        (recents . 5)
+        (bookmarks . 5)
+        (agenda . 5)))
+
+(setq dashboard-projects-backend 'project-el)
 
 (global-visual-line-mode)
-(setq markdown-header-scaling t)
 
-;; font height any smaller and the welcome screen changes to fixed-pitch
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(blink-cursor-mode nil)
- '(column-number-mode t)
- '(custom-enabled-themes '(modus-vivendi))
- '(dashboard-items
-   '((projects . 10) (recents . 5) (bookmarks . 5) (agenda . 5)))
- '(dashboard-projects-backend 'project-el)
- '(dired-kill-when-opening-new-dired-buffer t)
- '(display-line-numbers-type 'absolute)
- '(global-display-line-numbers-mode t)
- '(inhibit-startup-screen t)
- '(minimap-hide-fringes t)
- '(minimap-major-modes '(prog-mode text-mode Info-mode))
- '(minimap-minimum-width 10)
- '(minimap-width-fraction 0.05)
- '(minimap-window-location 'right)
- '(package-selected-packages nil)
- '(project-mode-line t)
- '(standard-indent 2)
- '(tool-bar-mode nil)
- '(vc-handled-backends '(Git)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Hack Nerd Font Mono" :foundry "SRC" :slant normal :weight regular :height 113 :width normal))))
- '(fixed-pitch ((t (:family "Hack Nerd Font Mono"))))
- '(variable-pitch ((t (:family "Arial")))))
+;; VC follows the link and visits the real file, telling you about it
+;; in the echo area.
+(setq vc-follow-symlinks t)
+
+(let ((mono "Hack Nerd Font Mono")
+      (proportional "Liberation Sans"))
+  (set-face-attribute 'default nil :family mono :height 113)
+  (set-face-attribute 'fixed-pitch nil :family mono :height 1.0)
+  (set-face-attribute 'variable-pitch nil :family proportional :height 1.1))
 
 ;; '(show-trailing-whitespace t)
 
+(setq markdown-header-scaling t)
 (add-hook 'markdown-mode-hook #'variable-pitch-mode)
-
 (with-eval-after-load 'markdown-mode
-  (set-face-attribute 'markdown-header-face-1 nil :height 1.8)
-  (set-face-attribute 'markdown-header-face-2 nil :height 1.6)
-  (set-face-attribute 'markdown-header-face-3 nil :height 1.4)
-  (set-face-attribute 'markdown-header-face-4 nil :height 1.2)
-  (set-face-attribute 'markdown-header-face-5 nil :height 1.1)
-  (set-face-attribute 'markdown-header-face-6 nil :height 1.0))
+  (set-face-attribute 'markdown-header-face-1 nil :height 1.8 :family "Nasalization")
+  (set-face-attribute 'markdown-header-face-2 nil :height 1.6 :family "Nasalization")
+  (set-face-attribute 'markdown-header-face-3 nil :height 1.4 :family "Nasalization")
+  (set-face-attribute 'markdown-header-face-4 nil :height 1.2 :family "Nasalization")
+  (set-face-attribute 'markdown-header-face-5 nil :height 1.1 :family "Nasalization")
+  (set-face-attribute 'markdown-header-face-6 nil :height 1.0 :family "Nasalization")
 
-;; (add-hook 'js-json-mode-hook
-;;           (lambda ()
-;;             (setq-local js-indent-level 2)))
+  (set-face-attribute 'markdown-code-face        nil :inherit 'fixed-pitch)
+  (set-face-attribute 'markdown-inline-code-face nil :inherit 'fixed-pitch)
+  (set-face-attribute 'markdown-pre-face         nil :inherit 'fixed-pitch)
+  (set-face-attribute 'markdown-table-face       nil :inherit 'fixed-pitch))
 
 (setq js-indent-level 2)
 
-(defun my/global-settings ()
-  (global-tab-line-mode t)
-  (global-hl-line-mode t) ; highlight the whole cursor line
-  (setq tab-always-indent 'complete) ; tab indents then autocompletes
-  ;;  (setq display-line-numbers-type 'absolute)
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode) ;; Line numbers for all programming modes 
-  ;;(global-display-line-numbers-mode)
+(global-hl-line-mode t) ; highlight the whole cursor line
+(setq tab-always-indent 'complete) ; tab indents then autocompletes
 
-  (recentf-mode t) ; remember and open recent files with M-x recentf
-  (save-place-mode t) ; remember cursor location for previously opened files
+(recentf-mode t) ; remember and open recent files with M-x recentf
+(save-place-mode t) ; remember cursor location for previously opened files
 
-  (setq global-auto-revert-non-file-buffers t)
-  (global-auto-revert-mode t)
-  )
+(setq global-auto-revert-non-file-buffers t)
+(global-auto-revert-mode t)
 
-(my/global-settings)
+(keymap-global-set "M-n" 'scroll-up-line)
+(keymap-global-set "M-p" 'scroll-down-line)
 
-(defun my/keymap ()
-  (keymap-global-set "M-n" 'scroll-up-line)
-  (keymap-global-set "M-p" 'scroll-down-line)
+(add-hook 'Info-mode-hook
+          (lambda ()
+	          (keymap-set Info-mode-map "M-n" 'scroll-up-line)
+	          (keymap-set Info-mode-map "M-p" 'scroll-down-line)))
 
-  (add-hook 'Info-mode-hook
-            (lambda ()
-	      (keymap-set Info-mode-map "M-n" 'scroll-up-line)
-	      (keymap-set Info-mode-map "M-p" 'scroll-down-line)))
+(add-hook 'markdown-mode-hook
+          (lambda ()
+	          (keymap-set markdown-mode-map "M-n" 'scroll-up-line)
+	          (keymap-set markdown-mode-map "M-p" 'scroll-down-line)))
 
-  (add-hook 'markdown-mode-hook
-            (lambda ()
-	      (keymap-set markdown-mode-map "M-n" 'scroll-up-line)
-	      (keymap-set markdown-mode-map "M-p" 'scroll-down-line)))
+(add-hook 'slime-lisp-mode-hook
+          (lambda ()
+	          (keymap-set slime-mode-map "M-n" 'scroll-up-line)
+	          (keymap-set slime-mode-map "M-p" 'scroll-down-line)))
 
-  (add-hook 'slime-lisp-mode-hook
-            (lambda ()
-	      (keymap-set slime-mode-map "M-n" 'scroll-up-line)
-	      (keymap-set slime-mode-map "M-p" 'scroll-down-line)))
+(add-hook 'dired-mode-hook
+	        (lambda ()
+	          (keymap-set dired-mode-map "<mouse-1>" 'dired-find-file)))
 
-  (add-hook 'dired-mode-hook
-	    (lambda ()
-	      (keymap-set dired-mode-map "<mouse-1>" 'dired-find-file)))
+(add-hook 'emacs-lisp-mode-hook
+	        (lambda ()
+	          (keymap-global-set "C-c e" #'eval-buffer)))
 
-  (add-hook 'emacs-lisp-mode-hook
-	    (lambda ()
-	      (keymap-global-set "C-c e" #'eval-buffer)))
+(keymap-global-set "M-o" 'other-window)
+(keymap-global-set "M-O" '(lambda () (interactive) (other-window -1))) ; M-S-o is regonised as M-O
 
-  (keymap-global-set "M-o" 'other-window)
-  (keymap-global-set "M-O" '(lambda () (interactive) (other-window -1))) ; M-S-o is regonised as M-O
+;; TODO next-buffer if no tab-line
+(keymap-global-set "C-<tab>" 'tab-line-switch-to-next-tab)
+(keymap-global-set "C-S-<tab>" 'tab-line-switch-to-prev-tab)
+(keymap-global-set "C-<iso-lefttab>" 'tab-line-switch-to-prev-tab) ; laptop registered this keypress for C-S-<tab>
 
-  ;; TODO next-buffer if no tab-line
-  (keymap-global-set "C-<tab>" 'tab-line-switch-to-next-tab)
-  (keymap-global-set "C-S-<tab>" 'tab-line-switch-to-prev-tab)
-  (keymap-global-set "C-<iso-lefttab>" 'tab-line-switch-to-prev-tab) ; laptop registered this keypress for C-S-<tab>
+(keymap-global-set "M-D" 'isearch-forward-symbol-at-point)
 
-  (keymap-global-set "M-D" 'isearch-forward-symbol-at-point)
-  )
-
-(my/keymap)
 
 ;; minimap setup
-
 (defun my-enable-minimap-if-gui (frame)
   (when (display-graphic-p frame)
     (with-selected-frame frame
@@ -137,13 +138,6 @@
 
 (add-hook 'window-size-change-functions #'my-minimap-refresh-on-resize)
 
-;; (defun my/transpose ()
-;;   (interactive)
-;;   (if (region-active-p)
-;;       (transpose-regions)
-;;     (transpose-lines 0)))
-;; (keymap-global-set "M-<down>" 'my/transpose)
-
 ;; enable mouse in terminal
 (unless (display-graphic-p)
   (xterm-mouse-mode 1))
@@ -163,17 +157,17 @@
       (set-window-margins (selected-window) 0 0))))
 
 (defun zen-on-resize ()
-   (let* ((margins (window-margins))
+  (let* ((margins (window-margins))
          (left (or (car margins) 0))
          (right (or (cdr margins) 0)))
-  (if (not (and (= left 0) (= right 0))) (zen))))
+    (if (not (and (= left 0) (= right 0))) (zen))))
 
 (add-hook 'window-size-change-functions #'zen-on-resize)
 
 ;; https://stackoverflow.com/a/18330742
 (defvar --backup-directory (concat user-emacs-directory "backups"))
 (if (not (file-exists-p --backup-directory))
-        (make-directory --backup-directory t))
+    (make-directory --backup-directory t))
 (setq backup-directory-alist `(("." . ,--backup-directory)))
 (setq make-backup-files t               ; backup of a file the first time it is saved.
       backup-by-copying t               ; don't clobber symlinks
@@ -189,21 +183,43 @@
 
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+	           '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package slime)
+(use-package modus-themes
+  :ensure t
+  :config
+  (load-theme 'modus-vivendi :no-confirm-loading))
 
+;; Don't show tab bar until theme is set
+(global-tab-line-mode t)
+(setq tab-line-new-button-show nil)
+(setq tab-line-close-button-show nil)
+(setq tab-line-separator " ")
+
+(set-face-attribute 'tab-line nil
+                    :family "Nasalization"
+                    :height 1.1)
+
+(use-package slime)
 (use-package magit)
+(use-package visual-fill-column)
+(use-package writeroom-mode)
 
 ;; After installation, simply use M-x minimap-mode to toggle
 ;; activation of the minimap. Use 'M-x customize-group RET minimap
 ;; RET' to adapt minimap to your needs.
 (use-package minimap)
-(setq minimap-recreate-window t)
+;; Minimap
+(setq minimap-hide-fringes t
+      minimap-major-modes '(prog-mode text-mode Info-mode)
+      minimap-minimum-width 10
+      minimap-width-fraction 0.05
+      minimap-window-location 'right
+      minimap-recreate-window t)
 
 ;; hide fringe indicators - doesn't work either?
 ;; https://stackoverflow.com/a/61417854
@@ -223,14 +239,26 @@
          (vc-dir-mode . diff-hl-dir-mode))
   :config
   (diff-hl-flydiff-mode) ;; live updates as you type
-)
+  )
 
-;;(add-hook 'emacs-startup-hook
-;;	  (lambda () (delete-other-windows)) t)
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init
+  (setq markdown-hide-markup t
+        markdown-gfm-uppercase-checkbox t
+        ;; markdown-mode code block syntax highlighting  
+        markdown-fontify-code-blocks-natively t))
 
-(use-package markdown-mode)
- ;; markdown-mode code block syntax highlighting
-(setq markdown-fontify-code-blocks-natively t)
+(add-hook 'markdown-mode-hook #'variable-pitch-mode)
+(add-hook 'markdown-mode-hook #'visual-fill-column-mode)
+
+;; Keep code/table regions fixed-pitch
+(setq-local face-remapping-alist
+            '((markdown-code-face fixed-pitch)
+              (markdown-inline-code-face fixed-pitch)
+              (markdown-pre-face fixed-pitch)
+              (markdown-table-face fixed-pitch)
+              (markdown-language-keyword-face fixed-pitch)))
 
 ;; defaults to ChatGPT, using ~/.authinfo
 (use-package gptel)
@@ -238,13 +266,13 @@
 (setq my-llama
       (gptel-make-ollama "Llama"
         :host "localhost:11434"
-	:stream t
+	      :stream t
         :models '(llama3)))
 
 (setq my-gemma
       (gptel-make-ollama "Gemma"
         :host "localhost:11434"
-	:stream t
+	      :stream t
         :models '(gemma:7b)))
 
 ;; OPTIONAL configuration
@@ -291,6 +319,9 @@
     ;;(treemacs-resize-icons 44)
     (treemacs-resize-icons 16)
 
+    (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
+
+    (treemacs-indent-guide-mode)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode 'always)
@@ -315,13 +346,6 @@
         ("C-x t B"   . treemacs-bookmark)
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
-
-(with-eval-after-load 'treemacs
-   (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
-;;   (treemacs-follow-mode)
-   ;;   (treemacs-git-mode)
-   ;; (treemacs-git-commit-diff-mode)
-   )
 
 (use-package move-text
   :ensure t
@@ -409,3 +433,5 @@
   (define-key eww-mode-map [mouse-8] #'eww-back-url)
   (define-key eww-mode-map [mouse-9] #'eww-forward-url))
 
+
+(load custom-file :no-error-if-file-is-missing)
