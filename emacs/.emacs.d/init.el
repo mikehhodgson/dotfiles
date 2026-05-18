@@ -233,11 +233,11 @@
 ;; gutter diff highlights
 (use-package diff-hl
   :ensure t
-  :hook ((prog-mode . diff-hl-mode)
-         (vc-dir-mode . diff-hl-dir-mode))
+;;  :hook ((prog-mode . diff-hl-mode)
+;;         (vc-dir-mode . diff-hl-dir-mode))
   :config
-  (diff-hl-flydiff-mode) ;; live updates as you type
-  )
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)) ;; live updates as you type
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
