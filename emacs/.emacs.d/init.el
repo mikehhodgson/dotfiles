@@ -114,30 +114,6 @@
 
 (keymap-global-set "M-D" 'isearch-forward-symbol-at-point)
 
-
-;; minimap setup
-(defun my-enable-minimap-if-gui (frame)
-  (when (display-graphic-p frame)
-    (with-selected-frame frame
-      (minimap-mode 1))))
-
-;; run for initial frame
-(my-enable-minimap-if-gui (selected-frame))
-
-;; run for any new frames (important for daemon / emacsclient)
-(add-hook 'after-make-frame-functions #'my-enable-minimap-if-gui)
-
-;; explicity disable minimap in terminal
-(unless (display-graphic-p)
-  (minimap-mode -1))
-
-(defun my-minimap-refresh-on-resize (_frame)
-  (when (and (bound-and-true-p minimap-mode)
-             (display-graphic-p))
-    (minimap-update)))
-
-(add-hook 'window-size-change-functions #'my-minimap-refresh-on-resize)
-
 ;; enable mouse in terminal
 (unless (display-graphic-p)
   (xterm-mouse-mode 1))
@@ -231,6 +207,28 @@
           ;; '(truncation left-arrow nil) ;; left indicator only
           ;; '(truncation left-arrow right-arrow) ;; default
           fringe-indicator-alist)))
+
+(defun my-enable-minimap-if-gui (frame)
+  (when (display-graphic-p frame)
+    (with-selected-frame frame
+      (minimap-mode 1))))
+
+;; run for initial frame
+(my-enable-minimap-if-gui (selected-frame))
+
+;; run for any new frames (important for daemon / emacsclient)
+(add-hook 'after-make-frame-functions #'my-enable-minimap-if-gui)
+
+;; explicity disable minimap in terminal
+(unless (display-graphic-p)
+  (minimap-mode -1))
+
+(defun my-minimap-refresh-on-resize (_frame)
+  (when (and (bound-and-true-p minimap-mode)
+             (display-graphic-p))
+    (minimap-update)))
+
+(add-hook 'window-size-change-functions #'my-minimap-refresh-on-resize)
 
 ;; gutter diff highlights
 (use-package diff-hl
