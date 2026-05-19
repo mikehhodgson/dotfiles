@@ -237,7 +237,10 @@
 ;;         (vc-dir-mode . diff-hl-dir-mode))
   :config
   (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)) ;; live updates as you type
+  (diff-hl-flydiff-mode) ;; live updates as you type
+  (diff-hl-show-hunk-mouse-mode))
+
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
