@@ -118,27 +118,27 @@
 (unless (display-graphic-p)
   (xterm-mouse-mode 1))
 
-(defun zen ()
-  (interactive)
-  (let* ((margins (window-margins))
-         (left (or (car margins) 0))
-         (right (or (cdr margins) 0)))
-    (if (and (= left 0) (= right 0))
-        ;; Turn ON centering
-        (let* ((total-width (window-total-width))
-               (text-width 80)
-               (margin (max 0 (/ (- total-width text-width) 2))))
-          (set-window-margins (selected-window) margin margin))
-      ;; Turn OFF centering
-      (set-window-margins (selected-window) 0 0))))
+;; (defun zen ()
+;;   (interactive)
+;;   (let* ((margins (window-margins))
+;;          (left (or (car margins) 0))
+;;          (right (or (cdr margins) 0)))
+;;     (if (and (= left 0) (= right 0))
+;;         ;; Turn ON centering
+;;         (let* ((total-width (window-total-width))
+;;                (text-width 80)
+;;                (margin (max 0 (/ (- total-width text-width) 2))))
+;;           (set-window-margins (selected-window) margin margin))
+;;       ;; Turn OFF centering
+;;       (set-window-margins (selected-window) 0 0))))
 
-(defun zen-on-resize ()
-  (let* ((margins (window-margins))
-         (left (or (car margins) 0))
-         (right (or (cdr margins) 0)))
-    (if (not (and (= left 0) (= right 0))) (zen))))
+;; (defun zen-on-resize ()
+;;   (let* ((margins (window-margins))
+;;          (left (or (car margins) 0))
+;;          (right (or (cdr margins) 0)))
+;;     (if (not (and (= left 0) (= right 0))) (zen))))
 
-(add-hook 'window-size-change-functions #'zen-on-resize)
+;; (add-hook 'window-size-change-functions #'zen-on-resize)
 
 ;; https://stackoverflow.com/a/18330742
 (defvar --backup-directory (concat user-emacs-directory "backups"))
@@ -179,6 +179,8 @@
 (set-face-attribute 'tab-line nil
                     :family "Nasalization"
                     :height 1.1)
+(set-face-attribute 'tab-line-tab-modified nil
+                    :foreground "#E4002B")
 
 (use-package slime)
 (use-package magit)
@@ -434,5 +436,55 @@
   (define-key eww-mode-map [mouse-8] #'eww-back-url)
   (define-key eww-mode-map [mouse-9] #'eww-forward-url))
 
+;;;;;;;;;;;;;;;;;;;;
+;; JS Dev support ;;
+;;;;;;;;;;;;;;;;;;;;
+
+;; npm install -g typescript typescript-language-server
+
+;; Emacs needs the shell path to find the typescript-language-server install
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
+
+;; Tree-sitter modes
+(setq major-mode-remap-alist
+ '((javascript-mode . js-ts-mode)
+   (js-mode . js-ts-mode)
+   (typescript-mode . tsx-ts-mode)
+   (tsx-mode . tsx-ts-mode)))
+
+;; Eglot
+(add-hook 'js-ts-mode-hook #'eglot-ensure)
+(add-hook 'tsx-ts-mode-hook #'eglot-ensure)
+
+;; Mouse support
+(setq xref-search-program 'ripgrep)
+
+;; Ctrl+click
+(keymap-set prog-mode-map "C-<down-mouse-1>" #'ignore)
+(keymap-set prog-mode-map "C-<mouse-1>" #'xref-find-definitions-at-mouse)
+
+;; Manual treesit grammer installer
+(setq treesit-language-source-alist
+      '((javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
+        (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
+        (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+        (json . ("https://github.com/tree-sitter/tree-sitter-json"))
+        (css . ("https://github.com/tree-sitter/tree-sitter-css"))
+        (html . ("https://github.com/tree-sitter/tree-sitter-html"))
+        (bash . ("https://github.com/tree-sitter/tree-sitter-bash"))))
+
+;; Run once to install everything
+(defun my/install-treesit-languages ()
+  (interactive)
+  (mapc
+   (lambda (lang)
+     (unless (treesit-language-available-p lang)
+       (treesit-install-language-grammar lang)))
+   '(javascript typescript tsx json css html bash)))
+
+;;;;;;;;;;;;;;;;;;
 
 (load custom-file :no-error-if-file-is-missing)
