@@ -9,7 +9,7 @@
 	autocrlf = input
 	safectrl = true
 	excludesfile = ~/.config/git/gitignore_global
-	editor = emacs -nw
+	editor = emacs --no-window-system --no-init-file --load ~/.config/emacs/lisp/git-editor.el
 [alias]
         co = checkout
         ci = commit
