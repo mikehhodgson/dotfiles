@@ -2,3 +2,4 @@
 --target=~/
 --ignore='~'
 --no-folding
+--verbose=1
