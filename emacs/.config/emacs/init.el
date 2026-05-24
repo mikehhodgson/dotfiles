@@ -247,7 +247,7 @@
 (use-package markdown-mode
   :mode ("README\\.md\\'" . gfm-mode)
   :init
-  (setq markdown-hide-markup t
+  (setq markdown-hide-markup nil
         markdown-gfm-uppercase-checkbox t
         ;; markdown-mode code block syntax highlighting  
         markdown-fontify-code-blocks-natively t))
