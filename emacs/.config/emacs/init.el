@@ -3,30 +3,32 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 
 (add-to-list 'load-path
-             (expand-file-name "lisp" user-emacs-directory))
+             (expand-file-name "lisp/init"
+                               user-emacs-directory))
 
-(require 'init-packages)
-(require 'init-ui)
+;;(require 'core)
+(require 'packages)
+(require 'ui)
 ;; (require 'init-editing)
-;; (require 'init-keybinds)
-;; (require 'init-backups)
-;; (require 'init-theme)
+;; (require 'keybinds)
+;; (require 'backups)
+(require 'theme)
 
-;; (require 'init-markdown)
-;; (require 'init-dashboard)
+;; (require 'markdown)
+;; (require 'dashboard)
 
-;; (require 'init-completion)
-;; (require 'init-lsp)
-;; (require 'init-treesit)
-;; (require 'init-js)
+;; (require 'completion)
+;; (require 'lsp)
+;; (require 'treesit)
+;; (require 'js)
 
-;; (require 'init-treemacs)
-;; (require 'init-minimap)
-;; (require 'init-diff)
-;; (require 'init-git)
+;; (require 'treemacs)
+;; (require 'minimap)
+;; (require 'diff)
+;; (require 'git)
 
-;; (require 'init-ai)
+;; (require 'ai)
 
-(require 'init-old)
+(require 'original)
 
 (load custom-file :no-error-if-file-is-missing)

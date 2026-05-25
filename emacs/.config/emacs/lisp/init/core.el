@@ -22,4 +22,4 @@
 (setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode t)
 
-(provide 'init-core)
+(provide 'core)
