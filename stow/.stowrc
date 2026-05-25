@@ -1,5 +1,7 @@
 --dir=~/src/personal/dotfiles
 --target=~/
 --ignore='~'
---no-folding
 --verbose=1
+
+# Emacs config works better without folding
+--no-folding
