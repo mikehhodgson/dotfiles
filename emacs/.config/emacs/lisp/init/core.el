@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Use only Git for VC
 (setq vc-handled-backends '(Git))
 

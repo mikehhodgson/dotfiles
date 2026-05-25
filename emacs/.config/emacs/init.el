@@ -6,15 +6,16 @@
              (expand-file-name "lisp/init"
                                user-emacs-directory))
 
-;;(require 'core)
+(require 'core)
 (require 'packages)
 (require 'ui)
-;; (require 'init-editing)
+;; (require 'editing)
 ;; (require 'keybinds)
 ;; (require 'backups)
 (require 'theme)
+(require 'fonts)
 
-;; (require 'markdown)
+(require 'markdown)
 ;; (require 'dashboard)
 
 ;; (require 'completion)

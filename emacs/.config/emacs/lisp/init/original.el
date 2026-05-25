@@ -15,31 +15,7 @@
 
 (setq dashboard-projects-backend 'project-el)
 
-
-(let ((mono "Hack Nerd Font Mono")
-      (proportional "Liberation Sans"))
-  (set-face-attribute 'default nil :family mono :height 113)
-  (set-face-attribute 'fixed-pitch nil :family mono :height 1.0)
-  (set-face-attribute 'variable-pitch nil :family proportional :height 1.1))
-
-
-(setq markdown-header-scaling t)
-(add-hook 'markdown-mode-hook #'variable-pitch-mode)
-(with-eval-after-load 'markdown-mode
-  (set-face-attribute 'markdown-header-face-1 nil :height 1.8 :family "Nasalization")
-  (set-face-attribute 'markdown-header-face-2 nil :height 1.6 :family "Nasalization")
-  (set-face-attribute 'markdown-header-face-3 nil :height 1.4 :family "Nasalization")
-  (set-face-attribute 'markdown-header-face-4 nil :height 1.2 :family "Nasalization")
-  (set-face-attribute 'markdown-header-face-5 nil :height 1.1 :family "Nasalization")
-  (set-face-attribute 'markdown-header-face-6 nil :height 1.0 :family "Nasalization")
-
-  (set-face-attribute 'markdown-code-face        nil :inherit 'fixed-pitch)
-  (set-face-attribute 'markdown-inline-code-face nil :inherit 'fixed-pitch)
-  (set-face-attribute 'markdown-pre-face         nil :inherit 'fixed-pitch)
-  (set-face-attribute 'markdown-table-face       nil :inherit 'fixed-pitch))
-
 (setq js-indent-level 2)
-
 
 (keymap-global-set "M-n" 'scroll-up-line)
 (keymap-global-set "M-p" 'scroll-down-line)
@@ -48,11 +24,6 @@
           (lambda ()
 	          (keymap-set Info-mode-map "M-n" 'scroll-up-line)
 	          (keymap-set Info-mode-map "M-p" 'scroll-down-line)))
-
-(add-hook 'markdown-mode-hook
-          (lambda ()
-	          (keymap-set markdown-mode-map "M-n" 'scroll-up-line)
-	          (keymap-set markdown-mode-map "M-p" 'scroll-down-line)))
 
 (add-hook 'slime-lisp-mode-hook
           (lambda ()
@@ -179,25 +150,6 @@
   (diff-hl-show-hunk-mouse-mode))
 
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-
-(use-package markdown-mode
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init
-  (setq markdown-hide-markup nil
-        markdown-gfm-uppercase-checkbox t
-        ;; markdown-mode code block syntax highlighting  
-        markdown-fontify-code-blocks-natively t))
-
-(add-hook 'markdown-mode-hook #'variable-pitch-mode)
-(add-hook 'markdown-mode-hook #'visual-fill-column-mode)
-
-;; Keep code/table regions fixed-pitch
-(setq-local face-remapping-alist
-            '((markdown-code-face fixed-pitch)
-              (markdown-inline-code-face fixed-pitch)
-              (markdown-pre-face fixed-pitch)
-              (markdown-table-face fixed-pitch)
-              (markdown-language-keyword-face fixed-pitch)))
 
 ;; defaults to ChatGPT, using ~/.authinfo
 (use-package gptel)
