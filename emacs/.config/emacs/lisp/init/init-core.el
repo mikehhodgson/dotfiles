@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
+(set-default-coding-systems 'utf-8)
+
+(setq dired-kill-when-opening-new-dired-buffer t)
+
 ;; Use only Git for VC
 (setq vc-handled-backends '(Git))
 

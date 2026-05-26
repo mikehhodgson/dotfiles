@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
+(setq js-indent-level 2)
+
+(use-package slime)
+
 ;;;;;;;;;;;;;;;;;;;;
 ;; JS Dev support ;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -45,4 +49,4 @@
        (treesit-install-language-grammar lang)))
    '(javascript typescript tsx json css html bash)))
 
-(provide 'init-treesit)
+(provide 'init-dev)

@@ -4,6 +4,7 @@
 (column-number-mode 1)
 (global-visual-line-mode)
 (global-hl-line-mode t) ; highlight the whole cursor line
+(setq project-mode-line t)
 
 ;; Line numbers
 (setq display-line-numbers-type 'absolute)

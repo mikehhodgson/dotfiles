@@ -10,28 +10,22 @@
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-editing)
-;; (require 'init-keybinds)
-;; (require 'init-backups)
+(require 'init-keybinds)
+(require 'init-backups)
 (require 'init-theme)
 (require 'init-fonts)
 
 (require 'init-markdown)
-;; (require 'init-dashboard)
+(require 'init-dashboard)
 
-;; (require 'init-completion)
+(require 'init-completion)
 (require 'init-lsp)
-(require 'init-treesit)
-;; (require 'init-js)
+(require 'init-dev)
 
 (require 'init-treemacs)
-;; (require 'init-minimap)
-;; (require 'init-diff)
+(require 'init-minimap)
 (require 'init-git)
 
-;; (require 'init-ai)
-
-(require 'init-original)
-
-(load "local" t)
+(require 'init-ai)
 
 (load custom-file :no-error-if-file-is-missing)

@@ -1,5 +1,10 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package visual-fill-column)
+(use-package writeroom-mode)
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+
 (use-package move-text
   :ensure t
   :config
