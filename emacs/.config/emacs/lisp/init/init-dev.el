@@ -2,7 +2,10 @@
 
 (setq js-indent-level 2)
 
-(use-package slime)
+(use-package slime
+  :bind (:map slime-mode-map
+              ("M-n" . scroll-up-line)
+              ("M-p" . scroll-down-line)))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; JS Dev support ;;
