@@ -2,9 +2,10 @@
 
 (blink-cursor-mode -1)
 (column-number-mode 1)
-(global-visual-line-mode)
+(global-visual-line-mode 1)
 (global-hl-line-mode t) ; highlight the whole cursor line
 (setq project-mode-line t)
+(setq show-trailing-whitespace t)
 
 ;; Line numbers
 (setq display-line-numbers-type 'absolute)

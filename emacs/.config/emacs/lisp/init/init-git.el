@@ -13,6 +13,11 @@
   (global-diff-hl-mode)
   (diff-hl-flydiff-mode) ;; live updates as you type
   (diff-hl-show-hunk-mouse-mode)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+
+  (define-key diff-hl-mode-map
+              [left-fringe mouse-1]
+              #'diff-hl-show-hunk))
 
 (provide 'init-git)
