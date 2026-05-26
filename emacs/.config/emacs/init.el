@@ -6,30 +6,32 @@
              (expand-file-name "lisp/init"
                                user-emacs-directory))
 
-(require 'core)
-(require 'packages)
-(require 'ui)
-;; (require 'editing)
-;; (require 'keybinds)
-;; (require 'backups)
-(require 'theme)
-(require 'fonts)
+(require 'init-core)
+(require 'init-packages)
+(require 'init-ui)
+(require 'init-editing)
+;; (require 'init-keybinds)
+;; (require 'init-backups)
+(require 'init-theme)
+(require 'init-fonts)
 
-(require 'markdown)
-;; (require 'dashboard)
+(require 'init-markdown)
+;; (require 'init-dashboard)
 
-;; (require 'completion)
-;; (require 'lsp)
-;; (require 'treesit)
-;; (require 'js)
+;; (require 'init-completion)
+(require 'init-lsp)
+(require 'init-treesit)
+;; (require 'init-js)
 
-;; (require 'treemacs)
-;; (require 'minimap)
-;; (require 'diff)
-;; (require 'git)
+(require 'init-treemacs)
+;; (require 'init-minimap)
+;; (require 'init-diff)
+(require 'init-git)
 
-;; (require 'ai)
+;; (require 'init-ai)
 
-(require 'original)
+(require 'init-original)
+
+(load "local" t)
 
 (load custom-file :no-error-if-file-is-missing)

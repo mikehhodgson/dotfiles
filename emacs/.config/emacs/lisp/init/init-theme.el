@@ -17,4 +17,4 @@
 (set-face-attribute 'tab-line-tab-modified nil
                     :foreground "#E4002B")
 
- (provide 'theme)
+ (provide 'init-theme)

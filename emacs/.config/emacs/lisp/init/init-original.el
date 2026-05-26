@@ -48,8 +48,6 @@
 
 (keymap-global-set "M-D" 'isearch-forward-symbol-at-point)
 
-
-
 ;; (defun zen ()
 ;;   (interactive)
 ;;   (let* ((margins (window-margins))
@@ -90,7 +88,6 @@
       )
 
 (use-package slime)
-(use-package magit)
 (use-package visual-fill-column)
 (use-package writeroom-mode)
 
@@ -139,18 +136,6 @@
 
 (add-hook 'window-size-change-functions #'my-minimap-refresh-on-resize)
 
-;; gutter diff highlights
-(use-package diff-hl
-  :ensure t
-;;  :hook ((prog-mode . diff-hl-mode)
-;;         (vc-dir-mode . diff-hl-dir-mode))
-  :config
-  (global-diff-hl-mode)
-  (diff-hl-flydiff-mode) ;; live updates as you type
-  (diff-hl-show-hunk-mouse-mode))
-
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-
 ;; defaults to ChatGPT, using ~/.authinfo
 (use-package gptel)
 
@@ -184,134 +169,6 @@
   :hook (after-init . global-company-mode)
   :bind ("C-;" . company-complete))
 
-;; https://www.gnu.org/software/emacs/manual/html_node/eglot/Quick-Start.html
-;;(add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
-;;(add-hook 'c-mode-hook 'eglot-ensure)
-;;(add-hook 'c++-mode-hook 'eglot-ensure)
-(use-package eglot
-  :ensure t
-  :hook ((c++-mode . eglot-ensure)
-         (c-mode . eglot-ensure))
-  :config
-  (add-to-list 'eglot-server-programs
-               '((c++-mode c-mode) . ("clangd"))))
-
-;; https://github.com/Alexander-Miller/treemacs
-(use-package treemacs
-  :ensure t
-  :defer t
-  :init
-  (with-eval-after-load 'winum
-    (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
-  :config
-  (progn
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
-    (treemacs-resize-icons 16)
-
-    (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
-
-    (treemacs-indent-guide-mode)
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-fringe-indicator-mode 'always)
-    (when treemacs-python-executable
-      (treemacs-git-commit-diff-mode t))
-
-    (pcase (cons (not (null (executable-find "git")))
-                 (not (null treemacs-python-executable)))
-      (`(t . t)
-       (treemacs-git-mode 'deferred))
-      (`(t . _)
-       (treemacs-git-mode 'simple)))
-
-    (treemacs-hide-gitignored-files-mode nil))
-  :bind
-  (:map global-map
-        ("C-M-z"     . treemacs)
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t d"   . treemacs-select-directory)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
-
-(use-package move-text
-  :ensure t
-  :config
-  (move-text-default-bindings))
-
-;; https://github.com/emacsfodder/move-text#indent-after-moving
-(defun indent-region-advice (&rest ignored)
-  (let ((deactivate deactivate-mark))
-    (if (region-active-p)
-        (indent-region (region-beginning) (region-end))
-      (indent-region (line-beginning-position) (line-end-position)))
-    (setq deactivate-mark deactivate)))
-
-(advice-add 'move-text-up :after 'indent-region-advice)
-(advice-add 'move-text-down :after 'indent-region-advice)
-
-(defun my/duplicate-below ()
-  "Duplicate region or line downward."
-  (interactive)
-  (if (use-region-p)
-      ;; Region case
-      (let* ((beg (region-beginning))
-             (end (region-end))
-             (text (buffer-substring beg end))
-             (len (- end beg)))
-        (goto-char end)
-        (insert text)
-
-        ;; Reselect lower copy
-        (setq deactivate-mark nil)
-        (set-mark end)
-        (goto-char (+ end len))
-        (activate-mark))
-    ;; Line case
-    (let ((col (current-column)))
-      (save-excursion
-        (let ((line (buffer-substring
-                     (line-beginning-position)
-                     (line-beginning-position 2))))
-          (goto-char (line-beginning-position 2))
-          (insert line)))
-      (forward-line 1)
-      (move-to-column col))))
-
-(defun my/duplicate-above ()
-  "Duplicate region or line upward."
-  (interactive)
-  (if (use-region-p)
-      ;; Region case
-      (let* ((beg (region-beginning))
-             (end (region-end))
-             (text (buffer-substring beg end))
-             (len (- end beg)))
-        (goto-char beg)
-        (insert text)
-
-        ;; Reselect upper copy
-        (setq deactivate-mark nil)
-        (set-mark beg)
-        (goto-char (+ beg len))
-        (activate-mark))
-    ;; Line case
-    (let ((col (current-column)))
-      (save-excursion
-        (beginning-of-line)
-        (let ((line (buffer-substring
-                     (line-beginning-position)
-                     (line-beginning-position 2))))
-          (insert line)))
-      (move-to-column col))))
-
-(global-set-key (kbd "M-S-<down>") #'my/duplicate-below)
-(global-set-key (kbd "M-S-<up>")   #'my/duplicate-above)
-
 (with-eval-after-load 'help-mode
   (define-key help-mode-map [mouse-8] #'help-go-back)
   (define-key help-mode-map [mouse-9] #'help-go-forward))
@@ -324,56 +181,4 @@
   (define-key eww-mode-map [mouse-8] #'eww-back-url)
   (define-key eww-mode-map [mouse-9] #'eww-forward-url))
 
-;;;;;;;;;;;;;;;;;;;;
-;; JS Dev support ;;
-;;;;;;;;;;;;;;;;;;;;
-
-;; npm install -g typescript typescript-language-server
-
-;; Emacs needs the shell path to find the typescript-language-server install
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
-
-;; Tree-sitter modes
-(setq major-mode-remap-alist
- '((javascript-mode . js-ts-mode)
-   (js-mode . js-ts-mode)
-   (typescript-mode . tsx-ts-mode)
-   (tsx-mode . tsx-ts-mode)))
-
-;; Eglot
-(add-hook 'js-ts-mode-hook #'eglot-ensure)
-(add-hook 'tsx-ts-mode-hook #'eglot-ensure)
-
-;; Mouse support
-(setq xref-search-program 'ripgrep)
-
-;; Ctrl+click
-(keymap-set prog-mode-map "C-<down-mouse-1>" #'ignore)
-(keymap-set prog-mode-map "C-<mouse-1>" #'xref-find-definitions-at-mouse)
-
-;; Manual treesit grammer installer
-(setq treesit-language-source-alist
-      '((javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
-        (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-        (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
-        (json . ("https://github.com/tree-sitter/tree-sitter-json"))
-        (css . ("https://github.com/tree-sitter/tree-sitter-css"))
-        (html . ("https://github.com/tree-sitter/tree-sitter-html"))
-        (bash . ("https://github.com/tree-sitter/tree-sitter-bash"))))
-
-;; Run once to install everything
-(defun my/install-treesit-languages ()
-  (interactive)
-  (mapc
-   (lambda (lang)
-     (unless (treesit-language-available-p lang)
-       (treesit-install-language-grammar lang)))
-   '(javascript typescript tsx json css html bash)))
-
-;;;;;;;;;;;;;;;;;;
-
-
-(provide 'original)
+(provide 'init-original)

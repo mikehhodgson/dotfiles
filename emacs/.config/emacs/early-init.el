@@ -14,3 +14,14 @@
 (setq default-frame-alist
       '((background-color . "#000000")
         (foreground-color . "#ffffff")))
+
+;; Prevent bright default mode-line before theme loads
+(set-face-attribute 'mode-line nil
+                    :background "#222222"
+                    :foreground "#cccccc"
+                    :box nil)
+
+(set-face-attribute 'mode-line-inactive nil
+                    :background "#000000"
+                    :foreground "#666666"
+                    :box nil)

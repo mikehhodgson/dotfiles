@@ -16,4 +16,4 @@
 (unless (display-graphic-p)
   (xterm-mouse-mode 1))
 
-(provide 'ui)
+(provide 'init-ui)

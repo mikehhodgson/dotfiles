@@ -10,4 +10,4 @@
 
 (setq use-package-always-ensure t)
 
-(provide 'packages)
+(provide 'init-packages)

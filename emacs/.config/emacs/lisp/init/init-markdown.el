@@ -39,4 +39,4 @@
 	          (keymap-set markdown-mode-map "M-n" 'scroll-up-line)
 	          (keymap-set markdown-mode-map "M-p" 'scroll-down-line)))
 
-(provide 'markdown)
+(provide 'init-markdown)
