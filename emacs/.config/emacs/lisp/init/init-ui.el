@@ -19,11 +19,19 @@
   (xterm-mouse-mode 1))
 
 (use-package nerd-icons :ensure t)
+
 (use-package tab-line-nerd-icons
   :ensure t
   :after nerd-icons
   :config
   (setq tab-line-nerd-icons-space-width 1.0)
   (tab-line-nerd-icons-global-mode 1))
+
+(use-package nerd-icons-dired
+  :vc (:url "https://github.com/rainstormstudio/nerd-icons-dired"
+       :rev :newest)
+  :after nerd-icons
+  :hook
+  (dired-mode . nerd-icons-dired-mode))
 
 (provide 'init-ui)
