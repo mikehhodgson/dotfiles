@@ -18,4 +18,12 @@
 (unless (display-graphic-p)
   (xterm-mouse-mode 1))
 
+(use-package nerd-icons :ensure t)
+(use-package tab-line-nerd-icons
+  :ensure t
+  :after nerd-icons
+  :config
+  (setq tab-line-nerd-icons-space-width 1.0)
+  (tab-line-nerd-icons-global-mode 1))
+
 (provide 'init-ui)

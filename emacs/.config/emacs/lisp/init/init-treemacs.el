@@ -42,4 +42,9 @@
         ("C-x t C-t" . treemacs-find-file)
         ("C-x t M-t" . treemacs-find-tag)))
 
+(use-package treemacs-nerd-icons
+  :after (treemacs nerd-icons)
+  :config
+  (treemacs-load-theme "nerd-icons"))
+
 (provide 'init-treemacs)
