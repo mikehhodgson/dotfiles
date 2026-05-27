@@ -93,6 +93,11 @@
        (treesit-install-language-grammar lang)))
    '(javascript typescript tsx json css html bash)))
 
+;; highlight color values to preview colors
+(use-package rainbow-mode
+  :ensure t
+  :hook prog-mode)
+
 (provide 'init-dev)
 
 ;;; init-dev.el ends here
