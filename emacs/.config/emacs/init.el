@@ -7,6 +7,10 @@
                                user-emacs-directory))
 
 (require 'init-core)
+
+(when (eq system-type 'windows-nt)
+  (require 'init-windows))
+
 (require 'init-packages)
 (require 'init-ui)
 (require 'init-editing)
