@@ -1,5 +1,8 @@
 ;; -*- lexical-binding: t; -*-
 
+(add-to-list 'custom-theme-load-path
+             (expand-file-name "themes" user-emacs-directory))
+
 (use-package modus-themes
   :ensure t
   :config
@@ -17,4 +20,4 @@
 (set-face-attribute 'tab-line-tab-modified nil
                     :foreground "#E4002B")
 
- (provide 'init-theme)
+(provide 'init-theme)
