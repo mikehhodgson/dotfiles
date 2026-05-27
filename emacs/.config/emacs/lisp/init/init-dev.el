@@ -48,15 +48,41 @@
 (keymap-set prog-mode-map "C-<down-mouse-1>" #'ignore)
 (keymap-set prog-mode-map "C-<mouse-1>" #'xref-find-definitions-at-mouse)
 
-;; Manual treesit grammer installer
-(setq treesit-language-source-alist
+;; Received different mouse events from mouse back/forward on different machines
+(keymap-set prog-mode-map "<mouse-4>" #'xref-go-back)
+(keymap-set prog-mode-map "<mouse-8>" #'xref-go-back)
+(keymap-set prog-mode-map "<mouse-5>" #'xref-go-forward)
+(keymap-set prog-mode-map "<mouse-9>" #'xref-go-forward)
+
+;; Manual treesit grammar installer - windows needs older grammar version
+(if (eq system-type 'windows-nt)
+    (setq treesit-language-source-alist
+          '((javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"
+                           "v0.20.4"))
+            (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript"
+                           "v0.20.3"
+                           "typescript/src"))
+            (tsx. ("https://github.com/tree-sitter/tree-sitter-typescript"
+                   "v0.20.3"
+                   "tsx/src"))
+            (json . ("https://github.com/tree-sitter/tree-sitter-json"
+                     "v0.20.2"))
+            (css . ("https://github.com/tree-sitter/tree-sitter-css"
+                    "v0.20.0"))
+            (html . ("https://github.com/tree-sitter/tree-sitter-html"
+                     "v0.20.1"))
+            (bash . ("https://github.com/tree-sitter/tree-sitter-bash"
+                     "v0.20.5"))))
+  (setq treesit-language-source-alist
       '((javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
-        (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src"))
-        (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src"))
+        (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript"
+                       "master" "typescript/src"))
+        (tsx . ("https://github.com/tree-sitter/tree-sitter-typescript"
+                "master" "tsx/src"))
         (json . ("https://github.com/tree-sitter/tree-sitter-json"))
         (css . ("https://github.com/tree-sitter/tree-sitter-css"))
         (html . ("https://github.com/tree-sitter/tree-sitter-html"))
-        (bash . ("https://github.com/tree-sitter/tree-sitter-bash"))))
+        (bash . ("https://github.com/tree-sitter/tree-sitter-bash")))))
 
 ;; Run once to install everything
 (defun my/install-treesit-languages ()

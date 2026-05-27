@@ -66,8 +66,4 @@ KEYS may be a single key string or a list of key strings."
   (my/keymap-set eww-mode-map my/mouse-back-buttons #'eww-back-url)
   (my/keymap-set eww-mode-map my/mouse-forward-buttons #'eww-forward-url))
 
-(with-eval-after-load 'js
-  (my/keymap-set js-ts-mode-map my/mouse-back-buttons #'xref-go-back)
-  (my/keymap-set js-ts-mode-map my/mouse-forward-buttons #'xref-go-forward))
-
 (provide 'init-keybinds)
