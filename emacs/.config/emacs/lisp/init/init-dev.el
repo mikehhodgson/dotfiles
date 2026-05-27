@@ -1,4 +1,23 @@
+;;; init-dev.el --- dev tools
 ;; -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;; Provides general dev tools, mostly web dev.
+;;
+;; Initial setup:
+;;
+;; npm install -g typescript typescript-language-server
+;;
+;; For Tree-sitter language install on Windows:
+;; winget install --id=MSYS2.MSYS2 -e
+;;
+;; Then in MSYS2 UCRT64
+;; pacman -S --needed git mingw-w64-ucrt-x86_64-gcc
+;;
+;; Then in Emacs:
+;; (my/install-treesit-languages)
+
+;;; Code:
 
 (setq js-indent-level 2)
 
@@ -7,14 +26,10 @@
               ("M-n" . scroll-up-line)
               ("M-p" . scroll-down-line)))
 
-;;;;;;;;;;;;;;;;;;;;
-;; JS Dev support ;;
-;;;;;;;;;;;;;;;;;;;;
-
-;; npm install -g typescript typescript-language-server
-
 ;; Emacs needs the shell path to find the typescript-language-server install
 (use-package exec-path-from-shell
+  ;; Windows already inherits the system path as required
+  :if (not (eq system-type 'windows-nt))
   :ensure t
   :config
   (exec-path-from-shell-initialize))
@@ -53,3 +68,5 @@
    '(javascript typescript tsx json css html bash)))
 
 (provide 'init-dev)
+
+;;; init-dev.el ends here
