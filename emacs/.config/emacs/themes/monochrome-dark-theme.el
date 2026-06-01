@@ -3,6 +3,9 @@
 ;; An Emacs port of the VS Code theme `mikehhodgson.monochrome-dark`.
 ;;;###theme-autoload
 
+;;; Use C-u C-x = (what-cursor-position with a prefix argument).
+;;; This shows detailed text properties at point, including the face(s), without moving point to another buffer.
+
 (deftheme monochrome-dark
   "Monochrome Dark theme ported from VS Code.")
 
@@ -35,7 +38,27 @@
        (selection "#2e303e")
        (cursor "#d9dde1")
        (border "#313334")
-       (border-strong "#454547"))
+       (border-strong "#454547")
+
+
+       (background "#1a1a1a")
+       (border "#222426")
+       (foreground "#ffffff")
+       (cursor-bg "#ffffff")
+       (cursor-fg "#222426")
+       (selection "#606060")
+       (line-highlight-background "#303030")
+       (inactive-foreground "#aaaaaa")
+       (mode-line-background "#000000")
+       (string "#b3b3b3")
+       (comment "#888888")
+       (keyword "#969696")
+       (git-deleted "#BB0000")
+       (git-inserted "#0BB055")
+       (git-inserted "#9BB055")
+       (error "#FF0000")
+       (warning "#FFFA00")
+       )
 
   (custom-theme-set-variables
    'monochrome-dark
@@ -44,13 +67,13 @@
 
   (custom-theme-set-faces
    'monochrome-dark
-   `(default ((t (:background ,bg :foreground ,fg))))
-   `(cursor ((t (:background ,cursor))))
-   `(fringe ((t (:background ,bg :foreground ,fg-dim))))
-   `(region ((t (:background ,bg-region))))
+   `(default ((t (:background ,background :foreground ,foreground))))
+   `(cursor ((t (:background ,cursor-bg :foreground ,cursor-fg))))
+   `(fringe ((t (:background ,background :foreground ,fg-dim))))
+   `(region ((t (:background ,selection))))
    `(secondary-selection ((t (:background ,selection))))
    `(highlight ((t (:background ,bg-soft))))
-   `(hl-line ((t (:background ,bg-soft))))
+   `(hl-line ((t (:background ,line-highlight-background))))
    `(shadow ((t (:foreground ,fg-faint))))
    `(link ((t (:foreground ,link :underline t))))
    `(link-visited ((t (:foreground ,builtin :underline t))))
@@ -66,19 +89,19 @@
    `(mode-line-inactive ((t (:background ,bg-alt :foreground ,fg-muted :box nil))))
    `(mode-line-highlight ((t (:foreground ,fg-strong))))
    `(header-line ((t (:background ,bg-dim :foreground ,fg :box nil))))
-   `(tab-line ((t (:background ,bg-dim :foreground ,fg-muted :box nil :underline nil))))
+   `(tab-line ((t (:background ,background :foreground ,fg-muted :box nil :underline nil))))
    `(tab-line-tab ((t (:background ,bg-alt :foreground ,fg :box nil))))
    `(tab-line-tab-current ((t (:background ,bg :foreground ,fg-strong :box nil :weight bold))))
    `(tab-line-tab-inactive ((t (:background ,bg-dim :foreground ,fg-muted :box nil))))
    `(tab-line-highlight ((t (:background ,bg-soft :foreground ,fg-strong))))
-   `(line-number ((t (:background ,bg :foreground ,fg-muted))))
+   `(line-number ((t (:background ,background :foreground ,fg-muted))))
    `(line-number-current-line ((t (:background ,bg :foreground ,fg-strong :weight bold))))
    `(completions-common-part ((t (:foreground ,fg-strong :weight bold))))
    `(completions-first-difference ((t (:foreground ,warning :weight bold))))
    `(match ((t (:background ,bg-soft :foreground ,fg-strong :weight bold))))
    `(isearch ((t (:background ,warning :foreground ,bg-dim :weight bold))))
    `(lazy-highlight ((t (:background ,bg-soft :foreground ,fg-strong))))
-   `(show-paren-match ((t (:background ,bg-soft :foreground ,fg-strong :weight bold))))
+   `(show-paren-match ((t (:background ,fg-dim :foreground ,bg :weight bold))))
    `(show-paren-mismatch ((t (:background ,error :foreground ,bg-dim :weight bold))))
    `(success ((t (:foreground ,success :weight bold))))
    `(warning ((t (:foreground ,warning :weight bold))))
@@ -87,14 +110,14 @@
    `(widget-field ((t (:background ,bg-alt :foreground ,fg))))
    `(widget-button ((t (:foreground ,link :weight bold))))
 
-   `(font-lock-builtin-face ((t (:foreground ,builtin))))
+   `(font-lock-builtin-face ((t (:foreground ,keyword))))
    `(font-lock-comment-delimiter-face ((t (:foreground ,comment))))
    `(font-lock-comment-face ((t (:foreground ,comment :slant italic))))
-   `(font-lock-constant-face ((t (:foreground ,constant))))
-   `(font-lock-doc-face ((t (:foreground ,fg-faint :slant italic))))
+   `(font-lock-constant-face ((t (:foreground ,keyword))))
+   `(font-lock-doc-face ((t (:foreground ,comment :slant italic))))
    `(font-lock-function-name-face ((t (:foreground ,function))))
    `(font-lock-function-call-face ((t (:foreground ,fg))))
-   `(font-lock-keyword-face ((t (:foreground ,keyword :weight bold))))
+   `(font-lock-keyword-face ((t (:foreground ,keyword))))
    `(font-lock-negation-char-face ((t (:foreground ,keyword :weight bold))))
    `(font-lock-preprocessor-face ((t (:foreground ,keyword))))
    `(font-lock-regexp-grouping-backslash ((t (:foreground ,fg-strong :weight bold))))
@@ -104,7 +127,9 @@
    `(font-lock-string-face ((t (:foreground ,string))))
    `(font-lock-type-face ((t (:foreground ,type))))
    `(font-lock-variable-name-face ((t (:foreground ,variable))))
+   `(font-lock-variable-use-face ((t (:foreground ,variable))))
    `(font-lock-warning-face ((t (:foreground ,warning :weight bold))))
+   `(font-lock-operator-face ((t (:foreground ,keyword))))
 
    `(tree-sitter-hl-face:attribute ((t (:foreground ,variable))))
    `(tree-sitter-hl-face:comment ((t (:foreground ,comment :slant italic))))
@@ -115,7 +140,7 @@
    `(tree-sitter-hl-face:function.call ((t (:foreground ,function))))
    `(tree-sitter-hl-face:keyword ((t (:foreground ,keyword :weight bold))))
    `(tree-sitter-hl-face:method.call ((t (:foreground ,function))))
-   `(tree-sitter-hl-face:operator ((t (:foreground ,fg-strong :weight bold))))
+   `(tree-sitter-hl-face:operator ((t (:foreground ,keyword))))
    `(tree-sitter-hl-face:property ((t (:foreground ,variable))))
    `(tree-sitter-hl-face:property.definition ((t (:foreground ,variable))))
    `(tree-sitter-hl-face:punctuation ((t (:foreground ,fg-dim))))
@@ -130,7 +155,8 @@
    `(tree-sitter-hl-face:variable ((t (:foreground ,variable))))
    `(tree-sitter-hl-face:variable.builtin ((t (:foreground ,builtin))))
    `(tree-sitter-hl-face:label ((t (:foreground ,warning))))
-   `(typescript-ts-jsx-tag-face ((t (:foreground ,function))))
+
+   `(typescript-ts-jsx-tag-face ((t (:foreground ,keyword))))
    `(typescript-ts-jsx-attribute-face ((t (:foreground ,constant))))
 
    `(diff-added ((t (:background ,bg-diff-add :foreground ,fg))))
@@ -188,23 +214,24 @@
    `(dired-warning ((t (:foreground ,error :weight bold))))
 
    `(treemacs-window-background-face ((t (:background ,bg-alt :foreground ,fg))))
-   `(treemacs-hl-line-face ((t (:background ,bg-soft))))
-   `(treemacs-directory-face ((t (:foreground ,fg))))
-   `(treemacs-directory-collapsed-face ((t (:foreground ,fg))))
+   `(treemacs-hl-line-face ((t (:background ,line-highlight-background))))
+   `(treemacs-directory-face ((t (:foreground ,foreground))))
+   `(treemacs-directory-collapsed-face ((t (:foreground ,foreground))))
    `(treemacs-file-face ((t (:foreground ,fg))))
-   `(treemacs-root-face ((t (:foreground ,fg-strong :underline t :weight bold :height 1.2))))
+   `(treemacs-root-face ((t (:foreground ,fg-strong ;; :underline t
+                                         :weight bold :height 1.2))))
    `(treemacs-root-unreadable-face ((t (:foreground ,fg-strong :underline t :strike-through t :weight bold :height 1.2))))
    `(treemacs-root-remote-face ((t (:foreground ,fg-strong :underline t :weight bold :height 1.2))))
    `(treemacs-root-remote-unreadable-face ((t (:foreground ,fg-strong :underline t :strike-through t :weight bold :height 1.2))))
    `(treemacs-root-remote-disconnected-face ((t (:foreground ,warning :underline t :weight bold :height 1.2))))
    `(treemacs-term-node-face ((t (:foreground ,fg-dim))))
-   `(treemacs-git-unmodified-face ((t (:foreground ,fg))))
-   `(treemacs-git-modified-face ((t (:foreground ,fg-strong))))
-   `(treemacs-git-renamed-face ((t (:foreground ,fg-dim :slant italic))))
-   `(treemacs-git-ignored-face ((t (:foreground ,fg-faint))))
-   `(treemacs-git-untracked-face ((t (:foreground ,fg))))
-   `(treemacs-git-added-face ((t (:foreground ,fg-strong))))
-   `(treemacs-git-conflict-face ((t (:foreground ,error :weight bold))))
+   ;; `(treemacs-git-unmodified-face ((t (:foreground ,fg))))
+   ;; `(treemacs-git-modified-face ((t (:foreground ,fg-strong))))
+   ;; `(treemacs-git-renamed-face ((t (:foreground ,fg-dim :slant italic))))
+   ;; `(treemacs-git-ignored-face ((t (:foreground ,fg-faint))))
+   ;; `(treemacs-git-untracked-face ((t (:foreground ,fg))))
+   ;; `(treemacs-git-added-face ((t (:foreground ,fg-strong))))
+   ;; `(treemacs-git-conflict-face ((t (:foreground ,error :weight bold))))
    `(treemacs-tags-face ((t (:foreground ,fg-strong :weight bold))))
    `(treemacs-help-title-face ((t (:foreground ,fg-strong :weight bold))))
    `(treemacs-help-column-face ((t (:foreground ,fg-strong :underline t))))
@@ -214,12 +241,17 @@
    `(treemacs-header-button-face ((t (:foreground ,fg-strong :weight bold))))
    `(treemacs-peek-mode-indicator-face ((t (:background ,bg-soft))))
    `(treemacs-marked-file-face ((t (:foreground ,fg-strong :background ,bg-region :weight bold))))
-   `(treemacs-git-commit-diff-face ((t (:foreground ,fg-faint :slant italic))))
+   ;; `(treemacs-git-commit-diff-face ((t (:foreground ,fg-faint :slant italic))))
    `(treemacs-async-loading-face ((t (:foreground ,fg-faint :height 0.8))))
    `(treemacs-nerd-icons-root-face ((t (:foreground ,fg-strong))))
    `(treemacs-nerd-icons-file-face ((t (:foreground ,fg-dim))))
 
-   `(eglot-highlight-symbol-face ((t (:background ,fg :foreground ,bg :weight bold))))
+   `(eglot-highlight-symbol-face ((t (:background "#000000" ;:weight bold
+                     ;;                             :underline (:color "#ffffff")
+                                                  :box (:line-width (-1 . -1) :color "#ffffff")
+;;       :box (:line-width 1 :color "#ffffff")
+))))
+
    `(eglot-inlay-hint-face ((t (:foreground ,fg-faint :slant italic))))
    `(eglot-parameter-hint-face ((t (:foreground ,fg-faint :slant italic))))
    `(eglot-type-hint-face ((t (:foreground ,fg-faint :slant italic))))
@@ -248,6 +280,14 @@
    `(paren-face-mismatch ((t (:background ,error :foreground ,bg-dim :weight bold))))
    `(paren-face-no-match ((t (:background ,error :foreground ,bg-dim :weight bold))))
    ))
+
+
+(font-lock-add-keywords
+ nil
+ '(("[(){}\\[\\]]" . font-lock-keyword-face)))
+
+(font-lock-flush)
+(font-lock-ensure)
 
 (provide-theme 'monochrome-dark)
 

@@ -3,10 +3,12 @@
 (add-to-list 'custom-theme-load-path
              (expand-file-name "themes" user-emacs-directory))
 
-(use-package modus-themes
-  :ensure t
-  :config
-  (load-theme 'modus-vivendi :no-confirm-loading))
+;; (use-package modus-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'modus-vivendi :no-confirm-loading))
+
+(load-theme 'monochrome-dark :no-confirm-loading)
 
 ;; Don't show tab line until theme is set
 (global-tab-line-mode t)
