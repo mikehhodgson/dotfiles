@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if ls ~/Documents/Personal/Finance/gnucash/current/*.LCK >/dev/null 2>&1;
+then
+    hyprctl dispatch focuswindow 'class:^(gnucash)$' || \
+        swaymsg '[app_id=\"org.gnucash.GnuCash\"] focus' || \
+        i3-msg '[class=\"gnucash\"] focus'
+else
+    exec setsid uwsm-app -- gnucash
+fi
