@@ -79,12 +79,17 @@
 (global-set-key (kbd "M-S-<down>") #'my/duplicate-below)
 (global-set-key (kbd "M-S-<up>")   #'my/duplicate-above)
 
+(use-package expand-region
+  :ensure t
+  :bind ("M-S" . er/expand-region))
+
 (use-package multiple-cursors
-  :ensure t)
+  :ensure t
+  :bind ("M-D" . mc/mark-next-like-this-word))
 
 ;; TODO run mc/mark-next-like-this if already a selection?
 ;;(global-set-key (kbd "M-D") 'mc/mark-all-dwim) ; do what I mean
-(global-set-key (kbd "M-D") 'mc/mark-next-like-this-word)
+;;(global-set-key (kbd "M-D") 'mc/mark-next-like-this-word)
 
 ;; (Global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
 ;; (global-set-key (kbd "C->") 'mc/mark-next-like-this)
