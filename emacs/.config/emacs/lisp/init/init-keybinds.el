@@ -26,8 +26,6 @@
 ;; laptop registered this keypress for C-S-<tab>
 (keymap-global-set "C-<iso-lefttab>" #'my/prev-tab-or-buffer)
 
-(keymap-global-set "M-D" 'isearch-forward-thing-at-point)
-
 ;; have found different mouse events on different machines
 (defconst my/mouse-back-buttons
   '("<mouse-4>" "<mouse-8>")
