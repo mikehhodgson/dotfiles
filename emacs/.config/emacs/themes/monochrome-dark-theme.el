@@ -74,6 +74,7 @@
    `(secondary-selection ((t (:background ,selection))))
    `(highlight ((t (:background ,bg-soft))))
    `(hl-line ((t (:background ,line-highlight-background))))
+   `(minimap-active-region-background ((t (:background ,line-highlight-background))))
    `(shadow ((t (:foreground ,fg-faint))))
    `(link ((t (:foreground ,link :underline t))))
    `(link-visited ((t (:foreground ,builtin :underline t))))

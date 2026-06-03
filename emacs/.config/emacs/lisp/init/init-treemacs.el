@@ -30,19 +30,44 @@
       (`(t . _)
        (treemacs-git-mode 'simple)))
 
-    (treemacs-hide-gitignored-files-mode nil))
-  :bind
-  (:map global-map
-        ("C-M-z"     . treemacs)
-        ("M-0"       . treemacs-select-window)
-        ("C-x t 1"   . treemacs-delete-other-windows)
-        ("C-x t t"   . treemacs)
-        ("C-x t d"   . treemacs-select-directory)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag)))
+    (treemacs-hide-gitignored-files-mode nil)
+
+    ;; node_modules dimmed
+    (treemacs-create-icon
+     :icon (propertize "󰏗 "
+                       'face 'shadow)
+     :extensions (dir-closed dir-open))
+
+    ;; special face for src
+    (defface my-treemacs-src-face
+      '((t (:foreground "#61afef" :weight bold)))
+      "")
+
+    ;; override display
+    (font-lock-add-keywords
+     'treemacs-mode
+     '(("/src$" . 'my-treemacs-src-face)))
+
+    (treemacs-define-custom-icon
+     "󰉋 "
+     "src")
+
+    (treemacs-define-custom-icon
+     "󰏗 "
+     "node_modules"))
+:bind
+(:map global-map
+      ("C-M-z"     . treemacs)
+      ("M-0"       . treemacs-select-window)
+      ("C-x t 1"   . treemacs-delete-other-windows)
+      ("C-x t t"   . treemacs)
+      ("C-x t d"   . treemacs-select-directory)
+      ("C-x t B"   . treemacs-bookmark)
+      ("C-x t C-t" . treemacs-find-file)
+      ("C-x t M-t" . treemacs-find-tag)))
 
 (use-package treemacs-nerd-icons
+  :ensure t
   :after (treemacs nerd-icons)
   :config
   (treemacs-load-theme "nerd-icons"))

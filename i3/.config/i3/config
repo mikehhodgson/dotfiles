@@ -177,13 +177,13 @@ bindsym $mod+Shift+greater move workspace to output right
 bindsym $mod+Shift+less move workspace to output left
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
 
 # Fullscreen
 bindsym $mod+f fullscreen toggle
 
 # Restart
-bindsym $mod+Shift+r restart
+bindsym $mod+Ctrl+Shift+r restart
 
 # Common Apps
 bindsym $mod+Shift+b exec librewolf
@@ -196,6 +196,8 @@ bindsym $mod+Shift+f exec nautilus
 bindsym $mod+Shift+n exec emacs
 
 for_window [title=" - gitk$"] floating enable
+
+bindsym $mod+Shift+c exec gnucash
 
 # Would like Ctrl+Shift+Escape, but no go on i3 so far
 for_window [title="^__floating_btop__$"] floating enable
