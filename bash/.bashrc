@@ -25,3 +25,4 @@ alias w='curl wttr.in'
 alias diskstat='udisksctl status'
 alias diskpower='udisksctl power-off -b' # e.g. diskpower /dev/sda
 alias diff='diff --color'
+alias dlphotos='download-photos'
