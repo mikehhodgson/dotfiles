@@ -28,4 +28,6 @@
 (setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode t)
 
+(setq wdired-allow-to-change-permissions t)
+
 (provide 'init-core)
