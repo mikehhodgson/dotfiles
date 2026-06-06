@@ -98,6 +98,10 @@
   :ensure t
   :hook prog-mode)
 
+(use-package json-mode
+  :ensure t
+  :mode ("\\.jsonc\\'" . jsonc-mode))
+
 (provide 'init-dev)
 
 ;;; init-dev.el ends here
