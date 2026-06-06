@@ -3,12 +3,9 @@
 /* https://docs.gtk.org/gtk3/css-overview.html */
 /* https://github.com/Alexays/Waybar/issues/366 */
 
-
 /* https://www.nasa.gov/nasa-brand-center/brand-guidelines/ */
 @define-color nasablue #0032A0;
 @define-color nasared  #E4002B;
-
-
 
 * {
   background-color: @background;
@@ -153,16 +150,15 @@ tooltip {
 /* } */
 
 
-#cpu {
-    margin-right: 20px;
+#cpu, #memory {
+    margin-right: 18px;
     /* try this if going to be positioned in between other tray icons */
     /* min-width: 70px; */
 }
 
 #custom-weather {
-  margin-left: 7.5px;
-  margin-right: 7.5px;
-  margin-right: 22px;
+  margin-left: 5px;
+  margin-right: 18px;
 }
 
 #custom-weather.unavailable {
