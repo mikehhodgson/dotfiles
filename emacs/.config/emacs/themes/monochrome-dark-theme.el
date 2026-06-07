@@ -1,10 +1,14 @@
 ;;; monochrome-dark-theme.el --- Monochrome Dark -*- lexical-binding: t; -*-
 
+;;; Commentary:
+;;
 ;; An Emacs port of the VS Code theme `mikehhodgson.monochrome-dark`.
 ;;;###theme-autoload
 
-;;; Use C-u C-x = (what-cursor-position with a prefix argument).
-;;; This shows detailed text properties at point, including the face(s), without moving point to another buffer.
+;; Use C-u C-x = (what-cursor-position with a prefix argument).
+;; This shows detailed text properties at point, including the face(s), without moving point to another buffer.
+
+;;; Code:
 
 (deftheme monochrome-dark
   "Monochrome Dark theme ported from VS Code.")
@@ -22,20 +26,20 @@
        (fg-dim "#7f888d")
        (fg-faint "#666d73")
        (fg-muted "#575d62")
-       (comment "#6a7075")
-       (keyword "#e6e6e6")
-       (string "#cfd3d7")
+       ;;(comment "#6a7075")
+       ;;(keyword "#e6e6e6")
+       ;;(string "#cfd3d7")
        (type "#dadfe4")
        (builtin "#d2d7db")
        (function "#e2e5e8")
        (constant "#d8dde1")
        (number "#b5bcc2")
        (variable "#dde2e6")
-       (warning "#c8c8c8")
-       (error "#ff5f5f")
+       ;;(warning "#c8c8c8")
+       ;;(error "#ff5f5f")
        (success "#9bb955")
        (link "#d6dbe0")
-       (selection "#2e303e")
+       ;;(selection "#2e303e")
        (cursor "#d9dde1")
        (border "#313334")
        (border-strong "#454547")
@@ -54,10 +58,30 @@
        (comment "#888888")
        (keyword "#969696")
        (git-deleted "#BB0000")
-       (git-inserted "#0BB055")
        (git-inserted "#9BB055")
+       (git-inserted "#0BB055")
        (error "#FF0000")
        (warning "#FFFA00")
+
+       (gitAddedResourceForeground "#587c0c")
+       (gitModifiedResourceForeground "#0c7d9d")
+       (gitDeletedResourceForeground "#ad0707")
+       (gitUntrackedResourceForeground "#587c0c")
+       (gitIgnoredResourceForeground "#8c8c8c")
+       (gitConflictingResourceForeground "#e4676b")
+       (gitSubmoduleResourceForeground "#1258a7")
+
+       ;; VS Code defaults
+       (git-added-fg "#81b88b")
+		   (git-conflicting-fg "#e4676b")
+		   (git-deleted-fg "#c74e39")
+		   (git-ignored-fg "#8c8c8c")
+		   (git-modified-fg "#e2c08d")
+		   (git-renamed-fg "#73c991")
+		   (git-stagedeleted-fg "#c74e39")
+		   (git-stagemodified-fg "#e2c08d")
+		   (git-submodule-fg "#8db9e2")
+		   (git-untracked-fg "#73c991")
        )
 
   (custom-theme-set-variables
@@ -131,6 +155,10 @@
    `(font-lock-variable-use-face ((t (:foreground ,variable))))
    `(font-lock-warning-face ((t (:foreground ,warning :weight bold))))
    `(font-lock-operator-face ((t (:foreground ,keyword))))
+   `(font-lock-bracket-face ((t (:foreground ,fg-dim))))
+   `(font-lock-delimiter-face ((t (:foreground ,fg-dim))))
+   `(font-lock-punctuation-face ((t (:foreground ,fg-dim))))
+   `(font-lock-misc-punctuation-face ((t (:foreground ,fg-dim))))
 
    `(tree-sitter-hl-face:attribute ((t (:foreground ,variable))))
    `(tree-sitter-hl-face:comment ((t (:foreground ,comment :slant italic))))
@@ -226,13 +254,13 @@
    `(treemacs-root-remote-unreadable-face ((t (:foreground ,fg-strong :underline t :strike-through t :weight bold :height 1.2))))
    `(treemacs-root-remote-disconnected-face ((t (:foreground ,warning :underline t :weight bold :height 1.2))))
    `(treemacs-term-node-face ((t (:foreground ,fg-dim))))
-   ;; `(treemacs-git-unmodified-face ((t (:foreground ,fg))))
-   ;; `(treemacs-git-modified-face ((t (:foreground ,fg-strong))))
-   ;; `(treemacs-git-renamed-face ((t (:foreground ,fg-dim :slant italic))))
-   ;; `(treemacs-git-ignored-face ((t (:foreground ,fg-faint))))
-   ;; `(treemacs-git-untracked-face ((t (:foreground ,fg))))
-   ;; `(treemacs-git-added-face ((t (:foreground ,fg-strong))))
-   ;; `(treemacs-git-conflict-face ((t (:foreground ,error :weight bold))))
+   `(treemacs-git-unmodified-face ((t (:foreground ,fg))))
+   `(treemacs-git-modified-face ((t (:foreground ,git-modified-fg))))
+   `(treemacs-git-renamed-face ((t (:foreground ,git-renamed-fg))))
+   `(treemacs-git-ignored-face ((t (:foreground ,git-ignored-fg))))
+   `(treemacs-git-untracked-face ((t (:foreground ,git-untracked-fg))))
+   `(treemacs-git-added-face ((t (:foreground ,git-added-fg))))
+   `(treemacs-git-conflict-face ((t (:foreground ,git-conflicting-fg))))
    `(treemacs-tags-face ((t (:foreground ,fg-strong :weight bold))))
    `(treemacs-help-title-face ((t (:foreground ,fg-strong :weight bold))))
    `(treemacs-help-column-face ((t (:foreground ,fg-strong :underline t))))
@@ -247,11 +275,11 @@
    `(treemacs-nerd-icons-root-face ((t (:foreground ,fg-strong))))
    `(treemacs-nerd-icons-file-face ((t (:foreground ,fg-dim))))
 
-   `(eglot-highlight-symbol-face ((t (:background "#000000" ;:weight bold
-                     ;;                             :underline (:color "#ffffff")
-                                                  :box (:line-width (-1 . -1) :color "#ffffff")
-;;       :box (:line-width 1 :color "#ffffff")
-))))
+   `(eglot-highlight-symbol-face ((t (:background "#000000"
+                                                  :box (:line-width (-1 . -1) :color ,selection)))))
+                                        ; :weight bold
+                                        ; :underline (:color "#ffffff")
+                                        ; :box (:line-width 1 :color "#ffffff")
 
    `(eglot-inlay-hint-face ((t (:foreground ,fg-faint :slant italic))))
    `(eglot-parameter-hint-face ((t (:foreground ,fg-faint :slant italic))))
@@ -259,7 +287,7 @@
    `(eglot-diagnostic-tag-deprecated-face ((t (:inherit shadow :strike-through t))))
    `(eglot-diagnostic-tag-unnecessary-face ((t (:inherit shadow :slant italic))))
 
-   `(company-tooltip ((t (:background ,bg-alt :foreground ,fg))))
+   `(company-tooltip ((t (:background ,bg-alt :foreground ,gitSubmoduleResourceForeground))))
    `(company-tooltip-selection ((t (:background ,bg-region :foreground ,fg-strong))))
    `(company-tooltip-common ((t (:foreground ,fg-strong :weight bold))))
    `(company-scrollbar-bg ((t (:background ,bg-dim))))
@@ -281,14 +309,6 @@
    `(paren-face-mismatch ((t (:background ,error :foreground ,bg-dim :weight bold))))
    `(paren-face-no-match ((t (:background ,error :foreground ,bg-dim :weight bold))))
    ))
-
-
-(font-lock-add-keywords
- nil
- '(("[(){}\\[\\]]" . font-lock-keyword-face)))
-
-(font-lock-flush)
-(font-lock-ensure)
 
 (provide-theme 'monochrome-dark)
 
