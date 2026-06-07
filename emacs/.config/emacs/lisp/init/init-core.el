@@ -19,9 +19,6 @@
 ;; in the echo area.
 (setq vc-follow-symlinks t)
 
-;; remember and open recent files with M-x recentf
-(recentf-mode t)
-
 ;; remember cursor location for previously opened files
 (save-place-mode t)
 
