@@ -12,6 +12,17 @@
 (column-number-mode 1)
 (global-font-lock-mode 1)
 (visual-line-mode 1)
+(global-hl-line-mode 1)
+(set-face-attribute 'hl-line nil
+                    :underline nil)
+
+;; Minimal keymap
+(keymap-global-set "M-n" 'scroll-up-line)
+(keymap-global-set "M-p" 'scroll-down-line)
+(keymap-global-set "M-o" 'other-window)
+;; M-S-o is regonised as M-O
+(keymap-global-set "M-O" '(lambda () (interactive) (other-window -1)))
+
 
 ;; Enable mouse in terminal
 (xterm-mouse-mode 1)
@@ -25,7 +36,10 @@
 (with-eval-after-load 'diff-mode
   (define-key diff-mode-map
               (kbd "M-DEL")
-              #'backward-kill-word))
+              #'backward-kill-word)
+    (define-key diff-mode-map
+              (kbd "M-o")
+              #'other-window))
 
 ;;(load-theme 'modus-vivendi t)
 (load-theme 'wombat t)

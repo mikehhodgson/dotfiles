@@ -1,5 +1,18 @@
 ;; -*- lexical-binding: t; -*-
 
+;; https://news.ycombinator.com/item?id=31398738
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 2 1024 1024))))
+
+;; https://news.ycombinator.com/item?id=31399060
+;; I like to do this to ensure GC happens occasionally, when I focus
+;; away from Emacs:
+(add-function :after after-focus-change-function
+              (lambda () (unless (frame-focus-state)
+                           (garbage-collect))))
+
 (menu-bar-mode 1)
 (scroll-bar-mode 1)
 (tool-bar-mode -1)

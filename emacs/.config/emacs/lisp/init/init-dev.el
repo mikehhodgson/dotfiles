@@ -98,9 +98,29 @@
   :ensure t
   :hook prog-mode)
 
+(use-package prettier-js
+  :ensure t)
+
+(add-hook 'js-ts-mode-hook 'prettier-js-mode)
+(add-hook 'js-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
+
 (use-package json-mode
   :ensure t
   :mode ("\\.jsonc\\'" . jsonc-mode))
+
+;; https://www.rahuljuliato.com/posts/emacs-docker-podman
+(use-package dockerfile-mode
+  :defer t
+  :ensure t
+  :config
+	(setq dockerfile-mode-command "docker"))
+
+(use-package yaml-mode
+  :defer t
+  :ensure t
+  :mode
+  ("\\.yaml\\'" "\\.yml\\'"))
 
 (provide 'init-dev)
 

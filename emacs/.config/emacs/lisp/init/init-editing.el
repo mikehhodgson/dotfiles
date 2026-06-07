@@ -1,5 +1,8 @@
 ;; -*- lexical-binding: t; -*-
 
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+
 (use-package visual-fill-column)
 (use-package writeroom-mode)
 
