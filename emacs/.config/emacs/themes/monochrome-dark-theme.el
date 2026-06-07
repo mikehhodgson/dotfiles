@@ -287,9 +287,10 @@
    `(eglot-diagnostic-tag-deprecated-face ((t (:inherit shadow :strike-through t))))
    `(eglot-diagnostic-tag-unnecessary-face ((t (:inherit shadow :slant italic))))
 
-   `(company-tooltip ((t (:background ,bg-alt :foreground ,gitSubmoduleResourceForeground))))
+   `(company-tooltip ((t (:background ,bg-region :foreground ,warning))))
+   `(company-preview ((t (:background ,bg-region :foreground ,warning))))
    `(company-tooltip-selection ((t (:background ,bg-region :foreground ,fg-strong))))
-   `(company-tooltip-common ((t (:foreground ,fg-strong :weight bold))))
+   `(company-tooltip-common ((t (:foreground ,fg :weight bold))))
    `(company-scrollbar-bg ((t (:background ,bg-dim))))
    `(company-scrollbar-fg ((t (:background ,bg-soft))))
    `(company-tooltip-annotation ((t (:foreground ,fg-faint))))
