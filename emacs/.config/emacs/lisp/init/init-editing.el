@@ -1,5 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
+(electric-pair-mode 1)
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
@@ -12,6 +13,20 @@
   :ensure t
   :config
   (move-text-default-bindings))
+
+(defun my-cleanup-buffer-or-region ()
+  "Indent and remove trailing whitespace in the active region or whole buffer."
+  (interactive)
+  (save-excursion
+    (if (use-region-p)
+        (progn
+          (indent-region (region-beginning) (region-end))
+          (delete-trailing-whitespace (region-beginning) (region-end)))
+      (progn
+        (indent-region (point-min) (point-max))
+        (delete-trailing-whitespace)))))
+
+(global-set-key (kbd "C-M-\\") #'my-cleanup-buffer-or-region)
 
 ;; https://github.com/emacsfodder/move-text#indent-after-moving
 (defun indent-region-advice (&rest ignored)

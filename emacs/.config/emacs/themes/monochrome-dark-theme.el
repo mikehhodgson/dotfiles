@@ -298,7 +298,7 @@
    `(which-func ((t (:foreground ,fg-strong :weight bold))))
    `(whitespace-space ((t (:background ,bg :foreground ,bg-soft))))
    `(whitespace-tab ((t (:background ,bg :foreground ,bg-soft))))
-   `(whitespace-trailing ((t (:background ,error))))
+   `(whitespace-trailing ((t (:background "#990000"))))
    `(rainbow-delimiters-depth-1-face ((t (:foreground ,fg-dim))))
    `(rainbow-delimiters-depth-2-face ((t (:foreground ,fg))))
    `(rainbow-delimiters-depth-3-face ((t (:foreground ,fg-dim))))

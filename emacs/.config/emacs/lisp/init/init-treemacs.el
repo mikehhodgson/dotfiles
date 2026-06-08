@@ -9,17 +9,14 @@
     (define-key winum-keymap (kbd "M-0") #'treemacs-select-window))
   :config
   (progn
-    ;; The default width and height of the icons is 22 pixels. If you are
-    ;; using a Hi-DPI display, uncomment this to double the icon size.
-    ;;(treemacs-resize-icons 44)
+    (setq treemacs-sorting 'alphabetic-case-insensitive-asc)
+
     (treemacs-resize-icons 16)
-
-    (define-key treemacs-mode-map [mouse-1] #'treemacs-single-click-expand-action)
-
     (treemacs-indent-guide-mode)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
     (treemacs-fringe-indicator-mode 'always)
+
     (when treemacs-python-executable
       (treemacs-git-commit-diff-mode t))
 
@@ -55,16 +52,19 @@
     (treemacs-define-custom-icon
      "󰏗 "
      "node_modules"))
-:bind
-(:map global-map
-      ("C-M-z"     . treemacs)
-      ("M-0"       . treemacs-select-window)
-      ("C-x t 1"   . treemacs-delete-other-windows)
-      ("C-x t t"   . treemacs)
-      ("C-x t d"   . treemacs-select-directory)
-      ("C-x t B"   . treemacs-bookmark)
-      ("C-x t C-t" . treemacs-find-file)
-      ("C-x t M-t" . treemacs-find-tag)))
+
+  :bind
+  (("C-M-z"     . treemacs)
+   ("M-0"       . treemacs-select-window)
+   ("C-x t 1"   . treemacs-delete-other-windows)
+   ("C-x t t"   . treemacs)
+   ("C-x t d"   . treemacs-select-directory)
+   ("C-x t B"   . treemacs-bookmark)
+   ("C-x t C-t" . treemacs-find-file)
+   ("C-x t M-t" . treemacs-find-tag)
+
+   :map treemacs-mode-map
+   ([mouse-1]   . treemacs-single-click-expand-action)))
 
 (use-package treemacs-nerd-icons
   :ensure t
