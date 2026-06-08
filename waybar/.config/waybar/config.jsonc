@@ -13,7 +13,7 @@
     "custom/screenrecording-indicator",
     "custom/idle-indicator",
     "custom/notification-silencing-indicator"
-   ],
+  ],
   "modules-right": [
     "cpu",
     "memory",
@@ -41,7 +41,7 @@
       "9": "9",
       "10": "0",
       //"active": "󱓻",
-      "special":"SP"
+      "special": "SP"
     },
     "show-special": true,
     "persistent-workspaces": {
@@ -62,12 +62,12 @@
     "on-click": "hyprctl dispatch focuswindow 'class:^(gnucash)$' || swaymsg '[app_id=\"org.gnucash.GnuCash\"] focus' || i3-msg '[class=\"gnucash\"] focus'"
   },
   "custom/usb-eject": {
-     "exec": "~/.config/waybar/scripts/usb-eject.sh",
-     "interval": 5,
-     "format": "Eject",
-     "on-click": "~/.config/waybar/scripts/usb-eject.sh menu",
-     "return-type": "plain",
-     "tooltip": false
+    "exec": "~/.config/waybar/scripts/usb-eject.sh",
+    "interval": 5,
+    "format": "Eject",
+    "on-click": "~/.config/waybar/scripts/usb-eject.sh menu",
+    "return-type": "plain",
+    "tooltip": false
   },
   "custom/omarchy": {
     "format": "<span font='omarchy'>\ue900</span>",
@@ -94,7 +94,7 @@
     "on-click-right": "alacritty"
   },
   "memory": {
-    "interval": 30,
+    "interval": 10,
     "format": "{used:0.1f}G/{total:0.1f}G"
   },
   "clock": {
@@ -103,39 +103,36 @@
     //"format": "{:L%A %H:%M}",
     //"format-alt": "{:L%d %B W%V %Y}",
     // https://en.cppreference.com/w/cpp/chrono/duration/formatter
-//    "format": "{:L%Y-%m-%d %H:%M %z %Z}",
+    //    "format": "{:L%Y-%m-%d %H:%M %z %Z}",
     "format": "{:L%Y-%m-%d %H:%M %Z}",
-    "timezones": [
-    		 "Australia/Perth",
-		 "UTC"
-    ],
-//    "format-alt": "{:L%A %H:%M}",
+    "timezones": ["Australia/Perth", "UTC"],
+    //    "format-alt": "{:L%A %H:%M}",
     //"tooltip-format": "{:L%A %d %B W%V %Y}",
     //"on-click-right": "omarchy-launch-floating-terminal-with-presentation omarchy-tz-select",
     // https://github.com/Alexays/Waybar/wiki/Module:-Clock#example
     //"tooltip-format": "<tt><small>{calendar}</small></tt>",
     "tooltip-format": "<tt><span font='DM Mono'>{calendar}</span></tt>",
     "calendar": {
-    "mode"          : "year",
-    "mode-mon-col"  : 3,
-    "weeks-pos"     : "left",
-    "on-scroll"     : 1,
-    "format": {
-    "months":     "<span color='#ffead3'><b>{}</b></span>",
-    "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-    "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-    "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-    //"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-    "today":      "<span color='#000000' bgcolor='#e4002b'><b>{}</b></span>"
-    }
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        //"today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+        "today": "<span color='#000000' bgcolor='#e4002b'><b>{}</b></span>"
+      }
     },
-    "actions":  {
-        "on-click": "tz_up",
-        "on-click-right": "mode",
-//    "on-scroll-up": "tz_up",
-//    "on-scroll-down": "tz_down",
-        "on-scroll-up": "shift_up",
-        "on-scroll-down": "shift_down"
+    "actions": {
+      "on-click": "tz_up",
+      "on-click-right": "mode",
+      //    "on-scroll-up": "tz_up",
+      //    "on-scroll-down": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
     }
   },
   "custom/weather": {
@@ -180,7 +177,7 @@
     "on-click": "omarchy-menu power",
     "on-click-right": "notify-send -u low \"$(omarchy-battery-status)\"",
     "states": {
-      // default was 20/10    	      
+      // default was 20/10
       "warning": 30,
       "critical": 15
     }
