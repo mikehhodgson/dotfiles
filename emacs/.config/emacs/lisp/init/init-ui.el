@@ -5,7 +5,6 @@
 (global-visual-line-mode 1)
 (global-hl-line-mode t) ; highlight the whole cursor line
 (setq project-mode-line t)
-(setq-default show-trailing-whitespace t)
 
 ;; Line numbers
 (setq display-line-numbers-type 'absolute)

@@ -1,13 +1,52 @@
 ;; -*- lexical-binding: t; -*-
 
-(electric-pair-mode 1)
+(electric-pair-mode 1) ; matching quotes and braces
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
+(add-hook 'prog-mode-hook (lambda () (setq-local show-trailing-whitespace t)))
+(add-hook 'text-mode-hook (lambda () (setq-local show-trailing-whitespace t)))
 
 (use-package visual-fill-column)
 (use-package writeroom-mode)
 
-(add-hook 'text-mode-hook #'flyspell-mode)
+;; For spelling on Windows with MSYS2 UCRT64:
+;;
+;; pacman -Syu
+;;
+;; pacman -S \
+;;   mingw-w64-ucrt-x86_64-hunspell \
+;;   mingw-w64-ucrt-x86_64-hunspell-en
+
+(use-package flyspell
+  :defer t
+  :hook ((text-mode . flyspell-mode)
+         (prog-mode . flyspell-prog-mode))
+  :bind
+  (:map flyspell-mouse-map
+        ([mouse-3] . flyspell-correct-word))
+
+  :init
+  (setq ispell-personal-dictionary
+        "~/.local/share/emacs/ispell-personal-dictionary")
+
+  (make-directory
+   (file-name-directory ispell-personal-dictionary)
+   t)
+
+  (unless (file-exists-p ispell-personal-dictionary)
+    (write-region "" nil ispell-personal-dictionary))
+
+  (if (eq system-type 'windows-nt)
+      (progn
+        (setq ispell-program-name
+              "C:/msys64/ucrt64/bin/hunspell.exe")
+
+        (setenv "DICPATH"
+                "C:/msys64/ucrt64/share/hunspell")
+        (setenv "LANG" "en_AU")))
+  :config
+  (setq ispell-local-dictionary "en_AU"))
 
 (use-package move-text
   :ensure t

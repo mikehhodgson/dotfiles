@@ -196,6 +196,10 @@
    `(diff-hunk-header ((t (:background ,bg-diff-hunk :foreground ,fg-strong :weight bold))))
    `(diff-removed ((t (:background ,bg-diff-del :foreground ,fg))))
 
+   `(diff-hl-insert ((t (:background ,git-inserted :foreground ,git-inserted))))
+   `(diff-hl-change ((t (:background ,git-modified-fg :foreground ,git-modified-fg))))
+   `(diff-hl-delete ((t (:background ,git-deleted :foreground ,git-deleted))))
+
    `(magit-section-heading ((t (:foreground ,fg-strong :weight bold))))
    `(magit-section-highlight ((t (:background ,bg-soft))))
    `(magit-branch-current ((t (:foreground ,fg-strong :weight bold))))
@@ -284,8 +288,8 @@
    `(eglot-inlay-hint-face ((t (:foreground ,fg-faint :slant italic))))
    `(eglot-parameter-hint-face ((t (:foreground ,fg-faint :slant italic))))
    `(eglot-type-hint-face ((t (:foreground ,fg-faint :slant italic))))
-   `(eglot-diagnostic-tag-deprecated-face ((t (:inherit shadow :strike-through t))))
-   `(eglot-diagnostic-tag-unnecessary-face ((t (:inherit shadow :slant italic))))
+   `(eglot-diagnostic-tag-deprecated-face ((t (:strike-through t))))
+   `(eglot-diagnostic-tag-unnecessary-face ((t (:underline  (:color "DarkOrange" :style wave :position nil)))))
 
    `(company-tooltip ((t (:background ,bg-region :foreground ,warning))))
    `(company-preview ((t (:background ,bg-region :foreground ,warning))))

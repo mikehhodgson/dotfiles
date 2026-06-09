@@ -24,7 +24,6 @@
   :config
   (dolist (itm '("^/ssh:"
                  "^/sudo:"
-                 "~/.config/emacs/.*"
                  "~/.config/emacs/.cache/*"
                  "~/.config/emacs/places"
                  "~/.config/emacs/projects"
