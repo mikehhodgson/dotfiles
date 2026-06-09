@@ -22,6 +22,7 @@
 (setq js-indent-level 2)
 
 (use-package slime
+  :defer t
   :bind (:map slime-mode-map
               ("M-n" . scroll-up-line)
               ("M-p" . scroll-down-line)))
@@ -99,11 +100,9 @@
   :hook prog-mode)
 
 (use-package prettier-js
-  :ensure t)
-
-(add-hook 'js-ts-mode-hook 'prettier-js-mode)
-(add-hook 'js-mode-hook 'prettier-js-mode)
-(add-hook 'web-mode-hook 'prettier-js-mode)
+  :ensure t
+  :defer t
+  :hook (js-ts-mode-hook js-mode-hook web-mode-hook))
 
 (use-package json-mode
   :ensure t
@@ -113,6 +112,7 @@
 (use-package dockerfile-mode
   :defer t
   :ensure t
+  :mode "Dockerfile\\'"
   :config
 	(setq dockerfile-mode-command "docker"))
 
