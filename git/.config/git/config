@@ -10,6 +10,7 @@
 	safectrl = true
 	excludesfile = ~/.config/git/gitignore_global
 	editor = emacs --no-window-system --no-init-file --load ~/.config/git/editor.el
+  pager = hunk pager # npm i -g hunkdiff
 [alias]
         co = checkout
         ci = commit

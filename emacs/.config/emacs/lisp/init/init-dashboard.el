@@ -2,6 +2,7 @@
 
 (use-package dashboard
   :ensure t
+  :after (nerd-icons)
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-projects-backend 'project-el)

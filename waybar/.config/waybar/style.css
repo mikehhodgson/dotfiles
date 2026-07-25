@@ -135,6 +135,8 @@ tooltip {
     }
 }
 
+/*
+disabled as battery reporting incorrect charge state
 #battery.warning:not(.charging) {
     background: @nasared;
     color: white;
@@ -144,6 +146,7 @@ tooltip {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+*/
 
 /* #battery.charging { */
 /*     color: #26A65B; */
