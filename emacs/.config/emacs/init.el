@@ -24,6 +24,7 @@
 
 (require 'init-completion)
 (require 'init-lsp)
+(require 'init-c)
 (require 'init-dev)
 
 (require 'init-treemacs)
