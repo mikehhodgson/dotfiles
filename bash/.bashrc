@@ -12,6 +12,17 @@ source ~/.local/share/omarchy/default/bash/rc
 
 #export PATH="$PATH:$HOME/.local/bin"
 
+
+# https://superuser.com/questions/7414/how-can-i-search-the-bash-history-and-rerun-a-command
+# $ !cl
+# $ !?some
+
+# If the histverify shell option is enabled, and Readline is being
+# used, history substitutions are not immediately passed to the shell
+# parser. Instead, the expanded line is reloaded into the Readline
+# editing buffer for further modification.
+shopt -s histverify
+
 export TRY_PATH=~/src/experiments
 eval "$(/usr/bin/try init $TRY_PATH)"
 

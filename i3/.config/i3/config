@@ -186,9 +186,9 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+Ctrl+Shift+r restart
 
 # Common Apps
-bindsym $mod+Shift+b exec librewolf
-bindsym $mod+Shift+Return exec librewolf
-bindsym $mod+Shift+p exec librewolf --private-window
+bindsym $mod+Shift+b exec GDK_DEBUG=no-portals librewolf
+bindsym $mod+Shift+Return exec GDK_DEBUG=no-portals librewolf
+bindsym $mod+Shift+p exec GDK_DEBUG=no-portals librewolf --private-window
 
 bindsym $mod+e exec nautilus
 bindsym $mod+Shift+f exec nautilus
