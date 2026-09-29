@@ -21,7 +21,8 @@
 (use-package flyspell
   :defer t
   :hook ((text-mode . flyspell-mode)
-         (prog-mode . flyspell-prog-mode))
+         ;; (prog-mode . flyspell-prog-mode)
+         )
   :bind
   (:map flyspell-mouse-map
         ([mouse-3] . flyspell-correct-word))

@@ -2,11 +2,13 @@
 
 ;; https://www.gnu.org/software/emacs/manual/html_node/eglot/Quick-Start.html
 (use-package eglot
-  :ensure t
+  :ensure nil
   :hook ((c++-mode . eglot-ensure)
          (c-mode . eglot-ensure)
          (js-ts-mode . eglot-ensure)
          (python-mode . eglot-ensure)
+         (java-mode . eglot-ensure) ;; use jdtls for lsp server
+         (java-ts-mode . eglot-ensure) ;; TODO consider adding eglot-java
          (tsx-ts-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs
