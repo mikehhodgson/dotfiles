@@ -27,3 +27,27 @@ require("default.hypr.toggles")
 
 -- Add any other personal Hyprland configuration below.
 -- o.window("qemu", { workspace = "5" })
+
+-- Window behavior migrated from the legacy monitors.conf and input.conf.
+o.window("osgViewer", { immediate = true })
+
+o.window("ecwolf", {
+  content = "game",
+  immediate = true,
+  fullscreen = true,
+})
+
+o.window("steam_app_220200", {
+  content = "game",
+  immediate = true,
+  fullscreen = true,
+})
+
+o.window("Gitk", { maximize = true })
+
+o.window("xdg-desktop-portal-gtk", {
+  focus_on_activate = true,
+  float = true,
+})
+
+o.window("gnucash", { no_screen_share = true })
