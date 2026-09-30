@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "mike.gnucash",
+  "name": "GnuCash indicator",
+  "version": "1.0.0",
+  "author": "Mike",
+  "description": "GnuCash indicator",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "GnuCash indicator",
+    "description": "GnuCash indicator",
+    "category": "Status",
+    "allowMultiple": false
+  }
+}

@@ -1,0 +1,11 @@
+[font]
+base-size = 16
+
+[bar]
+active = "#E4002B"
+scale-with-font = false
+size-horizontal = 30
+
+[lock]
+border-error = "#E4002B"
+text-error = "#E4002B"

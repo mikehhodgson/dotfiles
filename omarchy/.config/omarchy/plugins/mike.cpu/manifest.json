@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "mike.cpu",
+  "name": "CPU usage",
+  "version": "1.0.0",
+  "author": "Mike",
+  "description": "CPU usage",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "CPU usage",
+    "description": "CPU usage",
+    "category": "Status",
+    "allowMultiple": false
+  }
+}

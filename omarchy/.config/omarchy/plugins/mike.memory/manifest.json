@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "mike.memory",
+  "name": "Memory usage",
+  "version": "1.0.0",
+  "author": "Mike",
+  "description": "Memory usage",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Widget.qml"
+  },
+  "barWidget": {
+    "displayName": "Memory usage",
+    "description": "Memory usage",
+    "category": "Status",
+    "allowMultiple": false
+  }
+}

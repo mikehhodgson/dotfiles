@@ -1,19 +1,33 @@
 {
   "bar": {
-    "centerAnchor": "omarchy.clock",
+    "centerAnchor": "mike.clock",
     "layout": {
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "mike.workspaces"
+        }
+      ],
       "center": [
         {
-          "id": "omarchy.indicators"
+          "id": "mike.indicators",
+          "items": [
+            "Dictation",
+            "ScreenRecording",
+            "StayAwake",
+            "Dnd"
+          ]
         },
         {
-          "id": "omarchy.clock",
+          "id": "mike.clock",
           "format": "yyyy-MM-dd HH:mm",
           "formatAlt": "d MMMM 'W'ww yyyy",
-          "verticalFormat": "HH\n—\nmm"
-        },
-        {
-          "id": "omarchy.keyboard-layout"
+          "verticalFormat": "HH\n—\nmm",
+          "timeZone": "Australia/Perth",
+          "calendarMode": "year",
+          "weekStartDay": "sunday"
         },
         {
           "id": "omarchy.weather"
@@ -22,20 +36,22 @@
           "id": "omarchy.system-update"
         }
       ],
-      "left": [
-        {
-          "id": "omarchy.menu"
-        },
-        {
-          "id": "omarchy.workspaces"
-        }
-      ],
       "right": [
         {
-          "id": "omarchy.tray"
+          "id": "mike.tray",
+          "showAll": true,
+          "pinned": [
+            "KeePassXC",
+            "steam"
+          ],
+          "hidden": []
         },
         {
-          "id": "omarchy.agents"
+          "id": "mike.gnucash",
+          "interval": 5,
+          "color": "#00FF00",
+          "onClick": "~/.local/bin/launch-or-focus-gnucash",
+          "command": "if compgen -G \"$HOME/Documents/Personal/Finance/gnucash/current/*.LCK\" >/dev/null; then printf '$'; fi"
         },
         {
           "id": "omarchy.bluetooth"
@@ -47,21 +63,47 @@
           "id": "omarchy.audio"
         },
         {
-          "id": "omarchy.monitor"
+          "id": "mike.cpu",
+          "interval": 5,
+          "onClick": "omarchy-launch-or-focus-tui btop",
+          "onRightClick": "alacritty",
+          "tooltip": "CPU usage",
+          "command": "python3 ~/.config/omarchy/bar/scripts/status.py cpu",
+          "widthText": "100% 󰍛"
         },
         {
-          "id": "omarchy.power",
-          "showPercentage": true
+          "id": "mike.memory",
+          "interval": 10,
+          "tooltip": "Used / total memory",
+          "command": "python3 ~/.config/omarchy/bar/scripts/status.py memory",
+          "widthText": "31.0G/31.0G"
+        },
+        {
+          "id": "mike.power",
+          "showPercentage": true,
+          "compactWidthText": "100% ",
+          "expandedWidthText": "T-9:99↓ 9.9W↓ 100% 󰁹"
         }
       ]
     },
     "position": "top",
-    "transparent": false
+    "transparent": true,
+    "id": "omarchy.bar"
   },
   "idle": {
     "lock": 300,
     "screensaver": 150
   },
-  "plugins": [],
-  "version": 1
+  "plugins": [
+    {
+      "id": "mike.lock"
+    }
+  ],
+  "version": 1,
+  "disabledPlugins": [
+    "omarchy.lock"
+  ],
+  "cloneSourceRestores": [
+    "mike.lock"
+  ]
 }
