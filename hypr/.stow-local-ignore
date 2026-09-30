@@ -1,2 +1,0 @@
-^/\.config/hypr/(autostart|bindings|envs|hypridle|hyprland|hyprlock|input|looknfeel|monitors)\.conf$
-^/\.config/hypr/envs\.conf\.nvidia$
