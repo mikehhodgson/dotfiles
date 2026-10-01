@@ -116,7 +116,7 @@ mode "exit" {
 }
 
 bar {
-    status_command i3status
+    status_command python3 ~/.config/i3/status.py
     position top
     #font pango:Hack Nerd Font Mono 10
     # For single monitor output
