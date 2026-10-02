@@ -16,6 +16,8 @@
           "items": [
             "Dictation",
             "ScreenRecording",
+            "Reminder",
+            "NightLight",
             "StayAwake",
             "Dnd"
           ]
@@ -28,6 +30,9 @@
           "timeZone": "Australia/Perth",
           "calendarMode": "year",
           "weekStartDay": "sunday"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
         },
         {
           "id": "omarchy.weather"
@@ -54,6 +59,9 @@
           "command": "if compgen -G \"$HOME/Documents/Personal/Finance/gnucash/current/*.LCK\" >/dev/null; then printf '$'; fi"
         },
         {
+          "id": "omarchy.agents"
+        },
+        {
           "id": "mike.bluetooth"
         },
         {
@@ -61,6 +69,9 @@
         },
         {
           "id": "omarchy.audio"
+        },
+        {
+          "id": "omarchy.monitor"
         },
         {
           "id": "mike.cpu",
@@ -101,7 +112,8 @@
   ],
   "version": 1,
   "disabledPlugins": [
-    "omarchy.lock"
+    "omarchy.lock",
+    "omarchy.monitor"
   ],
   "cloneSourceRestores": [
     "mike.lock"
