@@ -54,7 +54,7 @@
           "command": "if compgen -G \"$HOME/Documents/Personal/Finance/gnucash/current/*.LCK\" >/dev/null; then printf '$'; fi"
         },
         {
-          "id": "omarchy.bluetooth"
+          "id": "mike.bluetooth"
         },
         {
           "id": "omarchy.network"
