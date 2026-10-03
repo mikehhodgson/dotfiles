@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Report only. A failed audit must not interrupt Omarchy updates.
+"$HOME/.local/bin/audit-stow" || {
+    printf '\nWARNING: Stow audit could not run. Update continues.\n' >&2
+}
+exit 0

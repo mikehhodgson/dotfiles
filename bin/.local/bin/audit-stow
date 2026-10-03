@@ -1,0 +1,129 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Cwd qw(abs_path);
+use File::Basename qw(dirname basename);
+use File::Compare qw(compare);
+use File::Spec;
+use FindBin qw($RealBin);
+
+# Load Stow's CLI helpers without running its main(). Only parsing and
+# ignore checks are used; no tasks are planned or executed.
+sub audit {
+    my ($stow_cli) = grep { -f $_ && -x $_ }
+        map { "$_/stow" } split /:/, $ENV{PATH};
+    die "GNU Stow is not on PATH\n" unless $stow_cli;
+    do $stow_cli or die "Cannot load GNU Stow: " . ($@ || $!) . "\n";
+
+    my $repo = abs_path("$RealBin/../../..");
+    chdir $repo or die "Cannot read repository $repo: $!\n";
+    my $list = "$ENV{HOME}/.config/stow-audit/packages";
+    open my $fh, '<', $list or die "Cannot read package list $list: $!\n";
+    my (@packages, %seen);
+    while (<$fh>) {
+        s/#.*//;
+        s/^\s+|\s+$//g;
+        next unless length;
+        die "Invalid package name in $list: $_\n" unless /^[\w.-]+$/ && !/^\./;
+        push @packages, $_ unless $seen{$_}++;
+    }
+    close $fh;
+    die "Package list is empty: $list\n" unless @packages;
+
+    local @ARGV = ('--simulate', '--verbose=0', '--stow', @packages);
+    my ($options) = process_options();
+    my $stow = Stow->new(%$options);
+    my $dir = abs_path($options->{dir});
+    my $target = abs_path($options->{target});
+    my $count = 0;
+    my $warnings = 0;
+
+    print "\nStow audit (report only): $target\n";
+    print "Checks configured packages; does not attribute problems to this update.\n";
+    for my $package (@packages) {
+        my @issues;
+        if (!-d "$dir/$package" || -l "$dir/$package") {
+            push @issues, "package directory missing or is a symlink: $dir/$package";
+        } else {
+            walk_package($stow, $dir, $target, $package, '', '', \@issues, \$count);
+        }
+        next unless @issues;
+        $warnings += @issues;
+        print "\nWARNING: [$package]\n";
+        print "  $_\n" for @issues;
+    }
+    print $warnings
+        ? "\nWARNING: Stow audit found $warnings issue(s). No files changed; update continues.\n"
+        : "Stow audit: all $count expected links across " . scalar(@packages) . " packages are correct.\n";
+}
+
+sub walk_package {
+    my ($stow, $dir, $target, $package, $source_subdir, $target_subdir, $issues, $count) = @_;
+    opendir my $dh, "$dir/$package/$source_subdir" or die "Cannot read $package/$source_subdir: $!\n";
+    my @names = sort grep { $_ ne '.' && $_ ne '..' } readdir $dh;
+    closedir $dh;
+    for my $name (@names) {
+        my $source_rel = length($source_subdir) ? "$source_subdir/$name" : $name;
+        my $dest_name = $name;
+        my $ignore_rel = length($target_subdir) ? "$target_subdir/$name" : $name;
+        next if $stow->ignore($dir, $package, $ignore_rel);
+        $dest_name =~ s/^dot-([^.])/.$1/ if $stow->{dotfiles};
+        my $dest_rel = length($target_subdir) ? "$target_subdir/$dest_name" : $dest_name;
+        my $source = "$dir/$package/$source_rel";
+        my $dest = "$target/$dest_rel";
+        if (-d $source && !-l $source) {
+            if (-l $dest) {
+                my $actual = abs_path($dest);
+                my $expected = abs_path($source);
+                if (!defined($actual) || $actual ne $expected) {
+                    push @$issues, "$dest — wrong directory link -> " . readlink($dest) . " (expected $source)";
+                    next;
+                }
+            } elsif (-e $dest && !-d $dest) {
+                push @$issues, "$dest — non-directory blocks expected links from $source";
+                next;
+            }
+            walk_package($stow, $dir, $target, $package, $source_rel, $dest_rel, $issues, $count);
+            next;
+        }
+        $$count++;
+        if (-l $dest) {
+            my $link = readlink $dest;
+            my $point = File::Spec->rel2abs($link, dirname($dest));
+            # Resolve parents but retain the final source node, which can itself
+            # be a symlink inside the package.
+            my $parent = abs_path(dirname($point));
+            my $expected_parent = abs_path(dirname($source));
+            if (!defined($parent) || "$parent/" . basename($point) ne "$expected_parent/" . basename($source)) {
+                push @$issues, "$dest — wrong link -> $link (expected $source)";
+            }
+        } elsif (!-e $dest) {
+            push @$issues, "$dest — missing link (expected $source)";
+        } elsif (folded_link_matches($dest, $source, $target)) {
+            next;
+        } elsif (-f $dest && -f $source) {
+            my $result = compare($source, $dest);
+            my $contents = $result == 0 ? 'identical' : $result == 1 ? 'differ' : 'could not compare';
+            push @$issues, "$dest — regular file replaces link; contents $contents";
+        } else {
+            push @$issues, "$dest — non-symlink replaces expected file link ($source)";
+        }
+    }
+}
+
+sub folded_link_matches {
+    my ($dest, $source, $target) = @_;
+    my $parent = dirname($dest);
+    while ($parent ne $target && $parent ne '/') {
+        if (-l $parent) {
+            my $actual = abs_path($dest);
+            my $expected = abs_path($source);
+            return defined($actual) && defined($expected) && $actual eq $expected;
+        }
+        $parent = dirname($parent);
+    }
+    return 0;
+}
+
+eval { audit(); 1 } or print STDERR "\nWARNING: Stow audit could not complete: $@\nUpdate continues; no files changed.\n";
+exit 0;

@@ -1,0 +1,19 @@
+# Packages expected to be Stowed, one per line. Comment out any with #.
+# This list is explicit: the audit does not infer intended packages.
+bash
+bin
+emacs
+foot
+ghostty
+git
+hypr
+i3
+mpv
+omarchy
+starship
+stow
+tmux
+x11
+yt-dlp
+
+# Currently not selected: swayosd, walker, waybar, windows.
