@@ -1,0 +1,146 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use Cwd qw(abs_path);
+use File::Basename qw(dirname basename);
+use File::Spec;
+use File::Temp qw(tempfile);
+
+$| = 1;
+my $status = 0;
+my ($hunk, $output, $terminal);
+
+sub report {
+    my ($code, $message) = @_;
+    $status = $code if $code > $status;
+    print "$message\n";
+}
+
+# Compare link destinations without dereferencing the final package entry,
+# which may itself be a symlink.
+sub correct_link {
+    my ($dest, $source) = @_;
+    return 0 unless -l $dest;
+    my $point = File::Spec->rel2abs(readlink($dest), dirname($dest));
+    my $parent = abs_path(dirname($point));
+    my $expected = abs_path(dirname($source));
+    return defined($parent) && defined($expected)
+        && "$parent/" . basename($point) eq "$expected/" . basename($source);
+}
+
+sub walk {
+    my ($stow, $dir, $target, $package, $source_rel, $target_rel) = @_;
+    my $source = "$dir/$package/$source_rel";
+    my $dest = "$target/$target_rel";
+    return if length($source_rel) && correct_link($dest, $source);
+
+    if (-d $source && !-l $source) {
+        if (-l $dest) {
+            report(1, "Wrong directory link: $dest -> " . readlink($dest));
+        }
+        if ((-e $dest || -l $dest) && !-d $dest) {
+            report(1, "Blocked directory: $dest (expected directory for $source)");
+            return;
+        }
+        opendir my $dh, $source or do {
+            report(2, "Cannot read $source: $!");
+            return;
+        };
+        my @names = sort grep { $_ ne '.' && $_ ne '..' } readdir $dh;
+        closedir $dh;
+        for my $name (@names) {
+            my $next_source = length($source_rel) ? "$source_rel/$name" : $name;
+            my $next_target = length($target_rel) ? "$target_rel/$name" : $name;
+            next if $stow->ignore($dir, $package, $next_target);
+            my $dest_name = $stow->{dotfiles} ? Stow::Util::adjust_dotfile($name) : $name;
+            $next_target = length($target_rel) ? "$target_rel/$dest_name" : $dest_name;
+            walk($stow, $dir, $target, $package, $next_source, $next_target);
+        }
+        return;
+    }
+
+    if (-l $dest) {
+        report(1, "Wrong link: $dest -> " . readlink($dest));
+    }
+    if (!-e $dest) {
+        report(1, "Missing target: $dest (package file: $source)");
+        return;
+    }
+    if (!-f $source) {
+        report(2, "Cannot compare package file: $source (not a readable regular file)");
+        return;
+    }
+    if (!-f $dest) {
+        report(1, "Blocked file: $dest (expected file for $source)");
+        return;
+    }
+    report(1, "Compare: $dest -> $source");
+    my $result = system('diff', '-u', '--', $dest, $source);
+    if ($result == 0) {
+        print "Identical contents; target still replaces a Stow link: $dest\n";
+    } elsif ($result == -1 || ($result & 127) || ($result >> 8) > 1) {
+        report(2, "Could not diff: $dest and $source");
+    }
+}
+
+sub run {
+    if (@ARGV == 1 && $ARGV[0] eq '--help') {
+        print "Usage: stowdiff PACKAGE [PACKAGE ...]\n",
+            "Compare target files with Stow packages; never changes files.\n",
+            "Uses hunk pager when installed and stdout is a terminal.\n",
+            "Exit: 0 matched, 1 differences or replaced/missing links, 2 error.\n";
+        return;
+    }
+    die "Usage: stowdiff PACKAGE [PACKAGE ...]\n" unless @ARGV;
+    my @packages = @ARGV;
+    for (@packages) {
+        die "Invalid package name: $_\n" if !length || m{/} || /^-/ || $_ eq '.' || $_ eq '..';
+    }
+    my ($stow_cli) = grep { -f $_ && -x $_ }
+        map { File::Spec->rel2abs("$_/stow") } split /:/, $ENV{PATH};
+    die "GNU Stow is not on PATH\n" unless $stow_cli;
+    # Load the installed CLI's configuration helpers without invoking main().
+    do $stow_cli or die "Cannot load GNU Stow: " . ($@ || $!) . "\n";
+    my $options;
+    {
+        # Stow normally exits from usage(); keep configuration errors at exit 2.
+        no warnings 'once';
+        local *main::usage = sub { die(($_[0] || 'Invalid Stow configuration') . "\n"); };
+        local @ARGV = ('--simulate', '--verbose=0', '--stow', @packages);
+        ($options) = process_options();
+    }
+    my $dir = abs_path($options->{dir});
+    my $target = abs_path($options->{target});
+    my $stow = Stow->new(%$options);
+    if (-t STDOUT) {
+        ($hunk) = grep { -f $_ && -x $_ }
+            map { File::Spec->rel2abs("$_/hunk") } split /:/, $ENV{PATH};
+        if ($hunk) {
+            ($output) = tempfile(UNLINK => 1);
+            open $terminal, '>&', \*STDOUT or die "Cannot save stdout: $!\n";
+            open STDOUT, '>&', $output or die "Cannot capture diff output: $!\n";
+        }
+    }
+    for my $package (@packages) {
+        if (!-d "$dir/$package" || -l "$dir/$package") {
+            report(2, "Invalid package directory: $dir/$package");
+            next;
+        }
+        walk($stow, $dir, $target, $package, '', '');
+    }
+}
+
+eval { run(); 1 } or do { print STDERR $@; $status = 2; };
+if ($output && $terminal) {
+    open STDOUT, '>&', $terminal or die "Cannot restore stdout: $!\n";
+    seek $output, 0, 0 or die "Cannot rewind diff output: $!\n";
+    if (-s $output) {
+        open STDIN, '<&', $output or die "Cannot read diff output: $!\n";
+        if (system($hunk, 'pager') != 0) {
+            warn "Hunk failed; showing plain diff output.\n";
+            seek $output, 0, 0 or die "Cannot rewind diff output: $!\n";
+            print while <$output>;
+        }
+    }
+}
+exit $status;
