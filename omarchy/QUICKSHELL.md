@@ -63,7 +63,8 @@ CPU and memory sit immediately before power and reserve fixed widths measured
 from their `widthText` settings, including padding. Readings do not change the
 reserved width; it follows font changes. Both readings are right-aligned
 inside their reserved widths, with reduced padding. CPU reserves space for
-`100%` plus its icon; memory's sample matches this machine's 31.0 GiB total.
+`100%` plus its icon; memory uses one decimal below 10 GiB and whole numbers
+from 10 GiB upward. Its width sample is `9.9G/31G` for this machine's 31 GiB total.
 Update memory's `widthText` if the RAM total changes.
 
 Menu, weather, Bluetooth, network, audio, update and state indicators use

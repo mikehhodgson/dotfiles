@@ -87,7 +87,7 @@
           "interval": 10,
           "tooltip": "Used / total memory",
           "command": "python3 ~/.config/omarchy/bar/scripts/status.py memory",
-          "widthText": "31.0G/31.0G"
+          "widthText": "9.9G/31G"
         },
         {
           "id": "mike.power",

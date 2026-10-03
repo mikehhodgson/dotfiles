@@ -37,9 +37,9 @@ def memory_text():
     for line in Path('/proc/meminfo').read_text().splitlines():
         key, value = line.split(':', 1)
         memory[key] = int(value.split()[0])
-    total = memory['MemTotal'] / 1024**2
-    used = (memory['MemTotal'] - memory['MemAvailable']) / 1024**2
-    return f'{used:.1f}G/{total:.1f}G'
+    total = round(memory['MemTotal'] / 1024**2, 1)
+    used = round((memory['MemTotal'] - memory['MemAvailable']) / 1024**2, 1)
+    return f'{used:.{1 if used < 10 else 0}f}G/{total:.{1 if total < 10 else 0}f}G'
 
 
 if __name__ == '__main__':

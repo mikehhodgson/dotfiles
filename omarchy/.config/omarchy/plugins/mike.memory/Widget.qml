@@ -45,7 +45,7 @@ BarWidget {
     fontSize: Style.font.body
     keepSpace: true
     fixedWidth: root.vertical ? root.barSize : Math.ceil(labelMetrics.advanceWidth(
-      String(root.setting("widthText", "31.0G/31.0G")))) + scaledHorizontalMargin * 2
+      String(root.setting("widthText", "9.9G/31G")))) + scaledHorizontalMargin * 2
     foreground: root.setting("color", root.bar ? root.bar.barForeground : Color.foreground)
     horizontalMargin: 3
     onPressed: function(mouseButton) {
