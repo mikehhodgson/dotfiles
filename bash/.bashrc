@@ -51,5 +51,6 @@ alias rsnapshot='rsnapshot -c ~/.config/rsnapshot/rsnapshot.conf'
 alias backup='rsnapshot -V backup'
 
 alias src='cd ~/src'
-alias cx='cd ~/src/personal/codex && codex'
+alias cx='codex'
+alias cxr='codex resume'
 
